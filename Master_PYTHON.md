@@ -728,7 +728,10 @@ if __name__ == '__main__':
 > resuelve las operaciones aritmeticas
 ```
 
-## PROGRAMACION ORIENTADA A OBJETOS 
+## PROGRAMACION ORIENTADA A OBJETOS
+
+Es la abstracción de la vida real a la programacion conciderando que existen moldes o tambien llamado tipos por ejemplo autos y los objetos que son el tipo en concreto, así como las caracteristicas generales y las especific
+
 Se compone de cuatro elementos:
 - Clases -> Molde  (Modelo de un objeto)
 - Propiedades -> Atributos
@@ -1683,8 +1686,6 @@ a = array. con axis 1 longitud 2 🡻
  array([[0., 0., 0., 0.],
        [0., 0., 0., 0.]])
 ```
-
-
 
 
 ---
