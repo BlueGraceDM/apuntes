@@ -1702,3 +1702,53 @@ exista un espacio
 
 # HTML
 
+Es un lenguaje formado de etiquetas dependiendo de su función
+
+El formato preliminar de un ***HTML*** es:
+
+```html
+<!DOCTYPE html> <!--codificacion de archivo-->
+<html lang="en"> <!--etiqueta principal / idioma-->
+<head>
+    <meta charset="UTF-8"> <!--codificación-->
+    <title>Title</title> <!--titulo-->
+</head>
+<body>
+			<!--cuerpo-->
+</body>
+</html>
+```
+
+### ETIQUETAS GENERALES
+
+```html
+<h1>Encabezados principal</h1>
+<h2>Encabezado secundario</h2>
+<p>Parrafo<br>Salto de linea</p>
+<hr> crea una linea diagonal
+<pre>Texto preformateado, se resperan los saltos y espacios como ''' en py</pre>
+```
+
+### FORMATO DE TEXTO
+
+```html
+<p>My<b>textos en negrita</b></p>
+<strong>Textos importantes en negrita</strong>
+<i>Texto en cursiva</i>
+<em>Texto importante en cursiva</em>
+<u>Texto subrayado</u>
+<small>texto pequeño</small>
+<code>Insertar codigo de programación</code>
+	
+```
+
+
+
+## NOTAS MISCELÁNEAS
+
+### TODO
+
+```html
+<!--todo usamos esta etiqueta para dejar notas en el modulo TODO-->
+```
+
