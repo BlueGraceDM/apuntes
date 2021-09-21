@@ -730,7 +730,7 @@ if __name__ == '__main__':
 
 ## PROGRAMACION ORIENTADA A OBJETOS
 
-Es la abstracción de la vida real a la programacion conciderando que existen moldes o tambien llamado tipos por ejemplo autos y los objetos que son el tipo en concreto, así como las caracteristicas generales y las especific
+Es la abstracción de la vida real a la programacion conciderando que existen moldes o tambien llamado tipos por ejemplo autos y los objetos que son el tipo en concreto, así como los atributos generales y las caracteristicas especificas
 
 Se compone de cuatro elementos:
 - Clases -> Molde  (Modelo de un objeto)
@@ -744,18 +744,64 @@ Se compone de cuatro elementos:
 - Herencia
 - Polimorfismo
 
-> Un objeto son aquellos que tienen propiedades (atributos) y comportamientos
+> Un objeto son aquellos que tienen propiedades (atributos) y compo	rtamientos
 > funciones
 
-### CLASE 
+### CLASE
+
 Es el modelo desde que se contruyen objetos. Es el molde para los objetos. 
 De una clase podemos crear muchos objetos
 
 #### ABSTRACCION
+
 Es necesario analizar los objetos para crear clases. cada objeto tiene caracteristicas
 generales para construir la aplicacion
 
+```python
+class Auto(object): 🚗 # No es necesario los parentesis y el object
+    # Datos generales
+    marca = None
+    modelo = 0
+    placa = None
+
+
+taxi = Auto() 🚕
+# para llamar al modelo primero del objeto y luego el atributo
+print(taxi.modelo)
+```
+
+#### ELECCION DE OBJETO
+
+Ayuda a simplificar las lineas de codigo
+
+```python
+class Jugadores(object):
+    j1 = 'Messi'
+    j2 = 'C.Ronaldo'
+    
+print(jugadores.j2) # Elejimos al objeto
+```
+
+se permite la eleccion de un valor con el mismo nombre
+
+```python
+class Jugadores_A(object):
+    j1 = 'Messi'
+    j2 = 'C.Ronaldo'
+
+
+class Jugadires_B(object):
+    j3 = 'Marcelo'
+    j1 = 'Falcao'
+
+
+print(Jugadires_B.j1)
+```
+
+
+
 #### PARTES DE UNA CLASE
+
 - ***Identidad:*** Nombre de la clase (Solo se puede tener una clase)
 - ***Atributo:*** Son los atributos de los objetos para los objetos
 - ***Comportamiento:*** Son los metodos de la clase
@@ -765,6 +811,13 @@ generales para construir la aplicacion
 |Usuarios|Usuario 1|Usuario 2|
 |Numbre|Alex|Roel|
 |Iniciar Sesion|Iniciar Sesion|Iniciar Sesion|
+
+``` python
+objeto.atributo = 'valor'
+auto.marca = 'Toyota'
+```
+
+
 
 ```python
 # Este es el archivo de metodos y clases
@@ -780,6 +833,30 @@ class Persona: # El nombre de la clase va en mayuscula la primera letra
         print('Nombre: ', self.nombre)
         print('Edad: ', self.edad)
 ```
+```python
+class Nombre:
+    pass
+
+victor = Nombre() # Se crea los objetos
+maria = Nombre()
+
+# Se añaden atributos
+victor.edad = 30
+victor.sexo = 'masculino'
+victor.pais = 'bolivia'
+
+maria.edad = 25
+maria.sexo = 'femenino'
+maria.pais = 'colombia'
+
+#
+print(victor.edad)
+print(maria.edad)
+print(victor.pais)
+```
+
+
+
  Al crear una varible y asignar una clase se convierte en un objeto. A esto se le llama instancia
 
 ```python
