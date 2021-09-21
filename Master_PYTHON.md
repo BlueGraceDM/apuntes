@@ -1742,7 +1742,35 @@ El formato preliminar de un ***HTML*** es:
 	
 ```
 
+### ETIQUETAS DE CITAS
 
+```html
+    <h1>Citas</h1>
+    <hr>
+
+    <p>Mi parrafo de mi página</p>
+    <blockquote site="http://oregon.com/html">
+        Cita de fuente externa
+    </blockquote>
+
+    <hr>
+    <p>Otro parrafo de mi página</p>
+        <q>Una cita breve</q>
+	<hr>
+    <p>Tercer parrafo de cita</p>
+    <abbr title="Hyper Text Markup Language">HTML</abbr>
+    <hr>
+    <p>Cuarto parrafo de cita</p>
+    <address>
+        Cita para contacto
+        podemos poner todos los datos
+    </address>
+    <hr>
+    <p><cite>Curso de fotografía</cite> Centro aprendiendo. Hecho 2021</p>
+
+```
+
+NOS QUEDAMOS EN 11-10
 
 ## NOTAS MISCELÁNEAS
 
