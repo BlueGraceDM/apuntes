@@ -1569,7 +1569,91 @@ coneccion = sqlite3.connect('tienda.db')
 coneccion.close()
 ```
 
-> Precaucion. No solo abre el archivo , de no existir lo crea
+> Precaución. No solo abre el archivo , de no existir lo crea
+
+### CREAR UNA TABLA
+
+```python
+import sqlite3 
+conexion = sqlite3.connect("ejemplo.db")
+cursor = conexion.cursor()
+
+cursor.execute("CREATE TABLE persona (codigo_p INTEGER, nombre VARCHAR (100), edad INTEGER, PRIMARY KEY (codigo_p))")
+conexion.commit()
+conexion.close()
+```
+
+### INSERTAR REGISTROS
+
+```python
+import sqlite3 
+conexion = sqlite3.connect("ejemplo.db")
+cursor = conexion.cursor()
+cursor.execute("INSERT INTO productos VALUES (NULL, 'PC',1500)")
+conexion.commit()
+conexion.close()
+```
+
+### INGRESAR VARIOS DATOS
+
+```python
+import sqlite3
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+personas = [(2, "Roel", 24),
+            (3, "Juan", 45),
+            (4, "Pedro", 25)]
+cursor.executemany("INSERT INTO persona VALUES (?, ?, ?)", personas)
+
+conexion.commit()
+conexion.close()
+```
+
+### MOSTRAR DATOS  (Recuperar datos)
+
+```python
+import sqlite3
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+
+cursor.execute('SELECT * FROM persona') # Solicitud
+personas = cursor.fetchone() # Muestra el primer dato, para todos  .FETCHALL()
+
+for p in personas # Si no usamos FOR se imprimirá como lista
+	    print(f'ID: {p[0]} NOMBRE: {p[1]} EDAD: {p[2]}') # Con formato
+
+conexion.commit()
+conexion.close()
+```
+
+### MODIFICAR DATOS
+
+```python
+import sqlite3
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+
+cursor.execute("UPDATE persona SET nombre = 'Alex Ch' WHERE codigo_p =1")
+
+conexion.commit()
+conexion.close()
+```
+
+### BORRAR DATOS
+
+```python
+import sqlite3
+
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+
+cursor.execute("DELETE FROM persona WHERE codigo_p =2")
+
+conexion.commit()
+conexion.close()
+```
+
+
 
 ---
 
@@ -1585,6 +1669,20 @@ Estructura de datos,coleccion de elementos (valores o variables identificado por
 > - El numero de dimensiones ***rank*** 
 > - Lista de dimensiones con su  correspondiente longitud ***shape***
 > - Numero total de elementos (multiplicación de la longitud de las dimensiones) ***size***
+
+```python
+import numpy as np
+# Array cuyo valores son todos cero (0)
+a = np.zeros((2,4))
+a = array. con axis 1 longitud 2 🡻
+				   2 longitud 4 🡺
+    - RANK  ⫸ igual a dos (2) x.xdim
+    - SHAPE ⫸ (2,4) x.shape ⤍ forma ⤍ elementos
+    - SIZE  ⫸ (8) x.size
+ 			🡇   
+ array([[0., 0., 0., 0.],
+       [0., 0., 0., 0.]])
+```
 
 
 
