@@ -242,6 +242,7 @@ quieres retornar varias variables se creará una *TUPLA***
 #PARÁMETROS Y ARGUMENTOS
 Parameters son cuando enviamos valores a la función estos pueden estar posteriormente
 Mientras que argumentos son elementos que enviamos ala función
+
 ```python
 def función(parametro):
     return f'texto,{parametro} continua texto
@@ -1582,6 +1583,10 @@ Estructura de datos,coleccion de elementos (valores o variables identificado por
 >
 > - Cada dimension se denomina ***axis*** 
 > - El numero de dimensiones ***rank*** 
+> - Lista de dimensiones con su  correspondiente longitud ***shape***
+> - Numero total de elementos (multiplicación de la longitud de las dimensiones) ***size***
+
+
 
 
 ---
