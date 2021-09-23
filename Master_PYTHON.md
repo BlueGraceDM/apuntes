@@ -2,11 +2,15 @@
 
 ___
 
+
+
 ---
 
 # NOTAS MASTER EN PYTHON
 
 ---
+
+
 ___
 
 ## FUNCION PRINCIPAL
@@ -43,6 +47,8 @@ ___
 |sort|personaliza el orden de los elementos|list.sort(*\*,key=None, reverse=False*)
 |reverse|revierte los elementos de la lista|list.reverse()
 |copy|retorna una copia superficial de la lista equivalente a *a[:]*|list.copy()
+
+
 ---
 
 
@@ -1848,7 +1854,118 @@ El formato preliminar de un ***HTML*** es:
 
 ```
 
-NOS QUEDAMOS EN 11-10
+## LISTAS
+
+### LISTAS DESORDENADAS
+
+```html
+  <h1> LISTAS </h1>
+
+  <h2>LISTAS DESORDENADAS</h2>
+  <ul> <!--Muestra que son listas desordenadas-->
+      <li> Elemento 01 </li><!--Elemento de lista-->
+      <li> Elemento 02 </li>
+      <ul> <!--Muestra que son listas desordenadas-->
+        <li> Elemento 01 </li><!--Elemento de lista-->
+        <li> Elemento 02 </li>
+        <!--lista dentro de otra-->
+      </ul>
+  </ul>
+```
+
+
+
+```html
+    <h2>LISTAS ORDENADAS</h2>
+    <ol> <!--Listas enumeradas-->
+        <li>Elemento 01</li>
+        <ol>
+        <li> Subelemento 01 </li>
+        </ol>
+    </ol>
+```
+
+### TABLAS
+
+```html
+<h1>TABLAS</h1>
+    <table border="2"> <!--borde-->
+        <tr>
+            <th>Nombre</th> <!--Encabezado-->
+            <th>Correo</th>
+            <th>Telefono</th>
+        </tr><!--filas-->
+        <tr>
+            <td>Aiza</td><!--información-->
+            <td>correo@correo.com</td>
+            <td>55261537</td>
+        </tr>
+        <tr>
+            <td>Fernanda</td>
+            <td>correo2@correo.com</td>
+            <td>55897823</td>
+        </tr>
+    </table>
+```
+
+### ENLACES
+
+```html
+    <h1>ENLACES</h1>
+    <!-- _self abre en la misma pestaña
+         _blank abre en otra pestaña-->
+    <a href="www.pagina.com" target="_self">Ir a Pagina </a>
+    <h1>ENLACES</h1>
+    <p> Inicio de parrafo
+    <a href="www.pagina2.com" target="_blank">Ir a Pagina 2</a>
+    fin del parrafo
+    </p>
+    <a href="nombre_archivo.html"></a>
+```
+
+### IMAGENES
+
+```html
+<body>
+    <h1>ESTRELLA</h1>
+    <hr>
+    <img src="ruta/deimagen.jpg" alt="texto_alternativo" width="100" height="100">
+</body>
+```
+
+### VIDEO
+
+```html
+    <h1>Video</h1>
+    <video width="320" height="280" controls>
+        <source src="ruta/video.mp4" type="video/mp4">
+    </video>
+    <br>
+    <video width="320" height="280" autoplay>
+        <source src="ruta/video.mp4" type="video/mp4">
+    </video>
+```
+
+### AUDIO
+
+```html
+<h1>AUDIO</h1>
+    <audio controls>
+        <source src="ruta/audio.mp3" type="audio/mp3">
+    </audio>
+```
+
+### YOUTUBE VIDEO
+
+```html
+<h1>YOUTUBE</h1>
+    <iframe src="ruta/video" width="320" height="240" frameborder="0"></iframe>
+
+```
+
+
+
+
 
 ## NOTAS MISCELÁNEAS
 
