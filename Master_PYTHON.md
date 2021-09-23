@@ -734,7 +734,7 @@ if __name__ == '__main__':
 > resuelve las operaciones aritmeticas
 ```
 
-## PROGRAMACION ORIENTADA A OBJETOS
+# PROGRAMACION ORIENTADA A OBJETOS
 
 Es la abstracción de la vida real a la programacion conciderando que existen moldes o tambien llamado tipos por ejemplo autos y los objetos que son el tipo en concreto, así como los atributos generales y las caracteristicas especificas
 
@@ -755,7 +755,7 @@ Se compone de cuatro elementos:
 
 ### CLASE
 
-Es el modelo desde que se contruyen objetos. Es el molde para los objetos. 
+Es el modelo desde que se construyen objetos. Es el molde para los objetos. 
 De una clase podemos crear muchos objetos
 
 #### ABSTRACCION
@@ -823,22 +823,6 @@ objeto.atributo = 'valor'
 auto.marca = 'Toyota'
 ```
 
-
-
-```python
-# Este es el archivo de metodos y clases
-
-class Persona: # El nombre de la clase va en mayuscula la primera letra
-    nombre = None # Tambien se puede dejar ''
-    edad = None
-    
-''' Los atributos son variables, la funcion dentro de una clase se llama metodo
-    Y son comportamientos de los objetos'''
-    
-    def mostrar_datos(self): # Self muestra que esta funcion pertenece a la clase
-        print('Nombre: ', self.nombre)
-        print('Edad: ', self.edad)
-```
 ```python
 class Nombre:
     pass
@@ -863,7 +847,21 @@ print(victor.pais)
 
 
 
- Al crear una varible y asignar una clase se convierte en un objeto. A esto se le llama instancia
+```python
+# Este es el archivo de metodos y clases
+
+class Persona: # El nombre de la clase va en mayuscula la primera letra
+    nombre = None # Tambien se puede dejar ''
+    edad = None
+    
+''' Los atributos son variables, la funcion dentro de una clase se llama metodo
+    Y son comportamientos de los objetos'''
+    
+    def mostrar_datos(self): # Self muestra que esta funcion pertenece a la clase
+        print('Nombre: ', self.nombre)
+        print('Edad: ', self.edad)
+```
+ Al crear una variable y asignar una clase se convierte en un objeto. A esto se le llama instancia
 
 ```python
 # Este es el modulo principal
@@ -890,8 +888,74 @@ Nombre:  Alex
 Edad:  25
 ```
 
+## METODOS
+
+Cuando una función esta dentro de una clase se le llama método, el cual determina una accion o un comportamiento.
+
+```python
+## Ejemplo de construccion ##
+class nombre_de_clase:
+    #def son palabras que implican accion o comportamiento
+    def nombre_metodo(self): # self se refiere al objeto
+        self.nombre_variable = algoritmo # Aqui self ejecuta el metodo
+```
+
+```python
+class Matematica:
+    def suma(self):
+        self.n1 = 2
+        self.n2 = 3
+
+# Necesitamos el objeto
+s = Matematica() # hace referencia a las clase
+s.suma()
+print(s.n1 + s.n2)
+```
+
+
+
 ### CONSTRUCTORES
-Aquel que construye al objeto para simplificar al momento de crear un objeto, simplificando el trabajo
+
+Aquel que construye al objeto para simplificar al momento de crear un objeto, simplificando el trabajo 
+
+```python
+__init__(self) # Indica iniciar
+```
+
+```python
+class Ropa:
+     def __init__(self):
+          self.marca = 'willow' # asigna atributos
+          self.talla = 'M'
+          self.color = 'rojo'
+
+
+# crear un objeto
+camisa = Ropa()
+print(camisa.talla)
+print(camisa.marca)
+```
+
+
+
+```python
+### otro ejemplo ###
+class Calculator:
+    # here referencia a las variables con las que trabajaremos
+    def __init__(self, n1, n2):
+        self.suma = n1 + n2
+        self.resta = n1 - n2
+        self.producto = n1 * n2
+        self.division = n1 / n2
+
+
+# crear un objeto
+operacion = Calculator(10, 3)
+print(operacion.suma)  # se llama al objeto
+```
+
+
+
 ```python
 class Persona:
 
@@ -945,6 +1009,21 @@ print(pokemon1)
 > Nombre: Pikachu
  Atributo: Electro
 ```
+
+### FUNCIONES CON ATRIBUTOS
+
+```python
+class Persona:
+	edad = 27
+	nombre = 'Victor'
+
+
+doctor = Persona()
+print('La edad es: ', doctor.edad)  # Mismo resultado
+print('La edad es: ', getattr(doctor, 'edad'))
+```
+
+
 
 ### ENCAPSULACION
 
