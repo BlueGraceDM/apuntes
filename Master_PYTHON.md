@@ -1859,6 +1859,26 @@ print(end=' ')
 Se utiliza para que al final de cada una de las impresiones
 exista un espacio
 
+
+
+## [Convertir una `str` List en una cadena en Python](https://www.delftstack.com/es/howto/python/how-to-convert-a-list-to-string/#convertir-una-str-list-en-una-cadena-en-python)
+
+Podríamos usar el método `str.join()` para convertir una lista que tiene elementos de tipo datos `str` a una cadena.
+
+Por ejemplo,
+
+```python
+A = ["a", "b", "c"]
+StrA = "".join(A)
+print(StrA)
+## StrA is "abc"
+```
+
+```python
+import os
+os.system('cls') == limpiar sistema
+```
+
 ---
 
 ---

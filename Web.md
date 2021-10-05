@@ -179,6 +179,53 @@ El formato preliminar de un ***HTML*** es:
 
 
 
+## FORMULARIOS
+
+### TIPOS DE CAMPOS DE TEXTO (INPUT)
+
+```html
+    <h1>CAMPOS DE TEXTO</h1>
+
+    <form action="">
+        <label for="numero:">Numero</label><!--Campo números-->
+<!--para asociar se debe poner después de for un nombre como atributo
+igual debe estar en input-->
+        <input type="number" id="numero", name="numero">
+<!--Si queremos ingresar texto no va a permitir-->
+        <br>
+        <label for="nombre">Nombre</label><!--Campo Texto-->
+        <input type="text" id="nombre" name="nombre">
+        <br>
+        <label for="email">Email:</label><!--Campo Email-->
+        <input type="email" id="email" name="email">
+        <br>
+        <label for="pass">Password:</label><!--Campo para password-->
+        <input type="password" id="pass" name="pass"><!--Oculta con *-->
+        <br>
+        <label for="button"></label>
+        <input type="submit" value="Enviar">
+<!--También hay para checkbox, color, date, datetime, datetime-local,-->
+<!--file-->
+    </form>
+```
+
+
+
+### ATRIBUTOS DE INPUT
+
+|   VALOR   | ATRIBUTO                       |
+| :-------: | :----------------------------- |
+|   type    | Tipo de input                  |
+|   name    | Nombre del input               |
+|    id     | Para unir con label            |
+|   value   | Valor por defecto              |
+| readonly  | Solo lectura                   |
+| disabled  | Deshabilitado                  |
+|   size    | Tamaño de input                |
+| maxLength | Cantidad de caracteres         |
+| required  | Campo requerido                |
+| autofocus | El puntero enfoca en ese input |
+
 
 
 ## NOTAS MISCELÁNEAS
