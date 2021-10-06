@@ -4796,4 +4796,281 @@ def find_my_list(lists, my_list):
 | condicional | sustituto |
 | ----------- | --------- |
 | ==          | is        |
-| !=          | i         |
+| !=          | is not    |
+
+# Teoría: Diccionario
+
+Imagina que eres un observador de aves sentado en el parque y contando los pájaros que ves. ¡Has observado una docena de palomas, 5 gorriones e incluso un pico rojo! Ahora, suponga que desea almacenar estas observaciones para su uso posterior. Debe recordar exactamente cuántas aves de cada tipo ha visto. Por lo tanto, una lista simple con números no servirá porque no podrá saber qué número se refiere a qué ave. Necesita un tipo de datos que pueda asociar una cosa con otra: en nuestro caso, el nombre del ave con el número de observaciones.
+
+Afortunadamente, Python tiene un tipo de **diccionario** ( `dict`). Puede imaginarse un diccionario real, un libro grande con definiciones de muchas palabras. La definición contiene dos partes: la palabra en sí (llamémosla **clave** ) y su definición (un **valor** ). En nuestro ejemplo de observador de aves, las claves son los nombres de las aves ("paloma", "gorrión" y "pico rojo") y los valores son cuántas aves de ese tipo hemos visto (12, 5 y 1, respectivamente). .
+
+En programación, los diccionarios funcionan de manera similar: si queremos almacenar un objeto, necesitamos seleccionar alguna clave para él y poner nuestro objeto como un valor para esa clave en nuestro diccionario.
+
+##### Creación de diccionario
+
+Un diccionario consta de una colección de pares clave-valor. Cada par clave-valor asigna la clave a su valor asociado. Si ya conoce los valores necesarios, la forma más sencilla de crear un diccionario es utilizar las **llaves** con una lista de `key: value`pares separados por comas . Si desea crear un diccionario vacío, también puede hacerlo con la ayuda de llaves. Tenga en cuenta que los valores de un diccionario pueden ser de **diferentes tipos** .
+
+```python
+birds = {"pigeon": 12, "sparrow": 5, "red crossbill": 1}
+prices = {'espresso': 5.0, 'americano': 8.0, 'latte': 10, 'pastry': 'various prices'}
+empty_dict = {}
+
+print(type(birds))  # <class 'dict'>
+print(type(prices))  # <class 'dict'>
+print(type(empty_dict))  # <class 'dict'>
+```
+
+Otra forma de crear un diccionario es usar el `dict`constructor.
+
+```python
+another_empty_dict = dict()  # using the dict constructor
+
+print(type(another_empty_dict))  # <class 'dict'>
+```
+
+Al crear un diccionario no vacío, un constructor de dict puede tomar un diccionario como argumento y / o claves de diccionario futuras como argumentos con valores asignados, como en el ejemplo:
+
+```python
+# note that the future dictionary keys are listed without quotes
+prices_with_constr = dict({'espresso': 5.0}, americano=8.0, latte=10, pastry='various prices')
+
+print(prices_with_constr)  # {'espresso': 5.0, 'americano': 8.0, 'latte': 10, 'pastry': 'various prices'}
+```
+
+Cuando le damos al dict constructor las claves del diccionario con valores asignados, as `dict(americano=8.0)`, la parte izquierda de la expresión se trata como una variable. A diferencia del uso de llaves, en las que puede usar números enteros como claves, las claves en el constructor dict no pueden ser un número entero, una cadena entre comillas, una lista, una expresión de varias palabras, etc. Es decir, las siguientes líneas te dará un error:
+
+```python
+d1 = dict(888=8.0)
+d2 = dict("americano"=8.0)
+d3 = dict(["americano", "filter"]=8.0)
+d4 = dict(the best americano=8.0)
+```
+
+
+
+En general, las llaves y el constructor dict son intercambiables, solo tenga en cuenta la característica dada anteriormente.
+
+
+
+Por último, puede crear un diccionario anidado. Es una colección de diccionarios dentro de un solo diccionario.
+
+```python
+# a nested dictionary example
+my_pets = {'dog': {'name': 'Dolly', 'breed': 'collie'},
+           'cat': {'name': 'Fluffy', 'breed': 'maine coon'}}
+
+# another nested dictionary example
+# note that keys of the outer dictionary are numbers
+digits = {1: {'Word': 'one', 'Roman': 'I'}, 
+          2: {'Word': 'two', 'Roman': 'II'}, 
+          3: {'Word': 'three', 'Roman': 'III'}, 
+          4: {'Word': 'four', 'Roman': 'IV'}, 
+          5: {'Word': 'five', 'Roman': 'V'}}
+```
+
+##### Accediendo a los artículos
+
+La sintaxis para **acceder a** un elemento es bastante simple: corchetes `[]`con una clave entre ellos. Este enfoque funciona tanto para agregar objetos a un diccionario como para leerlos desde allí:
+
+```python
+my_pet = {}
+
+# add 3 keys and their values into the dictionary
+my_pet['name'] = 'Dolly'
+my_pet['animal'] = 'dog'
+my_pet['breed'] = 'collie'
+
+print(my_pet)  # {'name': 'Dolly', 'animal': 'dog', 'breed': 'collie'}
+
+# get information from the dictionary about an added item
+print(my_pet['name'])  # Dolly
+```
+
+Cuando se trabaja con un diccionario anidado, obtener el valor correcto puede ser un poco más difícil. Como en nuestro ejemplo, hay diferentes niveles y debe detenerse a la profundidad adecuada.
+
+```python
+# our nested dictionary once again:
+my_pets = {'dog': {'name': 'Dolly', 'breed': 'collie'},
+           'cat': {'name': 'Fluffy', 'breed': 'maine coon'}}
+
+print(my_pets['cat'])  # {'name': 'Fluffy', 'breed': 'maine coon'}
+
+print(my_pets['cat']['breed'])  # maine coon
+```
+
+##### Elegir las llaves
+
+Puede guardar objetos de cualquier tipo en un diccionario, pero no todos califican como clave. Necesita una clave buena y **única** para cada objeto de su colección. Aún así, esta no es la única restricción en las claves del diccionario y las cubriremos más adelante. Por ahora, use números y cadenas de forma segura.
+
+Cuando ya se haya agregado una clave a su diccionario, se sobrescribirá su valor anterior:
+
+```python
+trilogy = {'IV': 'Star Wars', 'V': 'The Empire Strikes Back', 'VI': 'Return of the Jedi'}
+print(trilogy['IV'])  # Star Wars
+
+trilogy['IV'] = 'A New Hope'
+print(trilogy['IV'])  # A New Hope
+```
+
+En **Python 3.7 y** versiones **posteriores** , los diccionarios mantienen el **orden de inserción** de los valores que almacenan, pero en versiones anteriores no es necesariamente así:
+
+```python
+alphabet = {}
+alphabet['alpha'] = 1
+alphabet['beta'] = 2
+
+print(alphabet)
+# Python 3.8 output: {'alpha': 1, 'beta': 2}
+```
+
+##### Resumen
+
+En este tema, hemos cubierto algunos conceptos básicos para el tipo de datos de **diccionario** en Python:
+
+- cómo crear un diccionario,
+- que es un diccionario anidado,
+- cómo administrar los elementos del diccionario: claves y valores.
+
+En la siguiente lección, se familiarizará con las operaciones básicas de los diccionarios, pero primero, practiquemos algunas tareas para que se sienta seguro al usar este tipo de datos.
+
+```python
+# create a dict here
+favorite_flowers = {'Alex': 'field flowers',
+                    'Kate': 'daffodil',
+                    'Eva': 'artichoke flower',
+                    'Daniel': 'tulip'}
+# and print it
+print(favorite_flowers)
+
+				### MEJOR OPCION ###
+
+favorite_flowers = {'Alex': 'field flowers',
+                    'Kate': 'daffodil',
+                    'Eva': 'artichoke flower',
+                    'Daniel': 'tulip'}
+
+for key,value in favorite_flowers.items():
+    print(f'{key}-> {value}')
+```
+
+#### Cambiar un valor de un diccionario
+
+```python
+shopping_list = {'bananas': 5, 'oranges': 3, 'yogurt': 2, 'chicken breasts': 3, 'olive oil': 1}
+###---###
+shopping_list['bananas'] = 10
+```
+
+
+
+
+
+# Teoría: Argumentos
+
+A estas alturas, estás en buenos términos con las funciones, ya que sabes cómo invocarlas y declararlas. Profundicemos un poco su conocimiento y descubramos algunas características nuevas de funciones.
+
+Primero, se debe trazar una línea entre los términos **"argumento"** y **"parámetro"** . Los parámetros representan lo que acepta una función, son esos nombres los que aparecen en la definición de la función. Mientras tanto, los argumentos son los valores que le pasamos a una función cuando la llamamos. Cubriremos más tanto los argumentos como los parámetros.
+
+##### Argumentos posicionales
+
+Hay diferentes formas de asignar argumentos a una función. En primer lugar, puede hacerlo simplemente por **posición** . En este caso, los valores se asociarán con los parámetros en el orden en que los pasó a su función **de izquierda a derecha** . Estos argumentos se denominan **posicionales** o **no palabras clave** .
+
+```python
+def subtract(x, y):
+    return x - y
+
+
+subtract(11, 4)  # 7
+subtract(4, 11)  # -7
+```
+
+Cuando intercambiamos los números en la segunda llamada de función, obtuvimos un resultado diferente. Por lo tanto, puede ver que el orden determina cómo se asignan los argumentos.
+
+##### Argumentos nombrados
+
+Otra forma de asignar argumentos es por **nombre** . A veces, es posible que desee controlar el orden de los valores pasados. Ahí es donde entran en juego los argumentos con **nombre** o **palabra clave** .
+
+```python
+def greet(name, surname):
+    print("Hello,", name, surname)
+
+
+# Non-keyword arguments
+greet("Willy", "Wonka")               # Hello, Willy Wonka
+
+# Keyword arguments
+greet(surname="Wonka", name="Willy")  # Hello, Willy Wonka
+```
+
+El orden no importa aquí ya que los parámetros se hacen coincidir por nombre. Sin embargo, los argumentos de palabras clave siempre se escriben **después de** los argumentos que no son palabras clave cuando se llama a una función:
+
+```python
+greet("Frodo", surname="Baggins")  # Hello, Frodo Baggins
+greet(name="Frodo", "Baggins")     # SyntaxError: positional argument follows keyword argument
+```
+
+Asegúrese de mencionar cada parámetro **una vez** . Para entender por qué esto es importante, pensemos en lo que sucede cada vez que llamamos a una función. De hecho, los argumentos se inicializan para que todas las operaciones con los valores de esta función comiencen desde cero. No puede inicializar un argumento dos veces, por lo que si ya se ha pasado un valor y se ha asociado con algún parámetro, los intentos de asignar otro valor a este nombre fallarán.
+
+```python
+def greet(name, surname):
+    print("Hello,", name, surname)
+
+
+greet("Clementine", name="Rose")
+# TypeError: greet() got multiple values for argument 'name'
+```
+
+Como se muestra en el ejemplo, varios valores para el mismo nombre provocan un error.
+
+##### Los nombres son importantes
+
+Hemos cubierto los principales errores que puede enfrentar. Por supuesto, puede haber más parámetros en una función:
+
+```python
+def responsibility(developer, tester, project_manager, designer):
+    print(developer, "writes code")
+    print(tester, "tests the system")
+    print(project_manager, "manages the product")
+    print(designer, "develops design")
+```
+
+Tenga en cuenta que cuando usamos argumentos de palabras clave, los nombres son importantes, no las posiciones. Por tanto, el siguiente ejemplo funcionará correctamente:
+
+```python
+responsibility(project_manager="Sara", developer="Abdul", tester="Yana", designer="Mark")
+# Abdul writes code
+# Yana tests the system
+# Sara manages the product
+# Mark develops design
+```
+
+Sin embargo, si llamamos a la función con el mismo orden de nombres, pero sin argumentos con nombre, la salida será incorrecta, con responsabilidades mixtas:
+
+```python
+responsibility("Sara", "Abdul", "Yana", "Mark")
+# Sara writes code
+# Abdul tests the system
+# Yana manages the product
+# Mark develops design
+```
+
+De esta forma, Python conoce los nombres de los argumentos que toma nuestra función. Podemos pedir que nos los recuerden usando la `help()`función incorporada.
+
+```python
+help(responsibility)
+# Help on function responsibility in module __main__:
+# responsibility(developer, tester, project_manager, designer)
+```
+
+##### Tiempo de PEP
+
+Mira las llamadas de función y función declarada mostrados en este tema una vez más: `greet(name="Willy", surname="Wonka")`. ¿Ha notado que faltan espacios alrededor del letrero de igualdad? Su ausencia no es accidental. Según la [convención de PEP 8](https://www.python.org/dev/peps/pep-0008/#other-recommendations) , no debe poner espacios alrededor `=`al indicar un argumento de palabra clave.
+
+##### Resumen
+
+Ahora que hemos discutido algunas características avanzadas de las funciones, resumamos:
+
+- Hay una distinción entre **parámetros** y **argumentos** .
+- Puede pasar argumentos a una función por **posición** y por **nombre** .
+- El **orden** de los **parámetros** declarados es importante, así como el **orden de los argumentos** pasados a una función.
+- La `help()`función puede decirle los **argumentos de** la **función** por nombre.
