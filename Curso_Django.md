@@ -4225,7 +4225,7 @@ There are three built-in boolean operators in Python: `and`, `or` and `not`. The
 
 - and
 
-       
+  ​     
 
     is a binary operator, it takes two arguments and returns
 
@@ -4253,7 +4253,7 @@ There are three built-in boolean operators in Python: `and`, `or` and `not`. The
 
 - or
 
-       
+  ​     
 
     is a binary operator, it returns
 
@@ -4281,7 +4281,7 @@ There are three built-in boolean operators in Python: `and`, `or` and `not`. The
 
 - not
 
-       
+  ​     
 
     is a unary operator, it reverses the boolean value of its argument.
 
@@ -5074,3 +5074,1223 @@ Ahora que hemos discutido algunas características avanzadas de las funciones, r
 - Puede pasar argumentos a una función por **posición** y por **nombre** .
 - El **orden** de los **parámetros** declarados es importante, así como el **orden de los argumentos** pasados a una función.
 - La `help()`función puede decirle los **argumentos de** la **función** por nombre.
+
+> Los parámetros aparecen en la definición de una función, mientras que los argumentos son los valores que pasamos durante una llamada.
+
+```python
+def greeting(first_name, second_name):
+   print("Hello,", first_name, "and", second_name) 
+
+name_1 = input()
+name_2 = input()
+
+greeting(first_name=name_1,second_name=name_2)
+### OTRA OPCION
+greeting(name_1,name_2)
+greeting(name_2,name_1)
+
+### Agregar un valor a una funcion determinda
+add_book(title='Alvion')
+```
+
+
+
+# Teoría: Operaciones con lista
+
+Ya sabe cómo crear listas (incluso las vacías), por lo que, no es de extrañar, es posible que desee cambiar sus listas de alguna manera. Hay muchas cosas que hacer con una lista, puede leer sobre ellas en la [documentación de Python Data Structures](https://docs.python.org/3/tutorial/datastructures.html) . En este tema, discutiremos solo las operaciones básicas.
+
+##### Agregar un elemento
+
+La lista es una **colección dinámica** , lo que significa que puede agregar y eliminar elementos. Para echar un vistazo más de cerca, creemos una lista vacía de dragones.
+
+```python
+dragons = []  # we do not have dragons yet
+```
+
+¿Lo que sigue? Lo primero que me viene a la mente es, por supuesto, **agregar nuevos elementos** a la lista.
+
+Para agregar un nuevo elemento al final de una lista existente, debe usar el `list.append(element)`método. Solo necesita un único argumento, por lo que de esta manera puede agregar solo un elemento a la lista a la vez.
+
+```python
+dragons.append('Rudror')
+dragons.append('Targiss')
+dragons.append('Coporth')
+```
+
+Ahora tienes tres dragones, y están ordenados de la forma en que los agregaste:
+
+```python
+print(dragons)  # ['Rudror', 'Targiss', 'Coporth']
+```
+
+##### Añadiendo varios elementos
+
+Existe la `list.extend(another_list)`operación que agrega todos los elementos de otro iterable al final de una lista.
+
+```python
+numbers = [1, 2, 3, 4, 5]
+numbers.extend([10, 20, 30])
+print(numbers)  # [1, 2, 3, 4, 5, 10, 20, 30]
+```
+
+Tenga cuidado: si usa en `list.append(another_list)`lugar de `list.extend(another_list)`, agrega la lista completa como un elemento:
+
+```python
+numbers = [1, 2, 3, 4, 5]
+numbers.append([10, 20, 30])
+print(numbers)  # [1, 2, 3, 4, 5, [10, 20, 30]]
+```
+
+Alternativamente, para fusionar dos listas, puede agregar una a otra:
+
+```python
+numbers_to_four = [0, 1, 2, 3, 4]
+numbers_from_five = [5, 6, 7, 8, 9]
+numbers = numbers_to_four + numbers_from_five 
+print(numbers)  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+Si necesita una lista con elementos repetidos, puede crear una lista con el patrón repetido y luego simplemente multiplicarla por cualquier número. Esto es particularmente útil cuando desea crear una lista de una longitud específica con el mismo valor:
+
+```python
+pattern = ['a', 'b', 'c']
+patterns = pattern * 3
+print(patterns)  # ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
+
+one = [1]
+ones = one * 7
+print(ones)  # [1, 1, 1, 1, 1, 1, 1]
+```
+
+##### Eliminar elementos
+
+Lo contrario de agregar elementos, **eliminarlos** , se puede hacer de tres maneras. Echemos un vistazo a ellos.
+
+Primero, podemos usar la `list.remove(element)`operación.
+
+```python
+dragons.remove('Targiss')
+print(dragons)  # ['Rudror', 'Coporth']
+```
+
+Si el elemento que queremos eliminar aparece varias veces en la lista, solo se elimina la primera instancia de ese elemento.
+
+```python
+dragons = ['Rudror', 'Targiss', 'Coporth', 'Targiss']
+dragons.remove('Targiss')
+print(dragons)  # ['Rudror', 'Coporth', 'Targiss']
+```
+
+Las otras dos formas eliminan elementos por sus **índices en** lugar de los valores mismos. La `del`palabra clave elimina cualquier tipo de objeto en Python, por lo que se puede usar para eliminar elementos específicos en una lista:
+
+```python
+dragons = ['Rudror', 'Targiss', 'Coporth']
+del dragons[1]
+print(dragons)  # ['Rudror', 'Coporth']
+```
+
+Finalmente, está el `list.pop()`método. Si se usa sin argumentos, elimina y devuelve **el último elemento** de la lista.
+
+```python
+dragons = ['Rudror', 'Targiss', 'Coporth']
+last_dragon = dragons.pop()
+print(last_dragon)  # 'Coporth'
+print(dragons)      # ['Rudror', 'Targiss']
+```
+
+Alternativamente, podemos especificar el índice del elemento que queremos eliminar y devolver:
+
+```python
+dragons = ['Rudror', 'Targiss', 'Coporth']
+first_dragon = dragons.pop(0)
+print(first_dragon)  # 'Rudror'
+print(dragons)       # ['Targiss', 'Coporth']
+```
+
+##### Insertar elementos en una posición específica
+
+Al comienzo de este tema, hemos aprendido cómo agregar nuevos elementos al final de una lista. Si queremos agregar un nuevo elemento en el medio, usamos la `list.insert(position, element)`operación. El primer argumento es el índice del elemento **antes del** cual se va a insertar el nuevo elemento; por lo que `list.insert(0, element)`inserta un elemento al principio de la lista y `list.insert(len(list), element)`es completamente similar a `list.append(element)`.
+
+Aquí hay un ejemplo:
+
+```python
+years = [2016, 2018, 2019]
+years.insert(1, 2017)           # [2016, 2017, 2018, 2019]
+years.insert(0, 2015)           # [2015, 2016, 2017, 2018, 2019]
+years.insert(len(years), 2020)  # [2015, 2016, 2017, 2018, 2019, 2020]
+```
+
+¡Ahora puedes llenar cualquier lista vacía con algo útil!
+
+##### Prueba de membresía en una lista
+
+Otra cosa que puede resultar muy útil es comprobar si un elemento está presente en la lista. Se puede hacer simplemente usando los operadores `in`y `not in`:
+
+```python
+catalog = ['yogurt', 'apples', 'oranges', 'bananas', 'milk', 'cheese']
+ 
+print('bananas' in catalog)      # True
+ 
+product = 'lemon'
+print(product in catalog)        # False
+print(product not in catalog)    # True
+```
+
+##### Buscando elementos específicos
+
+A veces, saber que el elemento especificado está en la lista no es suficiente; es posible que deseemos obtener más información al respecto: cuántas veces aparece el elemento en la lista y en qué posición.
+
+El método `count()`puede ayudar con la cantidad:
+
+```python
+grades = [10, 5, 7, 9, 5, 10, 9]
+print(grades.count(5))  # 2
+```
+
+Podemos usar el método `index() `para obtener la posición del elemento. Encuentra el índice de la **primera aparición** del elemento en la lista:
+
+```python
+print(grades.index(7))   # 2
+print(grades.index(10))  # 0
+```
+
+También podemos especificar el intervalo de búsqueda: `list.index(element, start, end)`.
+
+```python
+print(grades.index(9, 2, 5))  # 3
+
+# if we don't specify the end of the interval, it automatically equals the end of the list
+print(grades.index(10, 1))    # 5
+```
+
+
+
+Tenga cuidado: el `end`índice no está incluido en el intervalo.
+
+
+
+También es bueno saber que si el elemento que buscamos no está en la lista, el método provocará un **error** :
+
+```python
+print(grades.index(8))  # ValueError: 8 is not in list
+```
+
+Nuestra discusión sobre las operaciones básicas con listas ha llegado a su fin. Si necesita más información, consulte la [documentación de Python Data Structures](http://docs.python.org/3/tutorial/datastructures.html) .
+
+##### Resumen
+
+Resumiendo, en este tema hemos aprendido a:
+
+- agregar un elemento con `append()`;
+
+- agregue varios elementos con `extend()`;
+
+- eliminar elementos con `remove()`;
+
+- insertar un elemento en una posición especificada con `insert()`;
+
+- compruebe si un elemento está en una lista o no con los operadores `in`y `not in`;
+
+- contar cuántas veces aparece un elemento en una lista con `count()`;
+
+- obtener la posición de un elemento en una lista con `index()`.
+
+    También sabemos ahora que, dado que la lista es una colección dinámica, se puede cambiar. No es necesario crear constantemente nuevas listas, lo que beneficia la memoria y el rendimiento de su programa.		
+
+
+
+```python
+def merge_lists(list_one, list_two):
+	list_one.extend(list_two)
+	return list_one
+
+l1 = ['Washington, D.C.', 'Chicago', 'New York']
+l2 = ['Los Angeles', 'Las Vegas']
+l3 = merge_lists(list_one=l1 , list_two=l2)
+print(l3)
+```
+
+```python
+numbers = [2, 2, 4, 1, 1, 3, 5]
+
+
+numbers.remove(1)
+numbers.extend([0])
+numbers.append(len(numbers))
+numbers.remove(5)
+numbers.append(5)
+print(numbers)
+
+[2, 2, 4, 1, 3, 0, 7, 5]
+```
+
+
+
+# Teoría: Tupla
+
+A estas alturas, definitivamente sabe cómo manejar una lista, la colección más popular en Python. Ahora descubramos un tipo de datos igualmente útil: las **tuplas** . Debe recordar que son casi idénticas a las listas. Lo que los distingue es su **inmutabilidad** .
+
+##### Definir una tupla
+
+Dado que las tuplas no se pueden cambiar, la creación de tuplas es similar a abrir una caja de un tamaño fijo, luego poner varios valores en esta caja y sellarla. Una vez sellada la caja, no se puede modificar su tamaño ni su contenido.
+
+Utilice un par de **paréntesis** para definir una tupla:
+
+```python
+empty_tuple = ()
+print(type(empty_tuple))  # <class 'tuple'>
+```
+
+Las tuplas vacías son fáciles de crear. Entonces, ¿qué salió mal en el siguiente ejemplo?
+
+```python
+not_a_tuple = ('cat')
+print(not_a_tuple)        # 'cat'
+print(type(not_a_tuple))  # <class 'str'>
+```
+
+Como puede ver, la variable que creamos almacena una cadena. En realidad, es una **coma** que forma una tupla, no un paréntesis. Arreglemos este fragmento de código:
+
+```python
+now_a_tuple = ('cat',)
+print(now_a_tuple)        # ('cat',)
+print(type(now_a_tuple))  # <class 'tuple'>
+```
+
+Por lo tanto, siempre use una coma al definir una tupla singleton. De hecho, incluso si su tupla contiene más de un elemento, separar los elementos con comas será suficiente:
+
+```python
+weekend = 'Saturday', 'Sunday'
+print(weekend)        # ('Saturday', 'Sunday')
+print(type(weekend))  # <class 'tuple'>
+```
+
+La función incorporada `tuple()`convierte cadenas, listas y otros **iterables** en una tupla. Con esta función, también puede crear una tupla vacía.
+
+```python
+# another empty tuple
+empty_tuple = tuple()
+print(empty_tuple)        # ()
+print(type(empty_tuple))  # <class 'tuple'>
+
+# a list turned into a tuple
+bakers_dozen = tuple([12, 1])
+print(bakers_dozen == (12, 1))  # True
+
+# a tuple from a string
+sound = tuple('meow')
+print(sound)  # ('m', 'e', 'o', 'w')
+```
+
+##### ¿Qué podemos hacer con las tuplas?
+
+Primero, examinemos qué características tienen en común las listas y las tuplas.
+
+Tanto las listas como las tuplas están **ordenadas** , es decir, al pasar elementos a estos contenedores, puede esperar que su orden siga siendo el mismo. Las tuplas también son indiferentes a la naturaleza de los datos almacenados en ellas, por lo que puede **duplicar valores** o **mezclar diferentes tipos de datos** :
+
+```python
+tiny_tuple = (0, 1, 0, 'panda', 'sloth')
+
+print(len(tiny_tuple))  # 5
+print(tiny_tuple)       # (0, 1, 0, 'panda', 'sloth')
+```
+
+Al igual que las listas, las tuplas admiten la **indexación** . Sin embargo, tenga cuidado con los índices si quiere arreglárselas sin ellos `IndexErrors`.
+
+```python
+empty_tuple = ()
+print(empty_tuple[0])  # IndexError
+
+numbers = (0, 1, 2)
+print(numbers[0])   # 0
+print(numbers[1])   # 1
+print(numbers[2])   # 2
+print(numbers[3])   # IndexError
+```
+
+Y aquí entra en juego la primera característica distintiva de las tuplas. Lo que no admiten es la **asignación de elementos** . Si bien puede cambiar un elemento en una lista que hace referencia a este elemento por su índice, no es el caso de las tuplas:
+
+```python
+# ex-capitals
+capitals = ['Philadelphia', 'Rio de Janeiro', 'Saint Petersburg']
+
+capitals[0] = 'Washington, D.C.'
+capitals[1] = 'Brasília'
+capitals[2] = 'Moscow'
+print(capitals)  # ['Washington, D.C.', 'Brasília', 'Moscow']
+
+former_capitals = tuple(capitals)
+former_capitals[0] = 'Washington, D.C.'  # TypeError
+```
+
+En el ejemplo anterior, intentamos actualizar la tupla y no terminó bien. No puede agregar un elemento a una tupla o eliminarlo de allí (a menos que elimine toda la tupla). Sin embargo, la inmutabilidad tiene un lado positivo. Lo discutiremos en la siguiente sección.
+
+##### Inmutabilidad y sus ventajas.
+
+En este momento, es posible que se le haya ocurrido una pregunta: ¿por qué usar tuplas cuando tenemos listas? Como era de esperar, todas las respuestas conducen a la inmutabilidad. Detengámonos en sus ventajas:
+
+- Las tuplas son **más rápidas** y **eficientes en memoria** que las listas. Siempre que necesite trabajar con grandes cantidades de datos, debe pensarlo. Si no va a modificar sus datos, tal vez debería optar por tuplas.
+- Una tupla se puede utilizar como **clave de diccionario** , mientras que las listas como claves darán como resultado `TypeError`.
+- Por último, pero no menos importante, es **imposible cambiar** por accidente los datos almacenados en una tupla. Puede resultar una solución segura y sólida para algunas tareas.
+
+##### Resumen
+
+Esos eran los conceptos básicos de las tuplas en Python. Al igual que las listas, las tuplas están **ordenadas** y son **iterables** . A diferencia de las listas, son **inmutables** . Aprenderá más sobre las características de tuplas en los siguientes temas, ¡ahora es el momento de escribir sus primeros programas con ellas!
+
+# Teoría: declaración If
+
+Hay situaciones en las que su programa necesita ejecutar algún fragmento de código solo si una condición particular es verdadera. Es posible establecer esa condición en Python y, en este tema, ¡aprenderemos cómo!
+
+##### Declaración if simple
+
+Entonces, en Python, un fragmento de código que debe ejecutarse solo bajo alguna condición debe colocarse dentro del cuerpo de una **declaración if** . El patrón es el mismo que en el idioma inglés: primero viene la palabra clave **`if`**, luego una condición y luego una lista de expresiones para ejecutar. La condición es siempre una **expresión booleana** , es decir, su valor es igual a `True`o `False`. Aquí hay un ejemplo de cómo debería verse el código con una expresión condicional:
+
+```python
+biscuits = 17
+if biscuits >= 5:
+    print("It's time for tea!")
+```
+
+Tenga en cuenta que la condición termina con dos puntos y una nueva línea comienza con una **sangría** . Por lo general, se utilizan 4 espacios para designar cada nivel de sangría. Un fragmento de código en el que todas las líneas están en el mismo nivel de sangría se denomina **bloque de código** . En Python, *solo* se usa sangría para separar diferentes bloques de código, por lo tanto, solo la sangría muestra qué líneas de código se supone que deben ejecutarse cuando `if`se satisface la declaración y cuáles deben ejecutarse *independientemente* de la `if`declaración. Mira el siguiente ejemplo:
+
+```python
+if biscuits >= 5:
+    print("It's time for tea!")
+    print("What tea do you prefer?")
+print("What about some chocolate?")
+```
+
+En este ejemplo, la línea `"It's time for tea!"`, así como `"What tea do you prefer?`", se imprimirán solo si hay 5 o más galletas. La línea `"What about some chocolate?"`se imprimirá independientemente del número de galletas.
+
+Una `if` declaración se ejecuta solo si su condición se cumple (el valor booleano es `True`); de lo contrario, se omite.
+
+Los valores booleanos básicamente dejan claro si un fragmento de código debe ejecutarse o no. Dado que las comparaciones dan como resultado `bool`, siempre es una buena idea usarlas como condición.
+
+
+
+Sin embargo, hay una trampa. No debe confundir el operador de comparación para la igualdad `==`con el operador de asignación `=`. Solo el primero proporciona una condición adecuada. Intente evitar este error común en su código.
+
+
+
+##### Instrucción if anidada
+
+A veces, una condición resulta ser demasiado complicada para una simple `if`afirmación. En este caso, puede utilizar las llamadas declaraciones **anidadas**`if` . Cuantas más `if`declaraciones se aniden, más complejo se vuelve su código, lo que generalmente no es algo bueno. Sin embargo, esto no significa que deba evitar las `if`declaraciones anidadas a toda costa. Echemos un vistazo al siguiente código:
+
+```python
+rainbow = "red, orange, yellow, green, blue, indigo, violet"
+warm_colors = "red, yellow, orange"
+my_color = "orange"
+
+if my_color in rainbow:
+    print("Wow, your color is in the rainbow!")
+    if my_color in warm_colors:
+        print("Oh, by the way, it's a warm color.")
+```
+
+El ejemplo anterior ilustra una `if`declaración anidada . Si la variable `my_color`es una cadena que contiene el nombre de un color del arco iris, ingresamos el cuerpo de la primera `if` declaración. Primero imprimimos el mensaje y luego comprobamos si nuestro color pertenece a los colores cálidos. El operador de membresía `in`simplemente muestra si `my_color`es una subcadena de la cadena respectiva, `rainbow`o `warm_colors`. Al igual que las comparaciones aritméticas, devuelve un valor booleano.
+
+Esto es lo que veremos en nuestro caso:
+
+```no-highlight
+Wow, your color is in the rainbow!
+Oh, by the way, it's a warm color.
+```
+
+Cuando se trata de `if`declaraciones anidadas , la sangría adecuada es crucial, así que no olvide aplicar sangría a cada declaración que comience con la `if`palabra clave.
+
+##### Resumen
+
+En resumen, en este tema, hemos aprendido cómo escribir y anidar condiciones en Python con if-statement.
+
+
+
+# Teoría: otra declaración
+
+Establecer condiciones es una herramienta muy popular y útil en programación. Sin embargo, a veces, comprobar si una condición es verdadera o no puede no ser suficiente. Digamos que no desea que se ejecute un fragmento de código si su condición es falsa, pero, si ese es el caso, hay otro fragmento de código que desea ejecutar. Para situaciones como esta, Python tiene otra herramienta poderosa sobre la cual aprenderemos en este tema.
+
+##### Simple if-else
+
+Una **declaración if-else** es otro tipo de expresiones condicionales en Python. Se diferencia de una **instrucción if** por la presencia de la palabra clave adicional `else`. El bloque de código que `else`contiene se ejecuta cuando la condición de su declaración if no se cumple (el valor booleano es `False`). Dado que una instrucción else es una alternativa para una instrucción if, solo se puede ejecutar un bloque de código. Además, `else`no requiere ninguna condición:
+
+```python
+if today == "holiday":
+    print("Lucky you!")
+else:
+    print("Keep your chin up, then.")
+```
+
+Tenga en cuenta que aquí también se aplica la regla de **sangría de** 4 espacios .
+
+Como pronto descubrirá, a los programadores les gustan todo tipo de atajos. Para las expresiones condicionales, también hay un truco: puede escribir una declaración if-else en una línea. Esto se llama **operador ternario** y tiene este aspecto:
+
+```python
+print("It’s a day now!" if sun else "It’s a night for sure!")
+```
+
+O, de manera más general:
+
+```python
+first_alternative if condition else second_alternative
+```
+
+Es una cuestión de conveniencia, pero recuerde que el código que cree debe ser legible.
+
+##### If-else anidado
+
+Cabe mencionar que las `if-else`declaraciones se pueden **anidar de** la misma manera que las `if`declaraciones. Puede aparecer una expresión condicional adicional después de la `if`sección, así como después de la `else`sección. Una vez más, no olvide aplicar la sangría correctamente:
+
+```python
+if x < 100:
+    print('x < 100')
+else:
+    if x == 100:
+        print('x = 100')
+    else:
+        print('x > 100')
+    print('This will be printed only because x >= 100')
+```
+
+##### Resumen
+
+En este tema, hemos aprendido sobre un tipo más de expresión condicional: instrucción if-else. Repasemos los puntos principales nuevamente:
+
+- la palabra clave `else`se usa para dar una alternativa;
+- se ejecutará en caso de que la `if`declaración no lo sea;
+- no requiere ninguna condición;
+- `if-else` Las declaraciones se pueden anidar.
+
+¡Eso es todo! Ahora está listo no solo para establecer condiciones, sino también para considerar diferentes alternativas. ¡Felicidades!
+
+```python
+dictionary = ["aa", "abab", "aac", "ba", "bac", "baba", "cac", "caac"]
+if input() in dictionary:
+    print("Correct")
+else:
+    print("Incorrect")
+    
+ ###----####   
+city = "..."
+summer = "Barcelona, Rome, Istanbul, Lisbon, Paris"
+winter = "Oslo, Helsinki, Sydney, Cape Town, Vienna"
+
+if (city in summer) or (city in winter):
+    if city in summer:
+        print("You should visit it in the summer!")
+    else:
+        print("You should visit it in the winter!")
+else:
+    print("I don't know what the best season is :(")
+```
+
+```python
+Here's a piece of a program that tells you when it is best to visit a particular city:
+
+city = "..."
+summer = "Barcelona, Rome, Istanbul, Lisbon, Paris"
+winter = "Oslo, Helsinki, Sydney, Cape Town, Vienna"
+
+if (city in summer) or (city in winter):
+    if city in summer:
+        print("You should visit it in the summer!")
+    else:
+        print("You should visit it in the winter!")
+else:
+    print("I don't know what the best season is :(")
+Match the value of city with the program's response.
+```
+
+
+
+# Teoría: declaración de Elif
+
+Ya que está familiarizado con las declaraciones condicionales básicas, como la declaración **if** y la declaración **if-else** , es hora de la **declaración elif** más avanzada .
+
+**La declaración Elif** se usa cuando queremos especificar varias condiciones en nuestro código. ¿En qué se diferencia de **las declaraciones if-else** ? Bueno, es simple. Aquí agregamos la palabra clave **elif** para nuestras condiciones adicionales. Se usa principalmente con operadores if y else y la sintaxis básica se ve así:
+
+```python
+# basic elif syntax
+if condition1:
+    action1
+elif condition2:
+    action2
+else:
+    action3
+```
+
+La condición va seguida de dos puntos, al igual que con las declaraciones **if-else** , la acción deseada se coloca dentro del cuerpo **elif** y no se olvide de una **sangría** , es decir, 4 espacios al comienzo de una nueva línea. Aquí primero verificamos la condición1 en la instrucción **if** y si se cumple (el valor de la expresión booleana es **Verdadero** ), se realiza la acción1. Si es **False** , omitimos action1 y luego verificamos la condition2 en la declaración **elif** . Nuevamente, si condition2 es Verdadero, se realiza action2; de lo contrario, lo omitimos y vamos a la parte **else** del código.
+
+Echemos un vistazo al siguiente ejemplo:
+
+```python
+# elif example
+price = 10000 # there should be some int value
+if price > 5000:
+    print("That's too expensive!")
+elif price > 500:
+    print("I can afford that!")
+else:
+    print("That's too cheap!")
+```
+
+¿Comprar o no comprar? Para responder a la pregunta, primero verificamos si el precio es superior a 5000. Si 'precio> 5000' es Verdadero, imprimimos que es demasiado caro y partimos en busca de algo más barato. Pero, ¿y si el precio fuera inferior a 5000? En este caso, verificamos que la siguiente condición es 'precio> 500', y nuevamente, si es Verdadero, imprimimos que podemos pagarlo, y si es Falso, vamos al bloque **else** e imprimimos que es demasiado barato. Así que "¡me lo puedo permitir!" se imprimirá si el precio es inferior a 5000 pero superior a 500, y "Eso es demasiado barato" si el precio es inferior a 500.
+
+**La** declaración **Elif** difiere de **else** en un momento clave: representa otra opción específica, mientras que **else se** ajusta a todos los casos que no caen en la condición dada en la declaración **if** . Es por eso que a veces puede encontrar declaraciones condicionales sin **más** :
+
+```python
+pet = 'cat'  # or 'dog'?
+
+# cats vs dogs conditional
+if pet == 'cat':
+    print('Oh, you are a cat person. Meow!')
+elif pet == 'dog':
+    print('Oh, you are a dog person. Woof!')
+```
+
+En este ejemplo, es posible agregar una declaración **else** para expandir ligeramente una perspectiva, pero no es necesario si solo estamos interesados en perros y gatos.
+
+##### ¿Por qué elif y no si?
+
+El último ejemplo probablemente le hizo preguntarse: ¿por qué usamos una `elif`declaración en lugar de solo dos `if`declaraciones? ¿No `if`serían más fáciles dos afirmaciones?
+
+```python
+if pet == 'cat':
+    print('Oh, you are a cat person. Meow!')
+if pet == 'dog':
+    print('Oh, you are a dog person. Woof!')
+```
+
+En este caso particular, el resultado sería el mismo que con `elif`. Pero esto no funcionaría como es necesario para el primer ejemplo de este tema:
+
+```python
+price = 6000
+if price > 5000:
+    print("That's too expensive!")
+if price > 500:
+    print("I can afford that!")
+else:
+    print("That's too cheap!")
+# The output is 'That's too expensive!\nI can afford that!'
+```
+
+¿Ver? Recibimos dos mensajes contradictorios en lugar de uno que originalmente teníamos la intención de mostrar. La diferencia entre los ejemplos anteriores es que en el ejemplo con mascotas, los casos descritos por declaraciones condicionales son *mutuamente excluyentes* , es decir, no hay una cadena que sea igual `'dog'`y `'cat'`al mismo tiempo. En el otro ejemplo, los casos no son mutuamente excluyentes y hay valores para `price`que pueden satisfacer ambas condiciones.
+
+Por lo tanto, la `elif`declaración es una mejor alternativa que dos `if`declaraciones cuando desea mostrar que se supone que solo se cumple una de las condiciones. Una cadena de `if`declaraciones implica que las condiciones expresadas en ellas no están relacionadas en absoluto y pueden satisfacerse independientemente unas de otras, como en el siguiente ejemplo:
+
+```python
+animal = 'unicorn'
+if animal in 'crow, dog, frog, pony':
+    print('This animal exists')
+if animal in 'unicorn, pegasus, pony':
+    print('This animal is a horse')
+```
+
+Con esta distinción en mente, podrá hacer que su código sea más claro y menos propenso a errores. Ahora, volvamos a estudiar la `elif`funcionalidad.
+
+##### Múltiples elif y un árbol de decisiones
+
+Puede haber tantas declaraciones **elif** como necesite, por lo que sus condiciones pueden ser muy detalladas. No importa cuántas declaraciones **elif** tenga, la sintaxis es siempre la misma. La única diferencia es que agregamos más **elifs** :
+
+```python
+# multiple elifs syntax
+if condition1:
+    action1
+elif condition2:
+    action2
+# here you can add as many elifs as you need
+elif conditionN:
+    actionN
+else:
+    actionN1
+```
+
+El código dentro del bloque **else** se ejecuta solo si todas las condiciones anteriores son **falsas** . Vea el siguiente ejemplo:
+
+```python
+# multiple elifs example
+light = "red"  # there can be any other color
+if light == "green":
+    print("You can go!")
+elif light == "yellow":
+    print("Get ready!")
+elif light == "red":
+    print("Just wait.")
+else:
+    print("No such traffic light color, do whatever you want")
+```
+
+En este programa, el mensaje del bloque **else** se imprime para la luz de cualquier color excepto verde, amarillo y rojo para los que hemos escrito mensajes especiales.
+
+Los condicionales con múltiples ramas forman un **árbol de decisión** , en el que un nodo es una expresión booleana y las ramas se marcan con **Verdadero** o **Falso** . La rama marcada como Verdadero conduce a la acción que debe ejecutarse y la rama Falsa conduce a la siguiente condición. La siguiente imagen muestra un árbol de decisiones de este tipo de nuestro ejemplo con semáforos.
+
+![img](https://ucarecdn.com/8f7d80be-494d-4599-85a9-c917d5b77cf7/)
+
+##### Declaraciones elif anidadas
+
+Las declaraciones Elif también se pueden **anidar** , al igual **que las** declaraciones **if-else** . Podemos reescribir nuestro ejemplo de semáforos con condicionales anidados:
+
+```python
+# nested elifs example
+traffic_lights = "green, yellow, red"
+# a string with one color
+light = "purple"  # variable for color name
+if light in traffic_lights:
+    if light == "green":
+        print("You can go!")
+    elif light == "yellow":
+        print("Get ready!")
+    else:
+        # if the lights are red
+        print("Just wait.")
+else:
+    print("No such traffic light color, do whatever you want")
+```
+
+##### Resumen
+
+En este tema, nos familiarizamos con elif-statement y aprendimos cuándo podría ser útil, cómo usarlo y anidarlo o hacer un árbol de decisiones con él. Ya que domina el tema de los condicionales, ¡a partir de ahora puede hacer que su programa haga lo que quiera cuando quiera!
+
+Let's imagine a chessboard, the squares on which are marked with coordinates. The coordinates are numbers between 1 and 8 inclusively. The first number indicates a column, the second one indicates a row.
+
+![img](https://ucarecdn.com/cbd97f5f-f89c-47d8-82e9-82de3b752632/)
+
+The chess king can stand on any square and can move one step horizontally, vertically, or diagonally in any direction within the board.
+
+The input will contain the coordinates on which the king is located. You should figure out and print how many moves the figure can make: for example, from the position (1, 8), the king can make only 3 moves (right, down, diagonally).
+
+```python
+chessExt = ['11','18','81','88']
+chessLinExt = ['12','13','14','15',
+               '16','17','82','83',
+               '84','85','86','87',
+               '71','61','51','41',
+               '31','21','78','68',
+               '58','48','38','28']
+
+x = input()
+y = input()
+z = x+y
+if z in chessExt:
+	print(3)
+elif z in chessLinExt:
+	print(5)
+elif z not in chessExt and z not in chessLinExt:
+	z = int(z)
+	if z<88:
+		print(8)
+else:
+	print('Error Value Chess')
+    
+    ### Other ###
+    arr = [
+    [3, 5, 5, 5, 5, 5, 5, 3],
+    [5, 8, 8, 8, 8, 8, 8, 5],
+    [5, 8, 8, 8, 8, 8, 8, 5],
+    [5, 8, 8, 8, 8, 8, 8, 5],
+    [5, 8, 8, 8, 8, 8, 8, 5],
+    [5, 8, 8, 8, 8, 8, 8, 5],
+    [5, 8, 8, 8, 8, 8, 8, 5],
+    [3, 5, 5, 5, 5, 5, 5, 3]]
+
+print(arr[int(input()) - 1][int(input()) - 1])
+
+```
+
+```python
+chicken = 23
+goat = 678
+pig = 1296
+cow = 3848
+sheep = 6769
+
+money = int(input())
+
+if chicken <= money <= goat:
+    buy = int(money / chicken)
+    if buy > 1:
+        print(f'{buy} chickens')
+    else:
+        print(f'{buy} chicken')
+        
+elif goat <= money <= pig:
+    buy = int(money / goat)
+    if buy > 1:
+        print(f'{buy} goats')
+    else:
+        print(f'{buy} goat')
+        
+elif pig <= money <= cow:
+    buy = int(money / pig)
+    if buy > 1:
+        print(f'{buy} pigs')
+    else:
+        print(f'{buy} pig')
+        
+elif cow <= money <= sheep:
+    buy = int(money / cow)
+    if buy > 1:
+        print(f'{buy} cows')
+    else:
+        print(f'{buy} cow')
+        
+elif sheep <= money:
+    buy = int(money / sheep)
+    print(f'{buy} sheep')
+else:
+    print(None)
+    
+    
+    
+    #### OTHER
+    
+money = int(input())
+animal = ["sheep", "cow", "pig", "goat", "chicken"]
+animals = ["sheep", "cows", "pigs", "goats", "chickens"]
+price = [6769, 3848, 1296, 678, 23]
+i = 0
+while True:
+    if money < price[4]:
+        print("None")
+        break
+    if money >= price[i]:
+        amount = money // price[i]
+        if amount == 1:
+            print(amount, animal[i])
+        else:
+            print(amount, animals[i])
+        break
+    i += 1
+
+```
+
+```python
+### SHORT CODE
+# put your python code here
+num_1 = float(input())
+num_2 = float(input())
+operator = input()
+
+if operator in "/, mod, div":
+    if num_2 == 0:
+        print("Division by 0!")
+    else:
+        if operator == "/":
+            print(num_1 / num_2)
+        elif operator == "mod":
+            print(num_1 % num_2)
+        else:
+            print(num_1 // num_2)
+else:
+    if operator == "+":
+        print(num_1 + num_2)
+    elif operator == "-":
+        print(num_1 - num_2)
+    elif operator == "*":
+        print(num_1 * num_2)
+    else:
+        print(num_1 ** num_2)
+### LONGCODE
+
+a = float(input())
+b = float(input())
+
+x = input()
+if x == '+':
+	print(a + b)
+elif x == '-':
+	print(a - b)
+elif x == '/':
+	if b != 0:
+		print(a / b)
+	else:
+		print("Division by 0!")
+elif x == '*':
+	print(a * b)
+elif x == 'mod':
+	if b != 0:
+		print(a % b)
+	else:
+		print("Division by 0!")
+elif x == 'pow':
+	print(a ** b)
+elif x == 'div':
+	if b != 0:
+		print(a // b)
+	else:
+		print("Division by 0!")
+```
+
+## Partículas de [declaración](https://hyperskill.org/learn/step/5926) elif
+
+El mundo de las partículas elementales es bastante complejo. Hay muchas clases diferentes y pueden interactuar de una manera bastante interesante.
+
+Dos características importantes de las partículas elementales son el giro y la carga eléctrica. Estas son algunas de las partículas elementales:
+
+| **Partícula** | **Clase** | **Girar** | **Carga eléctrica** |
+| ------------- | --------- | --------- | ------------------- |
+| Extraño       | Cuarc     | 1/2       | -1/3                |
+| Encanto       | Cuarc     | 1/2       | 2/3                 |
+| Electrón      | Lepton    | 1/2       | -1                  |
+| Neutrino      | Lepton    | 1/2       | 0                   |
+| Fotón         | Boson     | 1         | 0                   |
+
+Escribe un programa que devuelva la partícula y su clase en función de su giro y carga eléctrica.
+
+**El formato de entrada:**
+
+Dos líneas: primero el giro de la partícula, luego su carga. Usted *NO* tiene que convertir estos valores a los flotadores.
+
+**El formato de salida:**
+
+La partícula y su clase separadas por un espacio.
+
+
+
+# Teoría: Bucle FOR
+
+Las computadoras son conocidas por su capacidad para hacer cosas que la gente considera aburridas y que consumen mucha energía. Por ejemplo, repetir tareas idénticas sin errores es una de estas cosas. En este tema, aprenderemos qué herramienta de Python puede ayudarlo con eso, cómo implementarlo y qué funciones puede usar junto con él.
+
+##### ¿Qué es la iteración?
+
+En Python, el proceso de ejecución repetitiva del mismo bloque de código se denomina **iteración** .
+
+Hay dos tipos de iteración:
+
+**Iteración definida** , donde el número de repeticiones se indica de antemano.
+
+**Iteración indefinida** , donde un bloque de código se ejecuta siempre que la condición establecida de antemano sea verdadera.
+
+Después de la primera iteración, el programa vuelve al principio del cuerpo del código y lo repite, creando un llamado **bucle** . El más utilizado es el `for`**bucle, que** lleva el nombre del `for`**operador** , que proporciona la ejecución del código.
+
+##### Para la sintaxis de bucle
+
+Aquí está el esquema del bucle:
+
+```python
+for variable in iterable:
+    statement
+```
+
+donde `statement`es un bloque de operaciones ejecutadas para cada elemento en **,** un objeto utilizado en iteración (por ejemplo, una cadena o una lista). toma el valor del siguiente iterable después de cada iteración. `iterable``Variable`
+
+Ahora intente adivinar qué resultado obtendremos si ejecutamos el siguiente fragmento de código:
+
+```python
+oceans = ['Atlantic', 'Pacific', 'Indian', 'Southern', 'Arctic']
+for ocean in oceans:
+    print(ocean)
+```
+
+Durante cada iteración, el programa tomará los elementos de la lista y ejecutará las declaraciones con ellos, por lo que la salida será:
+
+```python
+Atlantic
+Pacific
+Indian
+Southern
+Arctic
+```
+
+Las cadenas también son iterables, por lo que puede deletrear una palabra, por ejemplo:
+
+```python
+for char in 'magic':
+    print(char)
+```
+
+Como esto:
+
+```python
+m
+a
+g
+i
+c
+```
+
+##### Función de rango
+
+La `range()`**función** se utiliza para especificar el número de iteraciones. Devuelve una secuencia de números desde 0 (por defecto) y termina en un número especificado. Tenga cuidado: el último número no aparecerá en la salida.
+
+Veamos el siguiente ejemplo:
+
+```python
+for i in range(5):
+    print(i)
+```
+
+Lo que obtendremos es esto:
+
+```python
+0
+1
+2
+3
+4
+```
+
+Puede cambiar el **valor inicial** si no está satisfecho con 0, además, puede configurar el valor de **incremento (paso)** agregando un tercer parámetro:
+
+```python
+for i in range(5, 45, 10):
+    print(i)
+```
+
+De acuerdo con los parámetros incluidos, hemos pedido imprimir los números del 5 al 45 con un valor de incremento de 10. Tenga cuidado nuevamente, el último valor no está incluido en la salida:
+
+```python
+5
+15
+25
+35
+```
+
+Si no va a utilizar la variable de contador en su ciclo, puede mostrarla reemplazando su nombre con el símbolo de subrayado:
+
+```python
+for _ in range(100):
+    do_smth()
+```
+
+En el ejemplo anterior, no necesitamos la variable de contador de ninguna manera, simplemente usamos el ciclo para repetir la `do_smth()`función un número determinado de veces.
+
+##### Procesamiento de datos de entrada
+
+También puede utilizar la `input()`**función,** que ayuda al usuario a pasar un valor a alguna variable y trabajar con ella. Por lo tanto, puede obtener el mismo resultado que con el código anterior:
+
+```python
+word = input()
+for char in word:
+    print(char)
+```
+
+Oh, mira, puedes escribir un fragmento de código con un propósito práctico:
+
+```python
+times = int(input('How many times should I say "Hello"?'))
+for i in range(times):
+    print('Hello!')
+```
+
+Por lo tanto, puede pedirle al usuario que especifique el número de iteraciones que se realizarán.
+
+##### Bucle anidado
+
+En Python, es fácil colocar un bucle dentro de otro: un **bucle anidado** . El tipo de bucle interno y externo no importa, el primero en ejecutar es el bucle externo, luego el interno se ejecuta:
+
+```python
+names = ['Rose', 'Daniel']
+surnames = ['Miller']
+for name in names:
+    for surname in surnames:
+         print(name, surname)
+```
+
+La salida se muestra a continuación:
+
+```python
+Rose Miller
+Daniel Miller
+```
+
+Consulte [esta](https://pythontutor.com/visualize.html#code=names %3D ['Rose', 'Daniel'] surnames %3D ['Miller'] for name in names%3A    for surname in surnames%3A         print(name, surname)&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=[]&textReferences=false) visualización para comprender mejor cómo funciona el código. En este ejemplo, usamos dos `for`bucles para crear nombres de personas ficticias. Obviamente, puede tratar con objetos iterables de diferentes tamaños sin demasiado alboroto.
+
+##### Resumen
+
+Con todo, los `for`bucles son una forma eficaz de automatizar algunas acciones repetitivas. Puede agregar variables y operaciones para hacer un bucle anidado. Además, puede controlar el número de iteraciones con la ayuda de la `range()`función. Tenga cuidado con la sintaxis: ¡una sangría adicional o la falta de dos puntos pueden causar un error!
+
+```python
+phrase = input()
+alfabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+character = [phrase[0].lower()]
+for char in phrase[1:]:
+    if char in alfabet:
+        character.append('_')
+        character.append(char.lower())
+    else:
+        character.append(char)
+snake_case = ''.join(character)
+print(snake_case)
+```
+
+
+
+# Teoría: descomposición funcional
+
+En este punto, ya sabe cómo declarar funciones en Python. Esta es una habilidad muy útil, sin duda alguna, pero para aprovecharla al máximo, necesitamos saber cuándo declararlos. En este tema, veremos cómo descomponer la solución de un problema particular en funciones.
+
+##### Ejemplo de la vida real
+
+Antes de pasar a la descomposición real, averigüemos qué es lo que queremos descomponer.
+
+Supongamos que estamos escribiendo un programa que simula un cajero automático. ¿Cómo funcionan los cajeros automáticos de la vida real? Bueno, generalmente un cliente inserta la tarjeta, ingresa el pin y, si el pin es correcto, realiza algunas operaciones, por ejemplo, retira dinero o deposita dinero en una cuenta. Podemos reinventar estas acciones como parte de un programa de computadora. Así es como se puede describir el algoritmo en general:
+
+1. Analizar los datos de entrada (tarjeta y pin introducido);
+2. Verifique que el pin sea correcto;
+3. Pregúntele al cliente qué quiere hacer;
+4. Si la operación es compatible, hágalo.
+
+Antes de programar este algoritmo, solucionemos algunas cosas. Obviamente, un banco real tiene una base de datos que almacena todos los datos necesarios, como el PIN correcto cifrado o el saldo actual de la tarjeta. Aquí estamos creando una versión muy simple de un cajero automático, por lo que no vamos a incluir revisiones de la base de datos. En cambio, definiremos variables `card_pin`y `card_balance`. Estas variables representarán el saldo correcto de PIN y tarjeta que hubiéramos obtenido de una base de datos.
+
+También necesitamos determinar qué operaciones permitiremos. Establezcamos tres: mostrar el saldo de la tarjeta, agregar dinero a la cuenta y retirar dinero de la cuenta.
+
+Ahora veamos el código:
+
+```python
+# operations
+DEPOSIT = "DEPOSIT"
+WITHDRAW = "WITHDRAW"
+DISPLAY = "DISPLAY"
+
+# read the data
+card_number = input("Enter card number: ")
+input_pin = input("Enter PIN: ")
+
+# card_pin and card_balance are read from the database
+
+# check that the pin is correct
+if card_pin == input_pin:
+    # ask the client what they want to do
+    action = input("Enter desired action: ")
+    if action == DEPOSIT:
+        money = float(input("Enter the sum of money to DEPOSIT: "))
+        card_balance += money
+        print("Deposited: $", money)
+        print("Current balance:", card_balance)
+    elif action == WITHDRAW:
+        money = float(input("Enter the sum of money to WITHDRAW: "))
+        card_balance -= money
+        print("Withdrawn: $", money)
+        print("Current balance:", card_balance)
+    elif action == DISPLAY:
+        print("Current balance:", card_balance)
+    else:
+        ...
+else:
+    print("Incorrect pin!")
+```
+
+Como puede ver, están sucediendo muchas cosas y es un poco difícil de seguir. La lógica principal es la misma que describimos anteriormente. Este código funciona perfectamente bien para nuestro problema y podríamos dejarlo así.
+
+Sin embargo, ¿qué pasa si queremos que este script funcione para muchos usuarios y no solo para uno? ¿Qué pasa si queremos procesar otros casos y realizar otras acciones, por ejemplo, comprobar si la tarjeta está en la base de datos o cambiar el pin? Algunas partes de este código serán útiles, otras partes tendremos que comentarlas o eliminarlas. También necesitaríamos realizar un seguimiento de todos los lugares donde estamos introduciendo cambios para asegurarnos de que todo funcione sin problemas. Ahora empieza a sonar como si tuviéramos un problema con nuestro código. La solución, como habrás adivinado, es la descomposición.
+
+##### Descomposición funcional
+
+**La descomposición funcional** es simplemente un proceso de descomposición del problema en varias funciones. Cada función realiza una tarea en particular y podemos realizar estas funciones en una fila para obtener los resultados que necesitamos.
+
+Cuando analizamos un problema, debemos pensar qué acciones queremos repetir varias veces o, alternativamente, realizarlas por separado. Así es como podemos obtener las funciones deseadas. Veamos nuevamente nuestra simulación de cajeros automáticos y descubramos qué pasos se pueden convertir en funciones separadas.
+
+Primero, una acción que hacemos con frecuencia es leer la entrada con un mensaje en particular. En segundo lugar, realizamos una determinada secuencia de acciones cuando el pin es correcto, específicamente preguntamos qué debemos hacer a continuación. En tercer lugar, dependiendo de la respuesta del cliente, realizamos ciertas acciones para depositar la suma en la cuenta o retirarlas de la cuenta. Y por último, sea cual sea la acción, siempre imprimimos el saldo actual.
+
+Algunas de estas acciones se pueden convertir en funciones independientes para simplificar el programa.
+
+Repasemos paso a paso. Primero, separemos nuestras operaciones principales en funciones.
+
+```python
+def deposit_money(amount, card_balance):
+    """Deposit given amount of money to the account."""
+    card_balance += amount
+    # save new balance to the database
+    return card_balance
+
+
+def withdraw_money(amount, card_balance):
+    """Withdraw given amount of money from the account."""
+    card_balance -= amount
+    # save new balance to the database
+    return card_balance
+```
+
+Es posible que haya notado que en el programa original imprimimos el saldo actual independientemente de lo que hayamos hecho antes. Esto significa que también podemos crear una función separada que registraría todo.
+
+```python
+def log_transaction(action, money, card_balance):
+    if action in (DEPOSIT, WITHDRAW):
+        print(action + ": $", money)
+    print("Current balance:", card_balance)
+```
+
+Esta función se llamará después de que hayamos hecho algo y mostrará información sobre el saldo actual y los cambios que se han realizado.
+
+A continuación, tiene sentido crear una función que administre estas operaciones:
+
+```python
+def move_money(action, money, card_balance):
+    if action == DEPOSIT:
+        return deposit_money(money, card_balance)
+    elif action == WITHDRAW:
+        return withdraw_money(money, card_balance)
+    elif action == DISPLAY:
+        return card_balance
+```
+
+Puede ver que esta función devuelve el saldo de la tarjeta que obtenemos después de nuestras manipulaciones. Esto es útil porque, como hemos visto antes, siempre queremos saber con cuánto dinero terminamos. Sin embargo, el propósito principal de esta función es simplificar el proceso de revisión de la funcionalidad de nuestro programa. Si queremos agregar alguna otra acción, simplemente agregamos otra opción a la `if - else`declaración y especificamos la función que llevaría a cabo esta tarea. Eliminar es similar.
+
+Una parte importante que aún no hemos cubierto es obtener la información sobre el dinero que trasladaremos a algún lugar. Sabemos que no necesitamos esta información para mostrarla, pero es necesaria para otras operaciones.
+
+```python
+def get_amount_of_money(action):
+    if action == DISPLAY:
+        return 0.0
+    money = input("Enter the sum of money to " + action + ": ")
+    return float(money)
+```
+
+En este momento, solo tenemos fragmentos de nuestro programa final. Otro paso importante es crear una función que lo junte todo.
+
+```python
+def make_transaction(action, card_balance):
+    money = get_amount_of_money(action)
+    card_balance = move_money(action, money, card_balance)
+    log_transaction(action, money, card_balance)
+```
+
+Aquí es cuando tiene lugar la lógica principal. Tenemos un único punto de entrada que determina el orden de las operaciones y llama a las funciones necesarias.
+
+##### El resultado
+
+Ahora, reescribamos el programa anterior usando estas funciones:
+
+```python
+card_number = input("Enter card number: ")
+input_pin = input("Enter PIN: ")
+
+# card_pin and card_balance are read from the database
+
+if card_pin == input_pin:
+    action = input("Enter desired action: ")
+    make_transaction(action, card_balance)
+else:
+    print("Incorrect pin!")
+```
+
+¡Eso es todo! Claro, junto con las funciones, el código es mucho más grande, pero esto nos brinda más ventajas que desventajas. Podemos comprender la dirección general del programa y podemos introducir cambios fácilmente si es necesario. Ahora, por ejemplo, si queremos agregar otra acción, solo necesitamos definir su función y modificar la `move_money`función. También podemos probar fácilmente componentes separados ya que se determinan en funciones separadas. Con todo, nuestro programa ahora es un programa de funcionamiento real que no se derrumbará cuando decidamos cambiarlo un poco.
+
+##### Resumen
+
+En este tema, hemos cubierto el concepto de descomposición funcional, dividiendo el proceso en varias funciones.
+
+Entre otras cosas, la descomposición nos permite:
+
+- estructurar mejor el código;
+- ver la lógica general del programa;
+- introducir cambios fácilmente;
+- probar funciones separadas.
+
+Evidentemente, la descomposición funcional no es una solución universal. Sin embargo, si puede pensar en su problema en términos de una secuencia de algunas funciones, ¡puede ser de gran ayuda para usted!
+
+```python
+name1 = "John"
+last_name1 = "Lennon"
+full_name1 = name1 + " " + last_name1
+        
+name2 = "Hermione"
+last_name2 = "Granger"
+full_name2 = name2 + " " + last_name2
+
+###
+
+def create_full_name(name, last_name):
+    return f'{name} {last_name}'
+
+```
+
