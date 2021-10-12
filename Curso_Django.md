@@ -6294,3 +6294,21 @@ def create_full_name(name, last_name):
 
 ```
 
+```python
+
+def main():
+    temperature, unit = input().split()
+    unit = str(unit)
+    temperature = float(temperature)
+    if unit == "C":
+        unit = "F"
+        print(str(celsius_to_fahrenheit(temperature)), "F")
+    else:
+        unit = "C"
+        print(str(fahrenheit_to_celsius(temperature)), "C")
+
+if __name__ == '__main__':
+    main()
+ 
+ ```
+``
