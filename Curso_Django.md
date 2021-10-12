@@ -6296,6 +6296,16 @@ def create_full_name(name, last_name):
 
 ```python
 
+def fahrenheit_to_celsius(temps_f):
+    temps_c = (temps_f - 32) * 5 / 9
+    return round(temps_c, 2)
+
+
+def celsius_to_fahrenheit(temps_c):
+    temps_f = temps_c * 9 / 5 + 32
+    return round(temps_f, 2)
+
+
 def main():
     temperature, unit = input().split()
     unit = str(unit)
@@ -6311,4 +6321,27 @@ if __name__ == '__main__':
     main()
  
  ```
-``
+
+```python
+def f1(x):
+    return (x ** 2) + 1 
+
+
+def f2(x):
+    return 1 / (x ** 2)
+
+
+def f3(x):
+    return (x ** 2) - 1 
+
+
+def f(x):
+    if x <= 0:
+        return f1(x) 
+    elif 0 < x < 1:
+        return f2(x)
+    else:
+        return f3(x)
+```
+
+
