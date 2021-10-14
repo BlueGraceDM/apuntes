@@ -6320,7 +6320,7 @@ def main():
 if __name__ == '__main__':
     main()
  
- ```
+```
 
 ```python
 def f1(x):
@@ -6354,3 +6354,504 @@ def calculate(amount, interest_rate, time):
 def print_result(interest, total_amount):
     print(f'The interest is: {interest}\nThe total amount is: {total_amount}')
 ```
+
+
+
+# Teoría: métodos de diccionario
+
+Ya sabe cómo crear un diccionario y acceder a sus elementos. En este tema, aprenderá sobre otras características de los diccionarios.
+
+##### Creación de diccionario alternativo
+
+Sabes que hay dos formas de crear un diccionario. Usar *llaves* con una lista de `key: value`pares separados por comas o el `dict`constructor. Aprenderemos sobre el `fromkeys`método que crea un nuevo diccionario con claves y valores especificados. Esta es la sintaxis de este método:
+
+```python
+dict.fromkeys(keys, value)
+```
+
+El `keys`parámetro es una secuencia de elementos que se convertirán en las claves de un nuevo diccionario. El `value`parámetro es opcional y el valor predeterminado es `None`, pero el usuario puede especificar un valor para todas las claves del diccionario. Mira el ejemplo de abajo:
+
+```python
+planets = {'Venus', 'Earth', 'Jupiter'}  
+  
+# initializing by default with None 
+planets_dict = dict.fromkeys(planets)
+print(planets_dict)  # {'Jupiter': None, 'Venus': None, 'Earth': None}
+
+# initializing with a value
+value = 'planet'
+planets_dict = dict.fromkeys(planets, value)
+print(planets_dict)  # {'Earth': 'planet', 'Venus': 'planet', 'Jupiter': 'planet'}
+
+# changing the value of 'Jupiter'
+planets_dict['Jupiter'] = "giant " + planets_dict['Jupiter']
+print(planets_dict)
+ # {'Earth': 'planet', 'Venus': 'planet', 'Jupiter': 'giant planet'}
+```
+
+¡La palabra se agregó con éxito! Pero ahora queremos crear un diccionario que almacenaría los nombres de los satélites de esos planetas. Algunos planetas tienen varios satélites, otros no los tienen en absoluto, por lo que es más conveniente usar una lista como valor.
+
+```python
+# some satellites of the Solar System
+satellites = ['Moon', 'Io','Europa']
+
+# initializing with an empty list
+planets_dict = dict.fromkeys(planets, [])
+print(planets_dict)  # {'Jupiter': [], 'Venus': [], 'Earth': []}
+```
+
+Agreguemos los elementos de la `satellites`lista a los planetas correspondientes. Mira, esto es lo que le pasó a nuestro diccionario:
+
+```python
+planets_dict['Earth'].append(satellites[0])
+planets_dict['Jupiter'].append(satellites[1])
+planets_dict['Jupiter'].append(satellites[2])
+print(planets_dict)  
+# {'Jupiter': ['Moon', 'Io', 'Europa'], 'Venus': ['Moon', 'Io', 'Europa'], 'Earth': ['Moon', 'Io', 'Europa']}
+```
+
+Vemos que todos los elementos de la `satellites`lista se han asignado a todos los planetas de nuestro diccionario. Esto sucedió porque el `fromkeys `método asigna el mismo objeto a todas las claves. Si bien nos referimos a diferentes claves del `planets_dict`diccionario, seguimos refiriéndonos a la misma lista. La diferencia con el ejemplo anterior es que si usamos objetos mutables (una lista, un diccionario) como valores, todos los cambios también se aplicarán a nuestro diccionario. La solución es utilizar la comprensión del diccionario:
+
+```python
+planets_dict = {key: [] for key in planets}
+```
+
+Se proporcionarán más detalles sobre esta operación en otro tema sobre operaciones de diccionario.
+
+##### Agregar elementos
+
+Supongamos que queremos agregar elementos a un diccionario existente. Usted sabe que una manera de hacerlo - definir una nueva clave y un nuevo valor: `existing_dict['new key'] = 'new value'`. Pero hay otra forma: use el `update`método. El método actualiza el diccionario con nuevos elementos de otro diccionario o un iterable de pares clave-valor.
+
+Creemos un diccionario y definamos los meses como claves y la temperatura media de este mes como valores. Entonces tenemos el siguiente `testable`diccionario:
+
+```python
+testable = {'September': '16°C', 'December': '-10°C'} 
+another_dictionary = {'June': '21°C'}
+
+# adding items from another dictionary
+testable.update(another_dictionary)
+print(testable)  # {'September': '16°C', 'December': '-10°C', 'June': '21°C'}
+
+# adding a key-value pair
+testable.update(October='10°C')
+print(testable)  
+# {'September': '16°C', 'December': '-10°C', 'June': '21°C', 'October': '10°C'}
+```
+
+Si la clave especificada ya existe en el diccionario, el método actualizará la clave con el nuevo valor:
+
+```python
+testable = {'September': '16°C', 'December': '-10°C'}
+testable.update(December='-20°C')
+
+print(testable)  # {'September': '16°C', 'December': '-20°C'}
+```
+
+##### Obtener y quitar elementos
+
+Aprendimos a crear un diccionario y agregarle elementos. Pero, ¿qué pasa si necesitamos obtener algún valor del diccionario o también eliminar un elemento? Los siguientes métodos le ayudarán a realizar diferentes tareas según sus necesidades.
+
+*1. Obtenga un valor del diccionario mediante una clave* .
+
+Como recordará, podemos acceder al valor en un diccionario mediante una clave:
+
+```python
+testable = {}
+testable['September'] = '16°C'
+
+print(testable['September'])  # 16°C
+```
+
+Sin embargo, si intenta acceder a una clave inexistente, obtendrá un `KeyError`:
+
+```python
+print(testable['June'])  # throws a KeyError
+```
+
+Para evitarlo `KeyError`, podemos usar el `get`método que devuelve `None`si la clave especificada no está en el diccionario:
+
+```python
+# 'get' method does not throw an error
+print(testable.get('September'))  # 16°C
+print(testable.get('June'))  # None
+```
+
+Con el `get`método, también podemos definir el valor predeterminado que se devolverá en tal caso:
+
+```python
+print(testable.get('June', 'no temperature'))  # no temperature
+```
+
+*2.* *Elimine la clave del diccionario y devuelva el valor utilizando el* `pop`*método.*
+
+Si la clave especificada se encontró en el diccionario, el método la eliminará y devolverá el valor:
+
+```python
+testable = {'September': '16°C', 'December': '-10°C'}
+return_value = testable.pop('December')
+
+print(return_value)  # -10°C
+print(testable)  # {'September': '16°C'}
+```
+
+Si no se encontró la clave, `KeyError`aparecerá un:
+
+```python
+testable.pop('July')  # throws a KeyError
+```
+
+Para deshacernos de él, podemos proporcionar un argumento predeterminado y devolverá este valor predeterminado:
+
+```python
+return_value = testable.pop('July', 'no temperature')
+print(return_value)  #  no temperature
+```
+
+*3.* *Elimine y devuelva el último elemento (clave, valor) agregado al diccionario* *mediante el* `popitem`*método:*
+
+```python
+testable = {'September': '16°C', 'December': '-10°C'}
+return_value = testable.popitem()
+
+print(return_value)  # ('December', '-10°C')
+print(testable)  # {'September': '16°C'}
+```
+
+Presta atención, si el diccionario está vacío, `KeyError`aparecerá un:
+
+```python
+testable = {}     
+return_value = testable.popitem()
+# KeyError: 'popitem(): dictionary is empty'
+```
+
+
+
+Antes de Python 3.7, el `popitem`método elimina y devuelve un *elemento aleatorio* del diccionario, no *el último agregado* .
+
+
+
+##### Limpiar el diccionario
+
+Todos los métodos descritos anteriormente devuelven un valor o un elemento (clave, valor) al eliminarlos, pero a veces esto no es lo que queremos. Hay dos formas de eliminar un elemento del diccionario (no devuelven nada) o todo el contenido del diccionario a la vez.
+
+*1. Eliminar (eliminar de un diccionario) un valor por su clave con la* `del`*palabra clave:*
+
+```python
+testable = {'September': '16°C', 'December': '-10°C', 'July': '23°C'}
+
+# this will remove both the key and the value from dictionary object
+del testable['September']  
+print(testable)  # {'December': '-10°C', 'July': '23°C'}
+
+# throws a KeyError because there's no such key in the dictionary
+del testable['May']
+ 
+# throws a KeyError, as we've already deleted the object by the key
+del testable['September']
+
+# deletes the whole dictionary
+del testable
+```
+
+\2. *Elimine todos los elementos y devuelva un diccionario vacío* utilizando el `clear`método:
+
+```python
+testable = {'September': '16°C', 'December': '-10°C', 'July': '23°C'}
+
+testable.clear()  # remove all elements
+print(testable)   # {}
+```
+
+##### Diferencias en los métodos de eliminación
+
+Quizás se pregunte, ¿hay alguna diferencia entre `dict = {}`y `dict.clear()`? Digamos que tenemos otra variable que se refiere al mismo diccionario:
+
+```python
+testable = {'December': '-10°C', 'July': '23°C'}
+another_testable = testable
+```
+
+Luego, `dict = {}`simplemente crea un nuevo diccionario vacío y lo asigna a nuestra variable. Volvamos al ejemplo anterior y asignemos un diccionario vacío a `testable`:
+
+```python
+testable = {}
+print(testable)  # {}
+print(another_testable)  # {'December': '-10°C', 'July': '23°C'}
+```
+
+`another_testable` todavía apunta al diccionario original con los mismos elementos, por lo que no cambia.
+
+Por el contrario, el `clear`método borrará el diccionario y todos los objetos que se refieren a él:
+
+```python
+testable = {'December': '-10°C', 'July': '23°C'}
+
+testable.clear()
+print(testable)  # {}
+print(another_testable)  # {}
+```
+
+##### Resumen
+
+¿Qué hemos aprendido en este tema?
+
+- un nuevo `fromkeys`método para la creación de diccionarios alternativos; también descubrimos sus peculiaridades,
+- diferentes métodos para acceder a elementos y / o eliminarlos mediante la tecla ( `get`, `pop`), así como añadiendo order ( `popitem`),
+- descubrió cómo agregar nuevos elementos al diccionario con el `update`método,
+- la `del`palabra clave y cómo usarla,
+- se familiarizó con las características de limpiar el diccionario ( `dict = {}`y `dict.clear()`).
+
+Si desea ver más información sobre los diccionarios, no olvide consultar [la documentación de Python](https://docs.python.org/3/library/stdtypes.html#dict) .
+
+
+
+# ¿Cuál es la diferencia entre conjuntos y listas en Python?
+
+¿Es la única diferencia entre conjuntos y listas en Python el hecho de que puede usar las funciones de unión, intersección, diferencia y diferencia simétrica para comparar dos conjuntos? ¿Por qué estas funciones no se pueden aplicar simplemente a las listas? ¿En qué situaciones son más útiles los conjuntos que las listas?
+
+
+
+Hay una gran diferencia.
+
+1. Los conjuntos no pueden contener duplicados
+2. Los conjuntos no están ordenados
+3. Para encontrar un elemento en un conjunto, se utiliza una búsqueda hash (por lo que los conjuntos no están ordenados). Esto hace que `__contains__` (`in` operator) sea mucho más eficiente para conjuntos que listas.
+4. Los conjuntos solo pueden contener elementos que se puedan compartir (ver # 3). Si intenta: `set(([1],[2]))` obtendrá un `TypeError`.
+
+En aplicaciones prácticas, las listas son muy agradables de ordenar y tienen orden, mientras que los conjuntos son agradables de usar cuando no desea duplicados y no le importa el orden.
+
+*También tenga en cuenta que si no le importa el orden, etc., puede usar*
+
+```python
+new_set = myset.intersection(mylist)
+```
+
+*para obtener la intersección entre un `set` y un `list`.*
+
+
+
+[`sets`](https://docs.python.org/2/library/sets.html) - Colecciones desordenadas de elementos únicos
+
+[`lists`](https://docs.python.org/2/faq/design.html#how-are-lists-implemented) - colecciones ordenadas de elementos
+
+`sets` le permite realizar operaciones como `intersection`, `union`, `difference` y `symmetric difference`, es decir, operaciones de la teoría de conjuntos de matemáticas. Los conjuntos no permiten la indexación y se implementan en tablas hash.
+
+`lists` son realmente matrices de longitud variable, no listas enlazadas de estilo LISP. En las listas se accede a los elementos por índices.
+
+
+
+**Conjunto**
+
+Un conjunto es una colección que no está ordenada ni indexada, y no permite duplicados. En Python, los conjuntos se escriben entre llaves.
+
+```python
+# example set
+newset = {"one", "two", "three"}
+```
+
+- No puede acceder a los elementos de un conjunto haciendo referencia a un índice
+- Los conjuntos son mutables
+- Son útiles para verificar duplicados
+
+**Lista**
+
+Una lista es una colección ordenada y modificable. En Python las listas se escriben entre corchetes.
+
+```python
+# example list
+newlist =["one", "two", "three"]
+```
+
+- Accede a los elementos de la lista haciendo referencia al número de índice
+- Las listas son mutables.
+
+
+
+Set representa una colección de elementos distintos. En python, los conjuntos se usan principalmente por dos razones (Libro: Data Science from Scratch, Joel Gruce):
+
+1. Para una operación más rápida: **in** es una operación muy rápida en conjuntos. Si tenemos una gran colección de elementos y deseamos realizar una prueba de membresía, en ese caso es apropiado usar set en lugar de una lista.
+2. Para encontrar elementos distintos en una colección. Los programadores usan conjuntos con mucha menos frecuencia que los dictados y las listas.
+
+Algunas diferencias más son:
+
+1. La lista puede ser 2D, mientras que un conjunto no puede.
+2. Como las listas están ordenadas (es decir, tienen número de serie), las listas son relativamente lentas de ejecutar, mientras que los conjuntos son rápidos.
+3. La lista en python es como Array of Java o c.
+4. La impresión de un conjunto casi siempre proporciona una secuencia diferente de salida.
+5. Set usa `hash function` para encontrar un elemento, mientras que list es una matriz. Por lo tanto, encontrar el elemento en `Set` es más rápido que en `list`.
+
+```python
+meals = [
+	{"title": "Oatmeal pancakes with apple and cinnamon", "kcal": 370},
+	{"title": "Italian salad with fusilli and ham", "kcal": 320},
+	{"title": "Bulgur with vegetables", "kcal": 350},
+	{"title": "Curd souffle with lingonberries and ginger", "kcal": 225},
+	{"title": "Oatmeal with honey and peanuts", "kcal": 440}]
+print(meals[0]["kcal"] + meals[1]["kcal"] + meals[2]["kcal"] + meals[3]["kcal"] + meals[4]["kcal"])
+```
+
+## Convertir dos listas en diccionario en Python
+
+Python tiene una función incorporada llamada `zip()`, que agrega tipos de datos iterables en una tupla y la devuelve a quien la llama. La función `dict()` crea un diccionario a partir de la colección dada.
+
+```python
+key_list = ['name', 'age', 'address']
+value_list = ['Johnny', '27', 'New York']
+
+dict_from_list = dict(zip(key_list, value_list))
+print(dict_from_list)
+```
+
+En esta solución, la conversión de listas en diccionarios es posible utilizando una sola línea y dos funciones.
+
+Producción:
+
+```python
+{'name': 'Johnny', 'age': '27', 'address': 'New York'}
+```
+
+## [Utilizar la comprensión de diccionarios para convertir listas en diccionarios en Python](https://www.delftstack.com/es/howto/python/python-convert-list-into-dictionary/#utilizar-la-comprensión-de-diccionarios-para-convertir-listas-en-diccionarios-en-python)
+
+La comprensión de diccionarios es una forma de acortar el tiempo de inicialización de la creación de diccionarios en Python. La comprensión es un reemplazo de los bucles for, que requieren múltiples líneas y variables. La comprensión hace el trabajo de inicialización en una sola línea.
+
+En esta solución, la función `zip()` seguirá proporcionando valores a la comprensión del diccionario. La comprensión devolverá un par clave-valor de cada elemento consecutivo dentro del valor de retorno de la función `zip()` como un diccionario.
+
+```python
+key_list = ['name', 'age', 'address']
+value_list = ['Johnny', '27', 'New York']
+
+dict_from_list = {k: v for k, v in zip(key_list, value_list)}
+print(dict_from_list)
+```
+
+Otra forma de convertir las listas en un diccionario es utilizar los índices de las listas y usar la función `range()` para iterar sobre ambas listas y usar la comprensión para construir un diccionario a partir de ellas.
+
+Se asume que la longitud de la lista de claves y la lista de valores es la misma. En este ejemplo, la longitud de la lista de claves será la base del rango.
+
+```python
+key_list = ['name', 'age', 'address']
+value_list = ['Johnny', '27', 'New York']
+
+dict_from_list = {key_list[i]: value_list[i] for i in range(len(key_list))}
+print(dict_from_list)
+```
+
+Ambas soluciones de comprensión proporcionarán la misma salida que el ejemplo anterior.
+
+La única diferencia entre estas dos soluciones es que una utiliza la función `zip()` para convertir la lista en una tupla. La otra utiliza la función `range()` para iterar ambas listas utilizando el índice actual para formar un diccionario.
+
+Producción:
+
+```python
+{'name': 'Johnny', 'age': '27', 'address': 'New York'}
+```
+
+### Utilizar el bucle for para convertir una lista en un diccionario en Python
+
+La forma más directa de lograr la conversión de lista a diccionario es mediante un bucle. Aunque este método es el más ineficiente y largo, es un buen comienzo, especialmente si eres un principiante y quieres comprender mejor la sintaxis básica de programación.
+
+Antes de hacer el bucle, inicialice un diccionario vacío. Después, proceda a la conversión, que requerirá un bucle anidado; el bucle exterior iterará la lista de claves, mientras que el bucle interior itera la lista de valores.
+
+```python
+key_list = ['name', 'age', 'address']
+value_list = ['Johnny', '27', 'New York']
+
+dict_from_list = {}
+for key in key_list:
+  for value in value_list:
+    dict_from_list[key] = value
+    value_list.remove(value)
+    break
+
+print(dict_from_list)
+```
+
+Cada vez que se forme un par clave-valor, elimina el elemento valor de la lista para que a la siguiente clave se le asigne el siguiente valor. Tras la eliminación, rompe el bucle interno para pasar a la siguiente clave.
+
+Otra solución utilizando un bucle es utilizar `range()` para utilizar el índice para obtener los pares clave y valor, al igual que lo que se hizo en el ejemplo con la comprensión del diccionario.
+
+```python
+key_list = ['name', 'age', 'address']
+value_list = ['Johnny', '27', 'New York']
+
+dict_from_list = {}
+for i in range(len(key_list)):
+  dict_from_list[key_list[i]] = value_list[i]
+
+print(dict_from_list)
+```
+
+Ambas soluciones producirán la misma salida:
+
+```python
+{'name': 'Johnny', 'age': '27', 'address': 'New York'}
+```
+
+En resumen, la forma más eficiente de convertir dos listas en un diccionario es utilizar la función incorporada `zip()` para convertir las dos listas en una tupla y luego convertir la tupla en un diccionario utilizando `dict()`.
+
+Usando la comprensión del diccionario también se pueden convertir las listas en un diccionario usando `zip()` para convertir las listas en tuplas, o `range()` y usar el índice de las listas para iterar e inicializar un diccionario.
+
+Estas dos soluciones son mejores que la solución ingenua, que utiliza bucles simples para convertir las listas en un diccionario.
+
+
+
+```python
+
+one = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+       'x', 'y', 'z']
+two = ['aa','bb', 'cc', 'dd', 'ee','ff', 'gg', 'hh','ii', 'jj', 'kk', 'll', 'mm', 'nn', 'oo', 'pp', 'qq', 'rr', 'ss',
+       'tt', 'uu', 'vv', 'ww', 'xx', 'yy', 'zz']
+
+double_alphabet = dict(zip(one, two))
+print (double_alphabet)
+####
+import string
+double_alphabet = string.ascii_lowercase
+double_alphabet = {key : key * 2 for key in double_alphabet}
+
+####
+letters_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
+                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+double_alphabet = dict.fromkeys(letters_list)
+
+for i in letters_list:
+    double_alphabet[i] = i * 2
+```
+
+```python
+walks = [
+	{"day": "Monday", "distance": 2000},
+	{"day": "Tuesday", "distance": 3000},
+	{"day": "Wednesday", "distance": 3500},
+	{"day": "Thursday", "distance": 2500},
+	{"day": "Friday", "distance": 2500},
+	{"day": "Saturday", "distance": 1000},
+	{"day": "Sunday", "distance": 5600}]
+
+val_1 = walks[0]
+val_2 = walks[1]
+val_3 = walks[2]
+val_4 = walks[3]
+val_5 = walks[4]
+val_6 = walks[5]
+val_7 = walks[6]
+dict_1 = val_1['distance']
+dict_2 = val_2['distance']
+dict_3 = val_3['distance']
+dict_4 = val_4['distance']
+dict_5 = val_5['distance']
+dict_6 = val_6['distance']
+dict_7 = val_7['distance']
+print((dict_1 + dict_2 + dict_3 + dict_4 + dict_5 + dict_6 + dict_7) // 7)
+
+### OR
+
+steeps = int((walks[0]["distance"] + walks[1]["distance"] + walks[2]["distance"] + walks[3]["distance"] + \
+              walks[4]["distance"] + walks[5]["distance"] + walks[6]["distance"]) / 7)
+print(steeps)
+
+### BEST ###
+print(sum(i['distance'] for i in walks) // 7)
+```
+
