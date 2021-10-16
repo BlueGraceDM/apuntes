@@ -6855,3 +6855,202 @@ print(steeps)
 print(sum(i['distance'] for i in walks) // 7)
 ```
 
+# Teoría: Operaciones con diccionario
+
+Ha aprendido sobre los métodos básicos que se utilizan para trabajar con diccionarios. Hablemos de otras operaciones. Le ayudarán a descubrir nuevas funciones de los diccionarios.
+
+##### Prueba de membresía en un diccionario
+
+A veces es necesario comprobar si un elemento específico está presente en su diccionario. Por ejemplo, tiene un catálogo de muebles donde se enumeran los productos (claves) junto con los precios (valores) y desea saber si tiene un sofá azul o no. En este caso, puede utilizar operadores `in`y `not in`para este propósito. La sintaxis es bastante simple: `key in dictionary`devuelve `True`si `key`existe en `dictionary`y de lo `False`contrario. El `not in`operador hace lo contrario, devuelve `True`si `key`no existe en el diccionario:
+
+```python
+catalog = {'green table': 5000, 'brown chair': 1500, 'blue sofa': 15000, 'wardrobe': 10000}
+ 
+print('blue sofa' in catalog)        # True
+print('green table' not in catalog)  # False
+```
+
+Tenga en cuenta que el operador de membresía busca claves, no valores:
+
+```python
+print(1500 in catalog)  # False
+```
+
+##### Iterando sobre claves
+
+Ya sabes que el `for`bucle nos permite iterar sobre elementos de un objeto. Entonces, ¿qué nos da la iteración sobre un diccionario? Echemos un vistazo al siguiente ejemplo:
+
+```python
+tiny_dict = {'a': 1, 'b': 2, 'c': 3}
+ 
+for obj in tiny_dict:
+    print(obj)
+```
+
+Vemos las *claves* del diccionario en la salida:
+
+```no-highlight
+a
+b
+c
+```
+
+Una forma similar de iterar sobre las claves es usar el `keys`método, que crea un objeto iterable especial, una colección de claves de diccionario:
+
+```python
+print(tiny_dict.keys())  # dict_keys(['a', 'b', 'c'])
+```
+
+Ahora intentemos escribir nuestro bucle usando el `keys`método y verifiquemos si la salida sigue siendo la misma:
+
+```python
+for obj in tiny_dict.keys():
+    print(obj)
+# a
+# b
+# c
+```
+
+##### Incluyendo valores en iteración
+
+¿Qué pasa si queremos obtener algo más que las claves del diccionario al iterar?
+
+El `values`método es bastante similar al anterior, la única diferencia es que obtienes los valores, no las claves. Proporciona una colección de valores, sin ninguna información sobre las claves que se utilizan para obtener estos valores del diccionario:
+
+```python
+for value in tiny_dict.values():
+    print(value)
+# 1
+# 2
+# 3
+
+print(tiny_dict.values())  # dict_values([1, 2, 3])
+```
+
+Finalmente, el `items`método proporciona una iteración completa en caso de que necesite tanto claves como valores. Devuelve la colección de `(key, value)`pares (tuplas):
+
+```python
+for obj in tiny_dict.items():
+    print(obj)
+# ('a', 1)
+# ('b', 2)
+# ('c', 3)
+
+print(tiny_dict.items())  # dict_items([('a', 1), ('b', 2), ('c', 3)])
+```
+
+##### Comprensión del diccionario
+
+La comprensión de diccionario es una forma muy conveniente y concisa de crear un nuevo diccionario con una línea de código. La plantilla mínima se ve así:
+
+```python
+dictionary = {key: value for element in iterable}
+```
+
+Miremos más de cerca. La expresión está agrupada entre llaves - `{}`. ¿Qué pasa adentro? El `for`bucle recorre los elementos de un objeto iterable (lista, otro diccionario, etc.). Para crear un diccionario, necesitamos especificar el `key`, que debe estar vinculado con un objeto iterable, y luego el `value`, que puede ser arbitrario:
+
+```python
+dictionary = {key + 5: 'some_value' for key in range(3)}
+print(dictionary)  # {5: 'some_value', 6: 'some_value', 7: 'some_value'}
+```
+
+Sin embargo, `value`generalmente también se asocia con el iterable:
+
+```python
+dictionary = {n + 10: n + 100 for n in range(5)}
+print(dictionary)  # {10: 100, 11: 101, 12: 102, 13: 103, 14: 104}
+```
+
+En el ejemplo anterior, recuperamos claves y valores realizando operaciones en elementos en el objeto iterable.
+
+Sin embargo, la comprensión de diccionario se usa con más frecuencia para crear un nuevo diccionario cambiando los valores en otro diccionario. Imagina que tenemos un diccionario que contiene los nombres de los planetas y sus diámetros en kilómetros. Necesita crear un nuevo diccionario donde los diámetros estén en millas. Sin la comprensión del diccionario, sería así:
+
+```python
+planets_diameter_km = {'Earth': 12742, 'Mars': 6779}
+
+# correct but long way
+planets_diameter_mile = {}
+for key, value in planets_diameter_km.items():
+    planets_diameter_mile[key] = round(value / 1.60934, 2)
+    
+print(planets_diameter_mile)  # {'Mars': 4212.29, 'Earth': 7917.53}
+```
+
+Ahora envolvemos la misma operación con la comprensión del diccionario; convertiremos los valores de kilómetros a millas:
+
+```python
+# convenient and short!
+planets_diameter_mile = {key: round(value / 1.60934, 2) for (key, value) in 
+                         planets_diameter_km.items()}
+print(planets_diameter_mile)  # {'Mars': 4212.29, 'Earth': 7917.53}
+```
+
+Podemos idear algunas condiciones en nuestra expresión. Por ahora, queremos incluir solo los planetas que son mayores de 10000 km en el nuevo diccionario:
+
+```python
+planets_diameter_mile = {key: round(value / 1.60934, 2) for (key, value) in
+                         planets_diameter_km.items() if value > 10000}
+print(planets_diameter_mile)  # {'Earth': 7917.53}
+```
+
+Entonces, la comprensión del diccionario agiliza el proceso de creación de un diccionario, y la lógica del proceso es comprensible. Sin embargo, tenga cuidado de no dificultar la lectura del código.
+
+Puede encontrar más información sobre la comprensión de diccionarios en el [sitio web oficial de Python](https://www.python.org/dev/peps/pep-0274/) .
+
+##### Resumen
+
+En este tema, ha aprendido algunos trucos sobre los diccionarios:
+
+- `in`y los `not in`operadores permiten probar la pertenencia a un diccionario, aunque solo buscan claves;
+- el `for`ciclo puede iterar a través de las claves de un diccionario;
+- `keys`y los `values`métodos le dan acceso a las claves y valores de un diccionario y el `items`método, a ambos al mismo tiempo.
+- la comprensión del diccionario es una forma rápida y fácil de crear un diccionario.
+
+```python
+A some_iterable stores words from a sentence. Use dictionary comprehension to create a new dictionary, in which keys will be words from some_iterable, written in uppercase letters, and values will be the same words written in lowercase letters. Print this dictionary.
+
+# the list with words from string
+# please, do not modify it
+some_iterable = input().split()
+
+# use dictionary comprehension to create a new dictionary
+new_dict = {i.upper(): i.lower() for i in some_iterable}
+print(new_dict)
+```
+
+```python
+Cuando se trata de dict.keys(), puede utilizar algunas operaciones para combinarlos. Por ejemplo, &denotará la intersección de las claves del diccionario incluso si sus valores son diferentes. Eche un vistazo al código a continuación. ¿Cuál es la salida correcta?
+
+tim_toys = {'teddy bear': 3, 'toy car': 5, 'lion': 7, 'puppy': 5}
+tom_toys = {'doll': 3, 'puppy': 2, 'kitten': 4, 'teddy bear': 3}
+print(tim_toys.keys() & tom_toys.keys())
+ Informar un error tipográfico
+ Seleccione una opción de la lista.
+# Toma el primero de la primera solicitud y la segunda del segundo parametro
+{'teddy bear', 'puppy'}
+```
+
+```python
+fruits_dict = {element: len(element) for element in fruits if len(element) > 5}
+```
+
+ ```python
+ ### BUSQUEDA DE DATOS EN DICCIONARIOS 
+ 
+ potential_dates = [{"name": "Julia", "gender": "female", "age": 29,
+                     "hobbies": ["jogging", "music"], "city": "Hamburg"},
+                    {"name": "Sasha", "gender": "male", "age": 18,
+                     "hobbies": ["rock music", "art"], "city": "Berlin"},
+                    {"name": "Maria", "gender": "female", "age": 35,
+                     "hobbies": ["art"], "city": "Berlin"},
+                    {"name": "Daniel", "gender": "non-conforming", "age": 50,
+                     "hobbies": ["boxing", "reading", "art"], "city": "Berlin"},
+                    {"name": "John", "gender": "male", "age": 41,
+                     "hobbies": ["reading", "alpinism", "museums"], "city": "Munich"}]
+ 
+ def select_dates(potential_dates):
+     suitable_dates = [x['name'] for x in potential_dates if # SOLICIT
+                       x['age'] > 30 and 'art' in x['hobbies'] and x['city'] == 'Berlin']
+     return ', '.join(suitable_dates)
+ ```
+
