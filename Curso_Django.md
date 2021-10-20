@@ -7054,3 +7054,404 @@ fruits_dict = {element: len(element) for element in fruits if len(element) > 5}
      return ', '.join(suitable_dates)
  ```
 
+# Teoría: objetos en Python
+
+Saber cómo funcionan los diferentes tipos de objetos en Python lo ayudará a comprender algunos de los siguientes temas con mayor profundidad, así como la estructura del lenguaje en general.
+
+##### Referencia a un objeto
+
+En Python, todos los valores se almacenan en objetos. Puedes pensar que un objeto es como una caja que contiene información sobre algún valor y también almacena algunos datos adicionales como su identidad. Cuando asigna un valor a una variable, por ejemplo `string = "hello"`, Python crea un nuevo objeto, coloca este valor (la cadena `"hello"`en nuestro caso) dentro del nuevo objeto y luego crea una **referencia** desde el nombre de la variable `string`al objeto.
+
+![img](https://ucarecdn.com/657a40a1-4ae3-44a2-b484-caaa762c635d/)
+
+Luego, si asignamos una variable a otra, por ejemplo `new_string = string`, Python creará una referencia a partir de la nueva variable `new_string`al **mismo objeto** .
+
+![img](https://ucarecdn.com/facfeced-a7b5-47b2-9e94-cc241fe3aac0/)
+
+Puede usar la `id`función para ver que ambas variables se refieren al mismo objeto:
+
+```python
+print(id(string))        # 4336233024
+print(id(new_string))    # 4336233024
+```
+
+Como resultado, puede acceder al objeto utilizando cualquiera de los dos nombres de variable. También puede asignar un nuevo valor a una de estas variables y esto no afectará a la otra.
+
+```python
+string = "hello"
+new_string = string
+string = "world"
+
+print(string, id(string))            # world 4336233136
+print(new_string, id(new_string))    # hello 4336233024
+```
+
+Tenga en cuenta que la identidad ha cambiado junto con el valor.
+
+![img](https://ucarecdn.com/7f9aff54-a941-4cff-89cc-a76ddb3a1a4e/)
+
+
+
+Sin embargo, la situación es un poco más compleja cuando tratamos con objetos *mutables* , por ejemplo, algunos de los contenedores.
+
+##### Objetos y referencias mutables
+
+Tomemos una lista como ejemplo. La cuestión es que una lista no almacena sus valores dentro de sí misma. En cambio, almacena **referencias** a objetos que almacenan valores. Por ejemplo, cuando escribe `lst = [2, 3, 9]`, Python crea la siguiente estructura:
+
+![img](https://ucarecdn.com/422bb28f-ef2f-4a8a-9326-651fd26a7ccd/)
+
+Ahora, si asignamos nuestra lista a una nueva variable y luego intentamos alterar el primer objeto, esto también afectará a la nueva lista:
+
+```python
+lst = [2, 3, 9]
+new_lst = lst
+
+print(lst, id(lst))            # [2, 3, 9] 4334518600
+print(new_lst, id(new_lst))    # [2, 3, 9] 4334518600
+
+# we change an element of the first list
+lst[2] = 0
+print(lst, id(lst))            # [2, 3, 0] 4334518600
+
+# but the new list is also modified
+print(new_lst, id(new_lst))    # [2, 3, 0] 4334518600
+```
+
+Esto es así porque ambas listas hacen referencia al mismo objeto: cuando se modifica, todas las variables continúan haciendo referencia a este mismo objeto. En el siguiente tema, aprenderá a modificar una lista sin cambiar sus copias.
+
+##### Resumen
+
+- Las variables en Python no almacenan valores en sí mismas, almacenan **referencias** a objetos que almacenan valores.
+- Cuando asignamos una variable a otra, se refieren al **mismo objeto** .
+- Después de modificar objetos mutables, otras variables que se refieren a él también **cambiarán** .
+
+# Teoría: argumentos predeterminados
+
+Además de varias formas que puede utilizar para pasar argumentos a funciones, Python también tiene una sintaxis especial para aceptar estos valores de una llamada a función. Entonces, mientras que en temas anteriores aprendimos cómo trabajar con argumentos, ahora nos enfocaremos en los parámetros, los que tienen **valores predeterminados** en particular, y los analizaremos con más detalle.
+
+##### Defaults
+
+En Python, las funciones pueden tener parámetros con **valores predeterminados** . Los parámetros predeterminados se especifican en la definición de la función y contienen valores predeterminados para los argumentos en caso de que no se proporcionen con una llamada a la función. Eche un vistazo a este código:
+
+```python
+def locate(place, planet="Earth"):
+    print(place, "on", planet)
+
+
+locate("Berlin")                     # Berlin on Earth
+locate("Breakfast", planet="Pluto")  # Breakfast on Pluto
+locate("Craters", "Mercury")         # Craters on Mercury
+```
+
+Aquí tenemos dos parámetros `place`y `planet`. El primero no tiene un valor predeterminado, por lo que siempre debemos especificarlo al llamar a la función. El segundo, por el contrario, se puede omitir, en cuyo caso la función simplemente tomará el valor predeterminado.
+
+Los parámetros con valores predeterminados, como `planet`, son opcionales de alguna manera. Puede llamar fácilmente a una función sin ellos y confiar en valores preestablecidos. Como en el ejemplo anterior, la mayoría de los lugares que podríamos querer encontrar se encuentran probablemente en la Tierra. Sin embargo, se les pueden asignar nuevos valores por nombre o por posición.
+
+Cuando declare esta función, coloque primero los parámetros no predeterminados y luego los que tienen valores predeterminados. Si intentas hacer lo contrario, `SyntaxError`aparecerá:
+
+```python
+def greet(greeting="Hello,", name):
+    print(greeting, name)
+
+# SyntaxError: non-default argument follows default argument
+```
+
+En este caso, no podrá utilizar el valor predeterminado en absoluto. Como el segundo parámetro aún requiere un valor, siempre tendríamos que escribir ambos valores en una llamada, lo que no tiene mucho sentido. Entonces, cuando declare una función, preste atención al orden de los parámetros.
+
+##### Objetos mutables como predeterminados
+
+Cuando se trata de objetos mutables, las cosas se vuelven más complicadas. Establezcamos una lista como valor predeterminado y veamos cómo funciona:
+
+```python
+def add_player(player, team=[]):
+    ...
+    team.append(player)
+    return team
+```
+
+Como puede ver, la función simplemente agrega un nuevo jugador a un equipo. Primero, le daremos ambos argumentos:
+
+```python
+ice_hockey_team = add_player("Chris", ["Robert", "Alice"])
+print(ice_hockey_team)    # ['Robert', 'Alice', 'Chris']
+```
+
+Todo luce bien. Sin embargo, cuando lo llamamos basándonos en el valor predeterminado, el comportamiento de la función sería diferente de lo que podría haber esperado:
+
+```python
+rugby_team = add_player("Robin")
+print(rugby_team)     # ['Robin']
+
+football_team = add_player("Andrew")
+print(football_team)  # ['Robin', 'Andrew']
+print(rugby_team)     # ['Robin', 'Andrew']
+```
+
+En lugar de dos listas separadas para equipos, sorprendentemente, solo tiene una. Con cada llamada posterior, la función agregará un nuevo elemento a esta lista. ¿Porque? Resulta que los valores de los parámetros predeterminados se evalúan *una vez* .
+
+Después de haber declarado una función, se crea un nuevo objeto para un valor predeterminado. Se utilizará a partir de este momento. Esto significa que si la función modifica este objeto de alguna manera, el valor predeterminado en el mutable también cambiará. Por esta razón, debe utilizar los valores predeterminados mutables con cuidado.
+
+Aquí hay una solución común para corregir la función de nuestro ejemplo anterior:
+
+```python
+def add_player(player, team=None):
+    if team is None:
+        team = []
+    team.append(player)
+    return team
+```
+
+Establecer el valor predeterminado `None`y reasignar explícitamente el valor del `team`parámetro le permite crear una nueva lista cada vez que se llama a esta función.
+
+##### Tiempo de PEP
+
+Mire las funciones declaradas que se muestran en este tema una vez más, por ejemplo `def locate(place, planet="Earth"): ...`,. ¿Ha notado que faltan espacios alrededor del signo igual? Su ausencia no es accidental. Según la [convención de PEP 8](https://www.python.org/dev/peps/pep-0008/#other-recommendations) , no debe poner espacios alrededor `=`al indicar un argumento de palabra clave. Esto es válido para los parámetros con valores predeterminados.
+
+##### Resumen
+
+Repasemos los puntos principales que hemos discutido:
+
+- Las funciones de Python pueden ser bastante flexibles, puede usarlas pasando menos argumentos en una llamada (gracias a **los valores predeterminados** ).
+- Debe prestar mucha atención al **orden** de los parámetros cuando declara funciones. Coloque los parámetros no predeterminados primero y aquellos con valores predeterminados después.
+- **Los valores predeterminados mutables** pueden funcionar en contra de sus intenciones, ya que sus valores se crean una vez en el tiempo de ejecución. Si es así, una forma común de evitar problemas es usar `None`de forma predeterminada y cambiar el valor del parámetro en el cuerpo de la función.
+
+# Teoría: Args  (Argumentos)
+
+Las funciones tienen una sintaxis flexible en Python. Descubriremos qué permite que las funciones acepten un número variable de argumentos y cómo descomprimir objetos iterables al llamar a una función.
+
+##### Múltiples argumentos posicionales
+
+Puede que te sorprenda el hecho de que todo lo que hemos hecho antes con funciones nos limitó de alguna manera. Por ejemplo, si no especificamos los valores predeterminados para los argumentos, siempre tendremos que pasar el número exacto de valores a dicha función. Sin embargo, a veces es más conveniente cuando varía el número de argumentos. Por ejemplo, si declara una función que debería encontrar la suma de todos los valores pasados a ella, nunca sabrá cuántos argumentos podría querer usar un usuario. Comencemos con un caso simple y definamos una función con dos parámetros. Se puede hacer de la siguiente manera:
+
+```python
+def add(a, b):
+    return a + b
+```
+
+Esta función nos hace pasar solo dos valores, no podemos simplemente hacerlo `add(1, 2, 3)`. Bueno, lo que podemos hacer es establecer un valor predeterminado para el tercer parámetro y luego llamar a esta función con dos o tres valores. Pero esto difícilmente resuelve el problema para casos más complejos.
+
+Si no está seguro acerca del número de argumentos que su función podría tomar, o si no quiere limitarlos, use la siguiente sintaxis para definir una función con `*args`:
+
+```python
+def add(a, b, *args):
+    total = a + b
+    for n in args:
+        total += n
+    return total
+```
+
+Esto le permite trabajar con la variable `args`, que es una tupla de los argumentos *posicionales* restantes . Su longitud puede variar:
+
+```python
+# The length of `args` is 3
+print(add(1, 2, 3, 4, 5))
+
+# The length of `args` is 0
+print(add(1, 2))
+```
+
+La función `add()`ahora requiere dos argumentos, pero si pasa valores adicionales, se recopilarán en una tupla y se agregarán al total.
+
+Como habrás adivinado, `args`es la abreviatura de "argumentos". Sin embargo, no tiene que usar este nombre convencional todo el tiempo:
+
+```python
+def will_survive(*names):
+    for name in names:
+        print("Will", name, "survive?")
+
+
+will_survive("Daenerys Targaryen", "Arya Stark", "Brienne of Tarth")
+```
+
+La salida para esta llamada de función será la siguiente:
+
+```python
+Will Daenerys Targaryen survive?
+Will Arya Stark survive?
+Will Brienne of Tarth survive?
+```
+
+Esto funciona para cualquier nombre de variable siempre que haya un solo asterisco `*`justo antes.
+
+Normalmente, `*args`viene después de parámetros específicos:
+
+```python
+def func(positional_args, defaults, *args):
+    pass
+```
+
+Una vez que se han pasado todos los argumentos necesarios, los valores restantes se empaquetan en la tupla.
+
+Los parámetros que vienen después `*args`son *solo palabras clave* . Significa que solo se pueden usar como palabras clave en lugar de argumentos posicionales.
+
+```python
+def recipe(*args, sep=" or "):
+    return sep.join(args)
+
+
+print(recipe("meat", "fish"))               # meat or fish
+print(recipe("meat", "fish", sep=" and "))  # meat and fish
+```
+
+##### Desembalaje en llamadas a funciones
+
+La sintaxis de Python nos permite pasar todos los elementos de una secuencia como argumentos posicionales individuales usando `*`. Un solo operador de asterisco *desempaqueta* un iterable. Invoquemos la `print()`función y veamos cómo funciona:
+
+```python
+print(*"fun")        # f u n
+print(*[5, 10, 15])  # 5 10 15
+```
+
+Este código será equivalente a una llamada donde los elementos se enumeran uno por uno: `print("f", "u", "n")`y `print(5, 10, 15)`respectivamente. Desempacar solo toma menos tiempo.
+
+Combinado con `*args`nuestra función ligeramente modificada `add()`, el desempaquetado elimina la preocupación por la cantidad de valores tanto en el cuerpo de la función como en las próximas llamadas.
+
+```python
+def add(*args):
+    total = 0
+    for n in args:
+        total += n
+    return total
+
+
+small_numbers = [1, 2, 3]
+large_numbers = [9999999, 1111111]
+
+print(add(*small_numbers))  # 6
+print(add(*large_numbers))  # 11111110
+```
+
+Esta es una característica realmente poderosa, ya que le permite manejar convenientemente un número arbitrario de valores en su función.
+
+##### Resumen
+
+Resumamos lo que discutimos en el tema:
+
+- Una función con `*args`puede aceptar un número cambiante de argumentos **posicionales** .
+- El nombre de la variable `args`es **arbitrario** , siempre puede elegir otro.
+- `*args`proporciona acceso a una **tupla** de valores restantes.
+- El **orden de los parámetros** en la definición de la función es importante, así como el **orden de los argumentos pasados** .
+- En las llamadas a funciones, puede utilizar el **operador de desempaquetado** `*` para objetos iterables.
+
+
+
+# Teoría: dividir y unir
+
+En Python, las cadenas y las listas son bastante similares. En primer lugar, ambos pertenecen a **secuencias** , aunque las cadenas se limitan a caracteres, mientras que las listas pueden almacenar datos de diferentes tipos. Además, puede **iterar** sobre cadenas y listas. Sin embargo, a veces es necesario convertir una cadena en una lista o viceversa. Python tiene este tipo de herramientas. Los métodos que le ayudarán a realizar esta tarea son **`split()`**, **`join()`**y **`splitlines()`**.
+
+##### Dividir una cuerda
+
+El **`split()`**método divide una cadena en subcadenas mediante un **separador** . Si no se proporciona el separador, el espacio en blanco se utiliza de forma predeterminada. El método devuelve una **lista** de todas las subcadenas y, en particular, el separador en sí no está incluido en ninguna de las subcadenas.
+
+```python
+# split example
+definition = input()  # 'Coin of the realm is the legal money of the country' 
+
+definition.split()
+# ['Coin', 'of', 'the', 'realm', 'is', 'the', 'legal', 'money', 'of', 'the', 'country']
+
+definition.split("legal")
+# ['Coin of the realm is the ', ' money of the country']
+```
+
+También puede especificar cuántas veces se realizará la división con el **`maxsplit`**argumento que viene después del separador. El número de elementos de la lista resultante será igual a `maxsplit + 1`.
+
+Si no se especifica el argumento, se realizan todas las divisiones posibles.
+
+```python
+# maxsplit example
+definition = input()  # 'Coin of the realm is the legal money of the country'
+
+definition.split("of", 1)
+# ['Coin ', ' the realm is the legal money of the country']
+
+definition.split("of")
+# ['Coin ', ' the realm is the legal money ', ' the country']
+```
+
+Si el separador no aparece en la cadena, el resultado del método es una lista con la cadena original como único elemento:
+
+```python
+definition = input()  # 'Coin of the realm is the legal money of the country'
+
+definition.split("hi!")  # wrong separator
+# ['Coin of the realm is the legal money of the country']
+```
+
+Así, en todos los casos **`split()`**nos permite convertir una cadena en una lista.
+
+También puede ser útil leer la entrada directamente en varias variables con `split()`:
+
+```python
+name, surname = input().split()  # Forrest Gump
+
+print(name)     # Forrest
+print(surname)  # Gump
+```
+
+Es bastante eficiente cuando conoce el número exacto de valores de entrada. En caso de que no lo haga, es probable que aparezca `ValueError`un mensaje que le diga que hay demasiados valores para descomprimir o que no hay suficientes. ¡Así que tenlo en mente!
+
+##### Unirse a una lista
+
+El **`join()`**método se utiliza para crear una cadena a partir de una colección de cadenas. Sin embargo, su uso tiene una serie de limitaciones. Primero, el argumento del método debe ser un **objeto iterable** con cadenas como elementos. Y segundo, el método debe aplicarse a un **separador** : una cadena que separará los elementos en un objeto de cadena resultante. Vea a continuación los ejemplos de eso:
+
+```python
+word_list  = ["dog", "cat", "rabbit", "parrot"]
+
+" ".join(word_list)  # "dog cat rabbit parrot"
+"".join(word_list)  # "dogcatrabbitparrot"
+"_".join(word_list)  # "dog_cat_rabbit_parrot"
+" and ".join(word_list)  # "dog and cat and rabbit and parrot"
+```
+
+Tenga en cuenta que este método solo funciona si los elementos del objeto iterable son **cadenas** . Si, por ejemplo, desea crear una cadena de números enteros, no funcionará. En este caso, debe convertir los enteros en cadenas de forma explícita o simplemente trabajar con cadenas desde el principio.
+
+```python
+int_list = [1, 2, 3]
+" ".join(int_list)  # TypeError!
+
+str_list = ["1", "2", "3"]
+" ".join(str_list)  # "1 2 3"
+```
+
+##### Dividir varias líneas
+
+El **`splitlines()`**método es similar a **`split()`**, pero se usa específicamente para dividir la cadena por los límites de la línea. Hay muchas secuencias de escape que significan el final de la línea, pero el `**split()**`método solo puede tomar un separador. Entonces aquí es donde el **`splitlines()`**método es útil:
+
+```python
+# splitlines example
+long_text = 'first line\nsecond line\rthird line\r\nfourth line'
+
+long_text.splitlines()
+# ['first line', 'second line', 'third line', 'fourth line']
+```
+
+El método tiene un argumento opcional **`keepends`**que tiene un valor Verdadero o Falso. Si **`keepends = True`**se incluyen saltos de línea en la lista resultante:
+
+```python
+# keepends
+long_text = 'first line\nsecond line\rthird line\r\nfourth line'
+
+long_text.splitlines(keepends=True)
+# ['first line\n', 'second line\r', 'third line\r\n', 'fourth line']
+```
+
+También puede utilizar varios métodos de cadena a la vez. Se llama **encadenamiento** y funciona porque la mayoría de los métodos de cadena devuelven una copia de la cadena original:
+
+```python
+# chaining example
+sent = input()  # "Mary had a little lamb"
+new_sent = sent.lower().split()
+# ["mary", "had", "a", "little", "lamb"]
+```
+
+Pero no te dejes llevar, porque la longitud de una línea no debe ser superior a 79 caracteres, ¡y definitivamente no queremos romper PEP 8!
+
+##### Resumen
+
+Hemos aprendido cómo convertir cadenas a través de las listas de la `split()`y `splitlines()`métodos, y cómo obtener copias de las cadenas de las listas a través del `join()`método. Como resumen, considere lo siguiente:
+
+- Los métodos de división y unión **no cambian** la cadena original.
+- Si necesita utilizar la cadena "modificada" varias veces, debe asignar el resultado del método respectivo a una variable.
+- Si necesita usar este resultado solo una vez, puede trabajar con él en el lugar, por ejemplo, `print()`it.
+- Hay muchos parámetros en los métodos de cadena. Puede consultar la [documentación](https://docs.python.org/3/library/stdtypes.html#str) si necesita ajustar su programa.
