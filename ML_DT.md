@@ -122,3 +122,20 @@ x=3-(1/2*0)=3  | x=3
 -   x el un valor inicial a eleccion
 -   Si el valor final de iteracion se repite significa que el valor de hipotesis y el real son ideticos 
 
+> h~θ~^(x)^=g(θ~0~+θ~1~X~1~+θ~2~X~2~) --> se basa en la pendiente -> ajustar θ~0~,θ~1~ y θ~2~
+>
+> parametro = parametro - α ^dJ^/~dparametro~
+>
+> α = Margen de aprendizaje, velocidad con la que se va a acercar a un optimo global
+>
+> d =  Derivada parcial
+
+Primero vamos a inicializar de un modo aleatorio y posteriormente actualizarlo
+
+> θ~0~ = θ~0~ - α ^dj^/~dθ~~0~ = θ~0~ - α * (hθ(x) - y)
+>
+> θ~1~ = θ~1~ - α ^dj^/~dθ~~1~ = θ~1~ - α *(x~1~ (hθ(x) - y))
+>
+> θ~2~ = θ~2~ - α ^dj^/~dθ~~2~ = θ~2~ - α *(x~2~ (hθ(x) - y))
+
+### 5 12 
