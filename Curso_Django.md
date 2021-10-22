@@ -7455,3 +7455,274 @@ Hemos aprendido cómo convertir cadenas a través de las listas de la `split()`y
 - Si necesita utilizar la cadena "modificada" varias veces, debe asignar el resultado del método respectivo a una variable.
 - Si necesita usar este resultado solo una vez, puede trabajar con él en el lugar, por ejemplo, `print()`it.
 - Hay muchos parámetros en los métodos de cadena. Puede consultar la [documentación](https://docs.python.org/3/library/stdtypes.html#str) si necesita ajustar su programa.
+
+
+
+# Teoría: módulo de carga
+
+Hay diferentes formas de interactuar con el código. En este tema, aprenderemos cuáles son y en qué casos qué opción es la más conveniente. Sin embargo, lo más importante es que descubriremos cómo guardar nuestro código en un archivo para su posterior uso o corrección. Como probablemente ya haya adivinado, eso se aplica a cualquier código, lo que significa que también puede usar el código de otra persona y esta última parte es bastante importante que apreciará rápidamente como desarrollador.
+
+##### Conceptos básicos del módulo
+
+Mientras trabaja con ejemplos simples, probablemente escriba su código directamente en el intérprete. Pero cada vez que abandona el intérprete y lo vuelve a iniciar, pierde todas las definiciones que hizo antes. Entonces, cuando comience a escribir programas más grandes, tiene sentido preparar su código con anticipación usando un editor de texto y luego ejecutarlo con el intérprete. Un archivo que contiene una lista de operaciones que se leerán e interpretarán más adelante se llama **script** .
+
+También puede querer escribir algunas funciones y luego usarlas en otros programas o incluso reutilizar el código que alguien más escribió antes. Una forma es simplemente copiar el código en su programa, pero pronto conduce a un código que está mal estructurado y es difícil de leer. Afortunadamente, hay otra forma en Python de organizar y reutilizar el código llamado **módulos** .
+
+El módulo es simplemente un archivo que contiene declaraciones y definiciones de Python. Suele tener una extensión **.py** . Lo que realmente hace que el sistema de módulos sea poderoso es la capacidad de **cargar** o **importar** un módulo de otro.
+
+##### Carga del módulo
+
+Para cargar un módulo, simplemente use una declaración de **importación** . En su forma básica, tiene la siguiente sintaxis: `import module`.
+
+```python
+import super_module
+
+super_module.super_function()  # calling a function defined in super_module
+
+print(super_module.super_variable)  # accessing a variable defined in super_module
+```
+
+`super_module`es el nombre del módulo que desea importar. Por ejemplo, un archivo llamadosuper_module.py tiene un nombre super_module. Para estar disponible para la importación,super_module.pydebe estar ubicado en el mismo directorio que el archivo desde el que está intentando importarlo. Al principio, el sistema de importación de Python busca un módulo en el directorio actual, luego verifica los módulos integrados y, si no se encuentra nada, se generará un error. Después de la importación, el módulo está disponible con su nombre y puede acceder a las funciones y variables definidas en él utilizando la notación de puntos.
+
+También es común importar solo las funciones o variables requeridas de un módulo, pero no el módulo en sí. Puede hacer esto usando `from`en la declaración de importación.
+
+```python
+from super_module import super_function
+
+super_function()  # super_function is now available directly at the current module
+
+super_module.super_function()  # note, that in this case name super_module is not imported, 
+                               # so this line leads to an error
+```
+
+Una buena práctica es cargar un solo módulo en una sola línea y colocar todas sus importaciones en la parte superior del archivo porque aumenta la legibilidad.
+
+```python
+import module1
+import module2
+import module3
+
+# the rest of module code goes here
+```
+
+Una forma especial de declaración de importación le permite cargar todos los nombres definidos en un módulo. Se llama *importación de comodines* y tiene la sintaxis `from module import *`. Por lo general, debería evitar esto en su código. Puede provocar un comportamiento inesperado porque no sabe qué nombres se importan exactamente en el espacio de nombres actual. Además, estos nombres pueden ocultar algunos de los existentes sin su conocimiento. Es mejor hacerlo explícito y especificar lo que está importando.
+
+En caso de que tenga que utilizar varias declaraciones de importación, preste atención a su orden:
+
+1. importaciones de bibliotecas estándar
+2. importaciones de dependencia de terceros
+3. importaciones de aplicaciones locales
+
+Al agrupar sus importaciones, puede poner una línea en blanco entre las secciones de importación. Además, algunas pautas, incluida la nuestra, recomiendan ordenar las importaciones alfabéticamente.
+
+##### Módulos incorporados
+
+Python viene con una gran biblioteca estándar. Contiene muchos módulos integrados que brindan funciones y estructuras de datos útiles. Otra ventaja es que la biblioteca estándar está disponible en todos los sistemas que tienen Python instalado. [Aquí](https://docs.python.org/3/py-modindex.html) puede encontrar una referencia oficial de la biblioteca.
+
+Python tiene un módulo de Matemáticas que proporciona acceso a funciones matemáticas.
+
+```python
+import math
+
+print(math.factorial(5))  # prints the value of 5!
+
+print(math.log(10))  # prints the natural logarithm of 10
+
+print(math.pi)  # math also contains several constants
+print(math.e)
+```
+
+La cuerda El módulo contiene constantes y operaciones de cadena comunes.
+
+```python
+from string import digits
+
+print(digits)  # prints all the digit symbols
+```
+
+Lo aleatorio El módulo proporciona funciones que le permiten hacer una elección aleatoria.
+
+```python
+from random import choice
+
+print(choice(['red', 'green', 'yellow']))  # print a random item from the list
+```
+
+##### Resumen
+
+Por lo tanto, en este tema, hemos aprendido qué son los scripts y módulos, por qué son útiles y cómo importar módulos (o cosas particulares de ellos). También hemos analizado los módulos externos y los que vienen con una biblioteca estándar de Python. Esta habilidad básica definitivamente le brindará muchas oportunidades en el futuro, ¡así que no dude en probar la carga de módulos por su cuenta!
+
+En el `random`módulo, los elementos aleatorios se generan mediante un algoritmo complejo cuyo punto de partida es un número llamado **semilla** . Una semilla se puede configurar manualmente usando la `seed()`función; luego, todas las secuencias numéricas generadas en nuestro programa después de eso serán las mismas. Si no especificamos la semilla manualmente, los números generados aleatoriamente dependerán de la hora actual del sistema (valor predeterminado para la semilla). Por lo tanto, los resultados proporcionados por las funciones del `random`módulo no son exactamente aleatorios, sino más bien *pseudoaleatorios* , y podemos asegurarnos de que sigan siendo los mismos independientemente de cuántas veces ejecutemos nuestro programa.
+
+
+
+# Teoría: Crear módulo
+
+Básicamente, un módulo es solo un archivo que tiene una extensión **.py** y contiene declaraciones y definiciones. ¿Cual es el punto? Bueno, los módulos te ayudan a organizar y reutilizar el código. Una vez que escribe un módulo, puede cargarlo desde el intérprete u otro módulo. En este tema, aprenderemos cómo crear uno y cargarlos correctamente entre sí, ¡así que prepárate!
+
+##### Diseño de módulo
+
+Un módulo simple que está escrito para ejecución directa a menudo se denomina **script** . La diferencia entre un módulo y un script en Python es solo la forma en que se usan. Los módulos se cargan desde otros módulos o scripts y los scripts se ejecutan directamente.
+
+Echemos un vistazo al ejemplo de un script simple a continuación:
+
+```python
+# hello.py script
+
+print("Hello, World!")
+```
+
+Ya has visto este ejemplo pero ahora queremos convertirlo en un script. Lo que debe hacer es simple: simplemente guarde este código en un archivo llamadohola.pyy luego ejecútelo con Python. Para ejecutar un script `python <script>`, use , donde<script> es la ruta a su archivo Python.
+
+```bash
+~$ python hello.py
+Hello, World!
+```
+
+¡Felicidades! Este es su primer script en Python.
+
+##### Importación de módulos
+
+Un módulo se puede cargar desde otro módulo. Eso te permite escribir un fragmento de código una vez y luego usarlo donde quieras. Es realmente útil cuando trabaja en proyectos más grandes y desea separar preocupaciones entre diferentes módulos. Ya vimos ejemplos de un módulo importado de otro módulo en el tema anterior.
+
+Al trabajar en el modo interactivo del intérprete, también puede cargar módulos. Tenga en cuenta que el módulo debe colocarse en el directorio desde el que ejecuta Python. Por ejemplo, puede cargarhola.py archivo que discutimos en la sección anterior del intérprete de esta manera:
+
+```python
+~$ python
+Python 3.6.6 (default, Sep 12 2018, 18:26:19)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux 
+Type "help", "copyright", "credits" or "license" for more information.
+
+>>> import hello
+Hello, World!
+```
+
+##### Errores comunes
+
+Ahora es el momento de cubrir algunos errores comunes que puede cometer al definir o importar módulos.
+
+Si importa accidentalmente un módulo de sí mismo, el código del módulo se ejecutará dos veces y, por lo general, no es algo que desee que suceda.
+
+```python
+# itself.py
+
+import itself
+
+print("Hello, it's me!")
+```
+
+La salida se ve así:
+
+```no-highlight
+Hello, it's me!
+Hello, it's me!
+```
+
+Así que tenga cuidado y evite situaciones en las que importe un módulo de sí mismo.
+
+Otro error común es el **sombreado de nombres** . Por ejemplo, ha creado un módulo local que tiene el mismo nombre que algún módulo integrado. En este caso, no podrá importar nada del módulo original, porque el sistema de importación buscará nombres en su módulo personalizado.
+
+Imagina, creaste un módulo socket.py y luego intentas importar alguna función del Python estándar enchufe módulo dentro de su módulo.
+
+```python
+# socket.py
+
+from socket import socket
+
+print("All cool!")
+```
+
+Verá un mensaje de error que dice que Python no puede importar `socket`desdeenchufe módulo:
+
+```no-highlight
+...
+
+ImportError: cannot import name 'socket'
+```
+
+Una forma de evitar esto es no nombrar sus archivos con el mismo nombre que los módulos integrados que podría usar. Solo sufijo_texto al nombre de sus scripts y módulos y estará a salvo de este problema de sombreado de nombres.
+
+Siempre que se importa el módulo, se ejecuta por completo y luego se agrega a su espacio de nombres actual. Incluso las formas especiales de declaración de importación como `from module import something`no afectan ese hecho. Esto puede convertirse en un problema en situaciones en las que desee poder importar su módulo y ejecutarlo como un script.
+
+Considere el ejemplo:
+
+```python
+# unsafe_module.py
+
+name = "George"
+
+print("Hello,", name)
+```
+
+Si define otro script e importa nombre de unsafe_moduleVerás *Hello, George* impreso.
+
+```python
+# unsafe_bye.py script
+
+from unsafe_module import name
+
+print("Bye,", name)
+```
+
+La salida:
+
+```bash
+Hello, George
+Bye, George
+```
+
+Para resolver este problema, simplemente puede dividir su archivo en dos: uno que contiene solo definiciones, otro que contiene el código que importa las definiciones del primer archivo y las usa. Pero también es común usar el **patrón** **__main__** .
+
+##### __main__ patrón
+
+Aprendamos otra opción sobre cómo hacer que su script sea seguro para importar. Cambiaremos elunsafe_module.py archivo de la sección anterior.
+
+```python
+# safe_module.py
+
+name = "George"
+
+if __name__ == "__main__":
+    print("Hello,", name)
+```
+
+El nombre del módulo siempre está disponible en la variable incorporada `__name__`. Cuando estás ejecutando un script `__name__`tiene un valor `"__main__"`. Entonces, aquí verificamos el valor de `__name__`e imprimimos la línea solo si el módulo se ejecuta como un script.
+
+```python
+# safe_bye.py script
+
+from safe_module import name
+
+print("Bye,", name)
+```
+
+El resultado es el siguiente:
+
+```bash
+Bye, George
+```
+
+En general, si tiene más de una línea para ejecutar en un script, es conveniente mover todo ese código a una función llamada main y luego llamarlo así:
+
+```python
+# safe_main_module.py
+
+name = "George"
+
+def main():
+    print("Hello,", name)
+
+if __name__ == "__main__":
+    main()
+```
+
+Tenga en cuenta que el nombre en sí no afecta la forma en que se ejecuta una función, es solo una convención para indicar que esta función se ejecuta solo cuando el archivo se usa como un script.
+
+##### Resumen
+
+Recordemos brevemente la utilidad de este tema:
+
+- hemos aprendido la diferencia entre scripts y módulos en Python;
+- recordó la forma de importar módulos;
+- pasó por algunos errores comunes a tener en cuenta al trabajar con módulos;
+- nos familiarizamos con la opción de importación segura usando `__main__`pattern.

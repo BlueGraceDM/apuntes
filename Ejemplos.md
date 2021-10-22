@@ -195,3 +195,154 @@ def average_mark(*students):
     return round(sum(students) / len(students), 1)
 ```
 
+# Buscar un final en especifico y cambiarlo e imprimir (.endswith('?'))
+
+```python
+Find all words that end in "s" and print them together separated by an underscore.
+After such words there will be no punctuation marks, you do not need to worry about that.
+
+for char in phrase:
+    if char.endswith('s'):
+        new_list.append(char)
+x = '_'.join(new_list)
+print(x)
+
+```
+
+# Insertar dos variables en un input
+
+```python
+x, y = input().split()
+print(f'{x} of {y}')
+```
+
+# Usar Capitalize
+
+```python
+#capitalize( )
+s1 = 'my name is khan'
+print(s1.capitalize())
+-- My name is khan
+
+#capwords( ) from string
+import string
+s1 = 'my name is khan'
+print(string.capwords(s1))
+-- My Name Is Khan
+print(string.capwords(s1, 'a'))
+-- My naMe is khaN
+
+# Otro ejemplo con replace
+
+y = input().split()
+x = ''.join(y).title().replace('_', '')
+
+print(x)
+```
+
+# Prueba FizzBuzz
+
+```python
+for n in range(1,101):
+    if n % 3 == 0 and n % 5 == 0:
+        print('FizzBuzz')
+    elif n % 3 == 0:
+        print('Fizz')
+    elif n % 5 == 0:
+        print('Buzz')
+    else:
+        print(n)
+```
+
+# Uso de la funcion Filter
+
+```python
+class Empleado:
+    def __init__(self, nombre, cargo, salario):
+        self.nombre = nombre
+        self.cargo = cargo
+        self.salario = salario
+
+    def __str__(self):
+        return '{} que trabaja como {} tiene un salario de {} $'.format(self.nombre, self.cargo, self.salario)
+
+listaEmpleados = [
+    Empleado('Juan', 'Director', 750000),
+    Empleado('Ana', 'Presidenta', 850000),
+    Empleado('Antonio', 'Administrativo', 25000),
+    Empleado('Sara', 'Secretaria', 27000),
+    Empleado('Mario', 'Botones', 21000),
+]
+salarios_altos = filter(lambda empleado: empleado.salario > 50000, listaEmpleados)
+for empleado_salario in salarios_altos:
+    print(empleado_salario)
+```
+
+```shell
+Juan que trabaja como Director tiene un salario de 750000 $
+Ana que trabaja como Presidenta tiene un salario de 850000 $
+```
+
+# Uso de funcion Map
+
+```python
+class Empleado:
+    def __init__(self, nombre, cargo, salario):
+        self.nombre = nombre
+        self.cargo = cargo
+        self.salario = salario
+
+    def __str__(self):
+        return '{} que trabaja como {} tiene un salario de {} $'.format(self.nombre, self.cargo, self.salario)
+
+listaEmpleados = [
+    Empleado('Juan', 'Director', 6700),
+    Empleado('Ana', 'Presidenta', 7500),
+    Empleado('Antonio', 'Administrativo', 2100),
+    Empleado('Sara', 'Secretaria', 2150),
+    Empleado('Mario', 'Botones', 1800),
+]
+def calculo_comision(empleado):
+    
+    if(empleado.salario <= 3000):
+        empleado.salario = empleado.salario * 1.03
+    return empleado
+
+listaEmpleadosComision = map(calculo_comision, listaEmpleados)
+for empleado in listaEmpleadosComision:
+    print(empleado)
+```
+
+```shell
+Juan que trabaja como Director tiene un salario de 6700 $
+Ana que trabaja como Presidenta tiene un salario de 7500 $
+Antonio que trabaja como Administrativo tiene un salario de 2163.0 $
+Sara que trabaja como Secretaria tiene un salario de 2214.5 $
+Mario que trabaja como Botones tiene un salario de 1854.0 $
+
+```
+
+```python
+# Ot
+# place `import` statement at top of the program
+from math import copysign
+
+# don't modify this code or the variables may not be available
+x, y = map(float, input().split(' '))
+
+print(copysign(x, y))
+```
+
+```python
+# place `import` statement at top of the program
+from random import randint, seed
+
+# don't modify this code or variable `n` may not be available
+n = int(input())
+
+# put your code here
+seed(n)
+k = randint(-100, 100)
+print(k) 
+```
+
