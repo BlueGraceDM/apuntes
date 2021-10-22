@@ -7726,3 +7726,150 @@ Recordemos brevemente la utilidad de este tema:
 - recordó la forma de importar módulos;
 - pasó por algunos errores comunes a tener en cuenta al trabajar con módulos;
 - nos familiarizamos con la opción de importación segura usando `__main__`pattern.
+
+
+
+# Teoría: Paquetes
+
+Cuando nuestro código se hace más grande, se vuelve muy difícil mantener y realizar un seguimiento de todos los módulos incluidos. Para que el código esté más organizado, podemos recurrir a paquetes. En este tema, aprenderemos qué es y cómo usarlos correctamente.
+
+##### Definición y estructura del paquete
+
+Un **paquete** es una forma de estructurar módulos **jerárquicamente** con la ayuda de los llamados **"nombres de módulo con puntos"** . Por lo tanto, el nombre del módulo `sun.moon`designa un submódulo llamado "luna" en un paquete llamado "sol".
+
+La posible **estructura** podría ser la siguiente:
+
+```no-highlight
+package/                           # first we name the main or top-level package
+            __init__.py            # this directory should be treated as a package
+            subpackage/            # we can add subpackage with extra modules
+                  __init__.py      # this directory should be treated as a subpackage
+                   artificial.py
+                   amateurs.py
+                   ...
+            subpackage2/                  
+                  __init__.py
+                  amazing.py
+                  animate.py
+                  barriers.py
+                  ...
+```
+
+**NB:** es necesario crear `__init__.py`archivos, eso hará que Python trate el directorio como un paquete / subpaquete. Pueden estar vacíos o ejecutar el código de inicialización del paquete.
+
+##### Importar y hacer referencia a paquetes
+
+Supongamos que nos gustaría importar un módulo específico del paquete. Hay dos formas de importar el submódulo "artificial" del subpaquete:
+
+```python
+from package.subpackage import artificial 
+```
+
+Este método le permite usar el contenido del submódulo sin nombrar el paquete y el subpaquete:
+
+```python
+artificial.function(arg1, arg2)
+```
+
+El segundo método es más sencillo:
+
+```python
+import package.subpackage.artificial      
+```
+
+Una vez que hayamos cargado el submódulo de esa manera, se debe hacer referencia a su contenido con su **nombre completo** :
+
+```python
+package.subpackage.artificial.function(arg1, arg2)
+```
+
+Además, es posible importar una función particular del submódulo:
+
+```python
+from package.subpackage.artificial import function
+```
+
+Después de eso, puede abordar `function()`directamente, sin especificar la ruta completa a un módulo.
+
+El método de importación de módulos depende de su programa y sus necesidades actuales. ¡La regla principal es la legibilidad!
+
+##### Importar * de…: ventajas y desventajas
+
+También puede utilizar `from package.subpackage import *`. Este código importará todos los submódulos que tiene su subpaquete, aunque es posible que realmente no lo necesite. Además, llevará mucho tiempo y se considerará una mala práctica. ¿Cómo podemos manejar estos efectos secundarios?
+
+Lo más importante es proporcionar al paquete un **índice** particular con la ayuda de una `__all__ `declaración en la que se debe insertar `__init__.py file`. Allí desea enumerar los submódulos que se importarán mientras `from package import *`se ejecuta la operación.
+
+```python
+__all__ = ["submodule1", "submodule10"]
+```
+
+##### Referencias intrapaquete
+
+Python es incluso más poderoso de lo que imagina: puede consultar los submódulos de los **paquetes hermanos** si es necesario. Por ejemplo, si usa el `package.subpackage1.artificial `y allí necesita algo `package.subpackage2.amazing`, puede importarlo `from package.subpackage2 import amazing `en el archivo **artificial.py** .
+
+También puede realizar las llamadas **"importaciones relativas"** que utilizan puntos iniciales para indicar los paquetes actuales y principales involucrados. Por lo tanto, para "aficionados" puede utilizar lo siguiente:
+
+```python
+from . import artificial    # one dot means addressing to a current package/subpackage
+
+from .. import subpackage2  # two dots mean addressing to a parent package/subpackage
+
+from ..subpackage2 import module
+```
+
+##### ¡Hora de PEP!
+
+El uso de **importaciones de comodines** ( `from <module> import *`) se considera una mala práctica, ya que dejan poco claro qué nombres están presentes en el espacio de nombres, lo que confunde tanto a los lectores como a muchas herramientas automatizadas.
+
+Se recomiendan las importaciones absolutas, ya que suelen ser más legibles. También dan mejores mensajes de error si algo sale mal:
+
+```python
+import package.subpackage.amateurs
+from package.mypackage import amateurs
+```
+
+Las importaciones relativas explícitas también son aceptables, especialmente cuando se trata de diseños de paquetes complejos donde el uso de importaciones absolutas sería innecesariamente detallado:
+
+```python
+from . import animate           # in amazing.py, for example
+from .barriers import function  # in animate.py, for example
+```
+
+El código de biblioteca estándar debe evitar diseños de paquetes complejos y utilizar siempre importaciones absolutas.
+
+##### Conclusión
+
+- Usar paquetes es una muy buena forma de estructurar su código.
+- Los paquetes hacen que su proyecto sea más fácil de percibir. Permiten reutilizar código de forma más sencilla.
+- Las diferentes formas de importar tienen sus propias ventajas y desventajas. Recuerde una de las principales reglas de Python: ¡la legibilidad cuenta!
+
+```python
+oscars/
+      __init__.py
+      two_nineteen/
+          __init__.py
+          bohemian_rhapsody.py
+          greenbook.py
+          favourite.py
+          blackpanther.py
+      two_eighteen/
+          __init__.py
+          shapeofwater.py
+          darktimes.py
+        
+What are the correct ways to import greenbook.py from within the module bohemian_rhapsody.py? Note that the current directory is supposed to be oscars/two_nineteen/.
+
+from . import greenbook
+from oscars.two_nineteen import greenbook
+```
+
+![image-20211022020705808](C:\Users\zhior\Documents\apuntes\image-20211022020705808.png)
+
+There are a lot of packages for Python, for example, SciPy is the most popular library for advanced math. Suppose you need to work with the function `csgraph_from_dense` from this module: it constructs a sparse graph representation from a dense matrix. This function is located in the `csgraph` submodule of the `sparse` subpackage of the `scipy` library.
+
+Take a look at the code below. If we run it right now, we will get the ImportError. Can you figure out what is wrong with this code snippet? Fix the mistake and run the code again.
+
+```python
+from scipy.sparse.{submodule_name} import csgraph_from_dense
+```
+
