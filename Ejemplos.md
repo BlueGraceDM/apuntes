@@ -346,3 +346,303 @@ k = randint(-100, 100)
 print(k) 
 ```
 
+# Crear contrasena
+
+```python
+import random
+
+
+def generar_contrasena():
+    mayusculas = ['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']
+    minusculas = ['a', 'b', 'c', 'd', 'e', 'g', 'h', 'i']
+    numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+    simbolos = ['!', '@', '#', '$', '%', '-']
+
+    caracteres = mayusculas + minusculas + numeros + simbolos
+    contrasena = []
+
+    # aqui senalamos cuantas veces va a realizar el ciclo para generar la contrasena
+    for i in range(15):
+        caracter_random = random.choice(caracteres)
+        contrasena.append(caracter_random) #senalamos donde lo vamos a compilar con append
+
+    contrasena = ''.join(contrasena) # se usa para cambiar de lista a cadena
+    return contrasena # nos regrese el valor de cadena
+
+def main():
+    contrasena = generar_contrasena() # creamos una variable para contener la funcion
+    print('Tu nueva contraseña es: ', contrasena)
+
+if __name__=='__main__':
+    main()
+```
+
+# Usar SQL
+
+## Crear tablas
+
+```sqlite
+-- Crea una tabla con incremento
+	
+CREATE TABLE "carreras" (
+	"codigo_c"	INTEGER,
+	"nombre"	TEXT,
+	"duracion"	INTEGER,
+	PRIMARY KEY("codigo_c" AUTOINCREMENT)
+);
+
+-- Crea una foreign key
+CREATE TABLE ALUMNOS(
+    'CODIGO_A' INTEGER,
+    'NOMBRE_A' VARCHAR(100),
+    'EDAD_A' INTEGER,
+    'TELEFONO_A' INTEGER,
+    'CARRERA_FK'INTEGER,
+    PRIMARY KEY (CODIGO_A),
+    FOREIGN KEY (CARRERA_FK) REFERENCES CARRERAS (CODIGO_C)
+);
+```
+
+## INSERTAR DATOS
+
+```sqlite
+-- recuerda saber cuantos campos existen
+INSERT INTO CARRERAS VALUES (1, 'ING SISTEMAS', 5);
+-- varios datos al mismo tiempo
+INSERT INTO CARRERAS VALUES (2, 'DERECHO', 3), (3, 'CONTABILIDAD', 5);
+-- cuando es autoincrement se usa lo siguiente
+    INSERT INTO TABLA VALUES (NULL, 'DATOS')
+```
+
+## VISUALIZAR DATOS
+
+```sql
+-- * significa TODO
+SELECT * FROM TABLA 
+-- elegir solo algunas campos
+SELECT CAMPO1, CAMPO2 FROM TABLA
+-- usando select en la busqueda
+SELECT * FROM CARRERAS WHERE DURACION = 5 
+-- =! (negacion) | < (menor que) | > (mayor que)
+```
+
+## INNER JOIN
+
+```sqlite
+-- senalamos con un punto cual es el dato que vamos a sustituir de 
+-- otra tabla, ON le indica el reemplazo
+SELECT CODIGO_A,NOMBRE_A,NOMBRE FROM ALUMNOS 
+INNER JOIN CARRERAS ON ALUMNOS.CODIGO_A = CARRERAS.CODIGO_C
+```
+
+## MODIFICAR DATOS
+
+```sqlite
+UPDATE CLIENTES
+SET NOMBRE_C = 'PEDRO'
+WHERE CODIGO_C = 2 
+
+---
+UPDATE CLIENTES
+SET NOMBRE_C = 'ROBERTO' WHERE NOMBRE_C = 'JUAN'
+```
+
+
+
+## BORRAR DATOS
+
+```sqlite
+-- borrar todos los datos de una tabla
+DELETE FROM TABLA
+-- solo un registro
+DELETE FROM TABLA WHERE CODIGO = 2 AND CONDICIONAL = 'NOMBRE'
+-- eliminar tabla 
+DROP TABLA
+```
+
+## NOTNULL
+
+```sqlite
+CREATE TABLE "carreras" (
+	"codigo_c"	INTEGER,
+	"nombre"	TEXT NOT NULL,
+	"duracion"	INTEGER,
+	PRIMARY KEY("codigo_c" AUTOINCREMENT)
+```
+
+
+
+ ## CONECTAR PYTHON A SQL
+
+```python
+import sqlite3
+
+# conectar a la base de datos
+coneccion = sqlite3.connect('tienda.db')
+# cerrar la base de datos
+coneccion.close()
+```
+
+> Precaución. No solo abre el archivo , de no existir lo crea
+
+
+
+# Usar SQL con Python
+
+## CREAR UNA TABLA
+
+```python
+import sqlite3 
+conexion = sqlite3.connect("ejemplo.db")
+cursor = conexion.cursor()
+
+cursor.execute("CREATE TABLE persona (codigo_p INTEGER, nombre VARCHAR (100), edad INTEGER, PRIMARY KEY (codigo_p))")
+conexion.commit()
+conexion.close()
+```
+
+## INSERTAR REGISTROS
+
+```python
+import sqlite3 
+conexion = sqlite3.connect("ejemplo.db")
+cursor = conexion.cursor()
+cursor.execute("INSERT INTO productos VALUES (NULL, 'PC',1500)")
+conexion.commit()
+conexion.close()
+```
+
+## INGRESAR VARIOS DATOS
+
+```python
+import sqlite3
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+personas = [(2, "Roel", 24),
+            (3, "Juan", 45),
+            (4, "Pedro", 25)]
+cursor.executemany("INSERT INTO persona VALUES (?, ?, ?)", personas)
+
+conexion.commit()
+conexion.close()
+```
+
+## MOSTRAR DATOS  (Recuperar datos)
+
+```python
+import sqlite3
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+
+cursor.execute('SELECT * FROM persona') # Solicitud
+personas = cursor.fetchone() # Muestra el primer dato, para todos  .FETCHALL()
+
+for p in personas # Si no usamos FOR se imprimirá como lista
+	    print(f'ID: {p[0]} NOMBRE: {p[1]} EDAD: {p[2]}') # Con formato
+
+conexion.commit()
+conexion.close()
+```
+
+## MODIFICAR DATOS
+
+```python
+import sqlite3
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+
+cursor.execute("UPDATE persona SET nombre = 'Alex Ch' WHERE codigo_p =1")
+
+conexion.commit()
+conexion.close()
+```
+
+## BORRAR DATOS
+
+```python
+import sqlite3
+
+conexion = sqlite3.connect('ejemplo.db')
+cursor = conexion.cursor()
+
+cursor.execute("DELETE FROM persona WHERE codigo_p =2")
+
+conexion.commit()
+conexion.close()
+```
+
+# Cambiar letras de una lista a otra
+
+```python
+name = input()
+
+def normalize(new_name):
+
+    # put your code here
+    old_values = ["é", "ë", "á", "å", "œ", "æ"]
+    new_values = ["e", "e", "a", "a", "oe", "ae"]
+    for count, value in enumerate(old_values):
+        new_name = new_name.replace(value, new_values[count])
+
+    return new_name
+
+print(normalize(name))
+
+
+####
+name = input()
+
+def normalize(old_name):
+    working_dict = {
+        'é': 'e',
+        'ë': 'e',
+        'á': 'a',
+        'å': 'a',
+        'œ': 'oe',
+        'æ': 'ae',
+    }
+
+    new_name = old_name
+    for old_char, new_char in working_dict.items():
+        new_name = new_name.replace(old_char, new_char)
+
+    return new_name
+
+print(normalize(name))
+###
+name = input()
+
+def normalize():
+    new_name = name.replace("é", "e").replace("ë", "e")
+    new_name = new_name.replace("á", "a").replace("å", "a")
+    new_name = new_name.replace("œ", "oe").replace("æ", "ae")
+    # put your code here
+    print(new_name)
+
+normalize()
+```
+
+# Agregar una letra e invocar un elemento de un diccionario
+
+```python
+    #### OTHER
+    
+money = int(input())
+animal = ["sheep", "cow", "pig", "goat", "chicken"]
+animals = ["sheep", "cows", "pigs", "goats", "chickens"]
+price = [6769, 3848, 1296, 678, 23]
+i = 0
+while True:
+    if money < price[4]:
+        print("None")
+        break
+    if money >= price[i]:
+        amount = money // price[i]
+        if amount == 1:
+            print(amount, animal[i])
+        else:
+            print(amount, animals[i])
+        break
+    i += 1
+```
+
