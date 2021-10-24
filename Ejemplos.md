@@ -646,3 +646,57 @@ while True:
     i += 1
 ```
 
+```python
+# Usar el valor de un diccionario
+car = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+x = car.get("model")
+
+print(x)
+
+```
+
+# Usar la comparativa para usar un dato
+
+```python
+def main():
+	numbers = {'00': 'RaRo', '01': 'RaTa', '02': 'ReNo', '03': 'ReMo', '04': 'RoCa', '05': 'RieL', '06': 'RiSa',
+	           '07': 'RiFa', '08': 'RaCHa', '09': 'RoBot',
+	           '0': 'aRo', '1': 'Tea', '2': 'Noe', '3': 'huMo', '4': 'oCa', '5': 'oLa', '6': 'oSo', '7': 'uFo',
+	           '8': 'haCHa', '9': 'aVe', '10': 'ToRo',
+	           '11': 'TeTa', '12': 'TiNa', '13': 'aToMo', '14': 'TaCo', '15': 'TeLa', '16': 'ToS', '17': 'TuFo',
+	           '18': 'TeCHo', '19': 'TuBo', '20': 'NoRia',
+	           '21': 'NaTa', '22': 'NeNe', '23': 'NeMo', '24': 'NuCa', '25': 'NiLo', '26': 'aNiS', '27': 'NiFe',
+	           '28': 'NiCHo', '29': 'NuBe', '30': 'MaR',
+	           '31': 'MoTo', '32': 'MoNo', '33': 'MoMia', '34': 'haMaCa', '35': 'MuLa', '36': 'MeSa', '37': 'MaFia',
+	           '38': 'MeCHa', '39': 'aMeBa', '40': 'CoRo',
+	           '41': 'CoheTe', '42': 'CoNo', '43': 'CaMa', '44': 'CoCo', '45': 'CoLa', '46': 'CaSa', '47': 'CaFe',
+	           '48': 'CoCHe', '49': 'CuBo', '50': 'LoRo',
+	           '51': 'LaTa', '52': 'LuNa', '53': 'LiMa', '54': 'LoCo', '55': 'LuLu', '56': 'LoSa', '57': 'aLFa',
+	           '58': 'LuCHa', '59': 'LoBo', '60': 'SoR',
+	           '61': 'SeTa', '62': 'SeNa', '63': 'SiMa', '64': 'SaCo', '65': 'SoL', '66': 'SeSo', '67': 'SoFa',
+	           '68': 'SaCHo', '69': 'SeBo', '70': 'FaRo',
+	           '71': 'FoTo', '72': 'FaeNa', '73': 'FaMa', '74': 'FoCa', '75': 'FaLo', '76': 'FoSa', '77': 'FiFi',
+	           '78': 'fiCHa', '79': 'eFeBo', '80': 'haCHeRo',
+	           '81': 'CHiTa', '82': 'CHiNo', '83': 'CHeMo', '84': 'CHiCa', '85': 'CHaL', '86': 'CHaS', '87': 'CHaFa',
+	           '88': 'CHuCHo', '89': 'CHiVo', '90': 'BaR',
+	           '91': 'BoTa', '92': 'ViNo', '93': 'BuuM', '94': 'VaCa', '95': 'VeLa', '96': 'VaSo', '97': 'BoFo',
+	           '98': 'BaCHe', '99': 'BeBe'}
+
+
+	lista = []
+
+	cbo = input()
+
+	if cbo in numbers:
+		lista.append(numbers.get(cbo))
+	print(lista)
+	main()
+if __name__ == '__main__':
+	main()
+```
+

@@ -7873,3 +7873,137 @@ Take a look at the code below. If we run it right now, we will get the ImportErr
 from scipy.sparse.{submodule_name} import csgraph_from_dense
 ```
 
+
+
+# Teoría: Cómo leer la documentación
+
+La mayoría de los programadores están acostumbrados a buscar en Google una respuesta cuando no saben cómo hacer algo o hacer una pregunta en un foro como [Stack Overflow](https://stackoverflow.com/) . A veces, en los foros, puede encontrar una abreviatura como **RTFM** . Tiene significados ligeramente diferentes, pero nos centraremos en "Leer el siguiente manual". Habla por sí solo, ¿no es así? Si ve una respuesta de este tipo, significa que la pregunta podría haber sido respondida leyendo el manual o la documentación correspondiente.
+
+**Leer la documentación** es, de hecho, una habilidad esencial para un programador. Para entender por qué es así, consideremos varios puntos:
+
+1. La documentación oficial es la fuente más veraz y completa.
+2. Contiene información actualizada para las últimas versiones.
+3. El mismo código se puede escribir de diferentes formas, pero la documentación contiene las mejores prácticas.
+
+¡Estas razones ya deberían ser suficientes para que se abra a la documentación y espere que se abra a usted!
+
+##### Fuente principal de documentación
+
+¡Por supuesto, Python tiene su propia [documentación oficial](https://docs.python.org/3/) completa y actualizada ! Echemos un vistazo al encabezado del sitio:
+
+![img](https://ucarecdn.com/cc67294e-478a-4177-9b48-3f3e7f33031e/)
+
+De forma predeterminada, vemos la última versión de Python, pero también puede encontrar documentación para versiones anteriores. Para su comodidad, también puede seleccionar otro idioma disponible o utilizar el campo *Búsqueda rápida* para encontrar la información que necesita.
+
+A continuación puede ver **partes de la documentación** . Echemos un vistazo rápido a algunos que son importantes para nosotros:
+
+- **[El tutorial](https://docs.python.org/3.9/tutorial/index.html)** es con el que empezar a descubrir el mundo de Python.
+- **[Library Reference](https://docs.python.org/3.9/library/index.html)** es una información más detallada sobre cómo funciona Python y qué características tiene. En esta sección, pasará la mayor parte de su tiempo como programador de Python.
+- **[Configuración y uso de Python](https://docs.python.org/3.9/using/index.html)** contiene sugerencias sobre cómo instalar y configurar el entorno de Python en diferentes plataformas.
+- **[Los CÓMO de Python](https://docs.python.org/3.9/howto/index.html)** son varias guías sobre temas específicos.
+
+También puede descargar la documentación en un formato que le resulte conveniente en la [página de descarga](https://docs.python.org/3/download.html) .
+
+Los documentos contienen mucha información, pero no temas, no tienes que leer todo a la vez. Lo principal es aprender a encontrar respuestas a tus preguntas.
+
+##### Documentación oficial de Python
+
+La mejor manera de aprender algo es probarlo usted mismo, así que vamos a referirnos a la [documentación del módulo de matemáticas](https://docs.python.org/3/library/math.html) como ejemplo. Le sugerimos que lo abra y lo mire usted mismo primero. A continuación, describimos lo que puede encontrar allí.
+
+En primer lugar, la documentación nos dice para qué se usa un módulo en particular:
+
+```no-highlight
+This module provides access to the mathematical functions defined by the C standard.
+```
+
+Y también sobre varias restricciones:
+
+```no-highlight
+These functions cannot be used with complex numbers...
+```
+
+Para cada función de este módulo, puede encontrar una descripción de lo que hace y qué valor obtiene como resultado. Considere la función [math.fabs (x)](https://docs.python.org/3/library/math.html#math.fabs) :
+
+![img](https://ucarecdn.com/32e5d05f-e925-4740-b6cf-f91d04e99c43/)
+
+
+
+
+Además, la documentación indicará qué errores podemos encontrar al llamar a la función con argumentos no válidos.
+
+Además, a menudo hay algunas secciones que son específicas del módulo en sí. En `math`, por ejemplo, " [Constantes](https://docs.python.org/3/library/math.html#constants) " es una sección de este tipo y contiene una lista de todos los valores constantes definidos en el módulo, como la siguiente:
+
+![img](https://ucarecdn.com/881f715d-0ce1-42b0-ad7e-d26a923b3524/)
+
+Finalmente, en la sección **Ver también** al final, puede encontrar alternativas o información adicional:
+
+![img](https://ucarecdn.com/76fc598e-1db7-4cd0-b32d-e98367857574/)
+
+Si necesita encontrar rápidamente información sobre un módulo, función, etc. específicos, utilice la búsqueda de páginas en el navegador ( **Ctrl + F o ⌘ + F en Mac)**
+
+
+
+##### Documentación de bibliotecas de terceros
+
+Además de las bibliotecas estándar que vienen con la instalación predeterminada de Python, también hay bibliotecas de terceros. Están desarrollados por programadores de terceros (de ahí el nombre) y tienen un propósito específico. Por lo tanto, otra fuente de información con la que se encontrará a menudo es la documentación de bibliotecas de terceros.
+
+Consideremos la documentación de una de estas bibliotecas: [Colorama](https://pypi.org/project/colorama/) , que " *hace que las secuencias de caracteres de escape ANSI (para producir texto de terminal en color y posicionamiento del cursor) funcionen en MS Windows* ". Como podemos ver, al igual que la documentación oficial, comienza con una breve descripción de para qué se utiliza la biblioteca.
+
+Además, encontrará información sobre cómo instalar una biblioteca de terceros:
+![img](https://ucarecdn.com/c8613ac5-b7e4-4d68-b002-8f01a52f4845/)
+y ejemplos de lo que obtiene como resultado (¡ *siga el enlace y compruébelo usted mismo!* ).
+
+Entonces, la documentación siempre contendrá ejemplos de cómo usar la biblioteca en varios casos que ilustran sus capacidades. No lo mostraremos aquí, pero puede verlo usted mismo en la documentación de [Colorama](https://pypi.org/project/colorama/) .
+
+Para acostumbrarse a la documentación, puede familiarizarse con su estructura usando ejemplos de algunas otras bibliotecas de terceros: [Matplotlib](https://matplotlib.org/) , [SymPy](https://docs.sympy.org/dev/index.html) , [PrettyTable](https://pypi.org/project/prettytable/) , [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) . Puede que no todos estén claros para ti todavía, ¡pero está bien! En programación, a menudo tienes que enfrentarte a cosas nuevas. Sin embargo, todos ellos generalmente constan de las mismas partes: un breve resumen de para qué se usa la biblioteca, pautas de instalación y una lista de funciones con descripciones y ejemplos de uso.
+
+
+
+Tenga en cuenta que la documentación de las bibliotecas de terceros no siempre está completa y actualizada. Está escrito por los propios desarrolladores, así que tenlo en cuenta.
+
+
+
+##### Un poco de ayuda()
+
+A menudo, necesita obtener información mientras escribe código, y Python tiene un sistema de ayuda incorporado para tales casos, lo que le permite obtener una referencia rápida sobre un objeto. Para hacer esto, necesita llamar a la `help()`función y pasar un objeto como argumento. Por ejemplo, puede ser una función:
+
+```python
+help(len)
+
+# Help on built-in function len in module builtins:
+#
+# len(obj, /)
+#     Return the number of items in a container.
+```
+
+Tenga en cuenta que la función en tal caso se escribe sin paréntesis.
+
+Ahora, intentemos obtener una breve documentación sobre la `sqrt()`función del `math`módulo:
+
+```python
+# something goes wrong:
+
+help(math.sqrt)  # NameError: name 'math' is not defined
+```
+
+La cuestión es que primero debes importar el módulo:
+
+```python
+import math
+
+
+help(math.sqrt)
+
+# sqrt(x, /)
+#    Return the square root of x.
+```
+
+o pasar el nombre del objeto en soportes como: `help('math.sqrt')`.
+
+Con todo, es un método conveniente para obtener información breve sobre el uso de un objeto sin buscar su documentación en Internet.
+
+##### Conclusión
+
+Recuerda que simplemente leer la documentación de principio a fin no te convertirá en un buen programador. Lo más importante es la práctica, y la práctica hace al maestro. La documentación es solo un instrumento, pero aún así, es importante saber cómo usarla.
+
+Hyperskill intenta responder todas las preguntas que plantea, pero también anima a los alumnos a buscar información adicional fuera de la plataforma si quieren saber más. La documentación es el primer asistente en esta materia. Después de este tema, esperamos que esté listo para buscar información adicional en la documentación.
