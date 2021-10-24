@@ -8007,3 +8007,18 @@ Con todo, es un método conveniente para obtener información breve sobre el uso
 Recuerda que simplemente leer la documentación de principio a fin no te convertirá en un buen programador. Lo más importante es la práctica, y la práctica hace al maestro. La documentación es solo un instrumento, pero aún así, es importante saber cómo usarla.
 
 Hyperskill intenta responder todas las preguntas que plantea, pero también anima a los alumnos a buscar información adicional fuera de la plataforma si quieren saber más. La documentación es el primer asistente en esta materia. Después de este tema, esperamos que esté listo para buscar información adicional en la documentación.
+
+> If you don’t want characters prefaced by \ to be interpreted as special characters, you can use raw strings by adding an r before the first quote
+
+```shell
+1. crea un entorno virtual llamado my_venv(tienes Python3 instalado y tu directorio de trabajo actual es en el que deseas crear el entorno),
+2. actívalo (tienes el sistema operativo Windows),
+3. instala la biblioteca NLTK (no se especifica la versión necesario),
+4. desactive el entorno con el deactivatecomando (sí, no hay nada más que añadir).
+
+python3 -m venv my_venv
+my_venv\Scripts\activate.bat
+python -m pip install nltk
+deactivate
+```
+
