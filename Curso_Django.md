@@ -8268,3 +8268,118 @@ new_house = House("building")
 
 ```
 
+# Teoría: instancias de clase
+
+A estas alturas, ya sabe qué son las clases y cómo se crean y utilizan en Python. Ahora entremos en detalles sobre **las instancias de clases.**
+
+Una instancia de clase es un objeto de la clase. Si, por ejemplo, hubiera una clase **Río,** podríamos crear instancias como Volga, Sena y Nilo. Todos tendrían la misma estructura y compartirían todos los atributos de clase definidos dentro de la clase River.
+
+Sin embargo, inicialmente, todas las instancias de la clase serían idénticas entre sí. La mayoría de las veces eso no es lo que queremos. Para personalizar el estado inicial de una instancia, `**__init__**`se utiliza el método.
+
+##### def __init __ ()
+
+El `__init__`método es un **constructor** . Los constructores son un concepto de la programación orientada a objetos. Una clase puede tener un solo constructor. Si `__init__`se define dentro de una clase, se invoca automáticamente cuando creamos una nueva instancia de clase. Tome nuestra clase River como ejemplo:
+
+```python
+class River:
+    # list of all rivers
+    all_rivers = []
+    
+    def __init__(self, name, length):
+        self.name = name
+        self.length = length
+        # add current river to the list of all rivers
+        River.all_rivers.append(self)
+
+volga = River("Volga", 3530)
+seine = River("Seine", 776)
+nile = River("Nile", 6852)
+
+# print all river names
+for river in River.all_rivers:
+    print(river.name)
+# Output:
+# Volga
+# Seine
+# Nile
+```
+
+Hemos creado tres instancias (u objetos) del río de clase: `volga`, `seine`, y `nile`. Dado que definimos los parámetros de **nombre** y **longitud** para el `__init__`, deben pasarse explícitamente al crear nuevas instancias. Entonces, algo como `volga = River()`causaría un error. ¡Mire [esta](https://pythontutor.com/visualize.html#code=class River%3A    %23 list of all rivers    all_rivers %3D []        def __init__(self, name, length)%3A        self.name %3D name        self.length %3D length        %23 add current river to the list of all rivers        River.all_rivers.append(self) volga %3D River("Volga", 3530) seine %3D River("Seine", 776) nile %3D River("Nile", 6852) %23 print all river names for river in River.all_rivers%3A    print(river.name) %23 Output%3A %23 Volga %23 Seine %23 Nile&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=[]&textReferences=false) visualización del código para ver cómo funciona casi en tiempo real!
+
+El `__init__`método especifica qué atributos queremos que tengan las instancias de nuestra clase desde el principio. En nuestro ejemplo, son el **nombre** y la **longitud** **.**
+
+##### uno mismo
+
+Usted puede haber notado que nuestro `__init__`método tenía otro argumento además del nombre y la longitud: `**self**`. El `self`argumento representa una instancia particular de la clase y nos permite acceder a sus atributos y métodos. En el ejemplo con `__init__`, básicamente creamos atributos para la instancia particular y les asignamos los valores de los argumentos del método. Es importante utilizar el `self`parámetro dentro del método si queremos guardar los valores de la instancia para su uso posterior.
+
+La mayoría de las veces también necesitamos escribir el parámetro self en otros métodos porque cuando se llama al método, el primer argumento que se pasa al método es el objeto en sí. Agreguemos un método a nuestra clase River y veamos cómo funciona. La sintaxis de los métodos no es de importancia en este momento, solo preste atención al uso de `self`:
+
+```python
+class River:
+    all_rivers = []
+
+    def __init__(self, name, length):
+        self.name = name
+        self.length = length
+        River.all_rivers.append(self)
+
+    def get_info(self):
+        print("The length of the {0} is {1} km".format(self.name, self.length))
+```
+
+Ahora, si llamamos a este método con los objetos que hemos creado, obtendremos esto:
+
+```python
+volga.get_info()
+# The length of the Volga is 3530 km
+seine.get_info()
+# The length of the Seine is 776 km
+nile.get_info()
+# The length of the Nile is 6852 km
+```
+
+Como puede ver, para cada objeto el `get_info()`método imprimió sus valores particulares y eso fue posible porque usamos la `self`palabra clave en el método.
+
+Tenga en cuenta que cuando realmente llamamos al método de un objeto, no escribimos el `self`argumento entre paréntesis. El `self`parámetro (que representa una instancia particular de la clase) se pasa **implícitamente** al método de instancia cuando se llama. Entonces, en realidad, hay dos formas de llamar a un método de instancia: `self.method()`o `class.method(self)`. En nuestro ejemplo se vería así:
+
+```python
+# self.method()
+volga.get_info()
+# The length of the Volga is 3530 km
+
+# class.method(self)
+River.get_info(volga)
+# The length of the Volga is 3530 km
+```
+
+##### Atributos de instancia
+
+Las clases en Python tienen dos tipos de atributos: atributos de clase y atributos de instancia. Ya debería saber qué son los atributos de clase, así que aquí nos centraremos en los atributos de la instancia. **Los atributos de la instancia** se definen dentro de los métodos y almacenan información específica de la instancia.
+
+En la clase River, el **nombre** y la **longitud de** los atributos son atributos de instancia ya que están definidos dentro de un método ( `__init__`) y tienen `self`ante sí. Por lo general, los atributos de instancia se crean dentro del `__init__`método, ya que es el constructor, pero también puede definir atributos de instancia en otros métodos. Sin embargo, no se recomienda, por lo que le recomendamos que se ciña a la extensión `__init__`.
+
+Los atributos de instancia están disponibles solo desde el alcance del objeto, por lo que este código producirá un error:
+
+```python
+print(River.name)  # AttributeError
+```
+
+Los atributos de instancia, naturalmente, se utilizan para distinguir objetos: sus valores son diferentes para diferentes instancias.
+
+```python
+volga.name  # "Volga"
+seine.name  # "Seine"
+nile.name   # "Nile"
+```
+
+Entonces, al decidir qué atributos elegir en su programa, primero debe decidir si desea que almacene valores únicos para cada objeto de la clase o, por el contrario, los compartidos por todas las instancias.
+
+##### Resumen
+
+En este tema, ha aprendido acerca de las instancias de clases.
+
+Si las clases son una abstracción, una plantilla para objetos similares, una **instancia de clase** es una especie de ejemplo de esa clase, un objeto particular que sigue la estructura descrita en la clase. En su programa, puede crear tantos objetos de su clase como necesite.
+
+Para crear objetos con diferentes estados iniciales, las clases tienen un constructor `__init__`que nos permite definir los parámetros necesarios. La referencia a una instancia particular dentro de los métodos se realiza mediante la `self`palabra clave. Dentro del `__init__`método, definimos atributos de instancia que son diferentes para todas las instancias.
+
+La mayoría de las veces en nuestros programas no trataremos directamente las clases, sino sus instancias, por lo que saber cómo crearlas y trabajar con ellas es muy importante.
