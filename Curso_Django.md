@@ -8022,3 +8022,249 @@ python -m pip install nltk
 deactivate
 ```
 
+# Teoría: Errores
+
+Lo primero que necesita saber acerca de la programación es cómo imprimir `"Hello, world!"`. La segunda es que esta puede ser una tarea desafiante, ya que incluso un script tan pequeño puede contener varios errores. Aquí estás:
+
+```python
+print("Hello, world!"
+```
+
+Si ejecuta este código, obtendrá esto:
+
+```no-highlight
+Traceback (most recent call last):
+  File "FULL/PATH/TO_YOUR/SCRIPT.PY", line 1
+    print("Hello, world!"
+                        ^
+SyntaxError: unexpected EOF while parsing
+```
+
+**El** rastreo es un rastreo de pila que aparece cuando su código causa un error e informa información detallada sobre ese error en particular, indicando los **archivos específicos** en los que ocurrió el error. No obstante, las líneas que nos resultan más informativas en este momento son las dos últimas. Señalan el error en su código.
+
+Esto puede parecer un poco frustrante, pero generalmente los errores están diseñados para permitir que Python se comunique con usted. Siempre que vea esas líneas rojas amenazadoras, ¡no se asuste! Simplemente lea atentamente lo que están diciendo.
+
+##### Errores de sintaxis
+
+En el ejemplo anterior, podemos ver claramente la palabra mágica `SyntaxError`que probablemente lo perseguirá durante el período de acostumbrarse a Python. Una gran variedad de errores diferentes se conocen como errores de sintaxis. Lo que generalmente quieren decir es que Python ha encontrado un problema al intentar **compilar** su programa y ni siquiera puede ejecutarlo.
+
+Si lee detenidamente el texto de un rastreo, le ayudará a encontrar errores y corregirlos con bastante facilidad, ya que puede ver una **flecha que** apunta al lugar exacto donde Python encontró el error en su código. Cada error de sintaxis tiene un **valor asociado** . Describe un error en detalle. En el ejemplo, "EOF"en el mensaje "SyntaxError: EOF inesperado durante el análisis"representa el final de un archivo. Este mensaje significa que se esperaba algo más después de su declaración, pero no se lo pasó al intérprete. En nuestro caso, debería haber habido un corchete de cierre")".
+
+Los errores no serán tan obvios todo el tiempo. Es muy probable que el mensaje que reciba como valor asociado sea el más común y oscuro"sintaxis inválida", que no es realmente útil. Bueno, de todos modos, para localizar el problema basta con saber que el error está en la sintaxis.
+
+##### Errores comunes para principiantes
+
+Algunos de los errores de sintaxis más comunes son:
+
+-   **ortografía incorrecta** de palabras clave y nombres de funciones, por ejemplo, en `While`lugar de `while`, en `pint`lugar de `print`;
+-   el número incorrecto de **paréntesis** en las llamadas a funciones, por ejemplo `print "just one round bracket")`;
+-   **las sangrías** también son el terreno fértil para los errores, por lo tanto, use los espacios y las pestañas con cuidado;
+-   **cotizaciones** . No olvide incluir una cadena entre comillas del mismo tipo: comillas triples para cadenas de varias líneas, comillas dobles o simples para cadenas ordinarias.
+
+Los IDE modernos tienden a verificar todo por usted y a resaltar amablemente los lugares donde cometió un error o error tipográfico, pero no confíe demasiado en esto y esté listo para leer el rastreo usted mismo.
+
+
+
+Tenga en cuenta que Python deja de compilar su programa después de encontrar el **primer** error de sintaxis, por lo que puede llevar un tiempo corregir cada error.
+
+
+
+Verifique el siguiente fragmento de código, por ejemplo. Parece una placa de Petri con errores de sintaxis:
+
+```python
+missing_quote  = "this is a mistake!
+another_string = this is not a string!"
+parted_string = 'I'd like to be highlighted, but'
+          prnit("I am not")
+```
+
+Como puede ver, hay muchos errores de sintaxis en este pequeño fragmento de código. Si ha verificado y corregido todo lo de la lista anterior y, sin embargo, encuentra esos mensajes de error, ¡no se preocupe! Una vez más, es solo Python tratando de decirle que algo salió mal. ¡Respire hondo, vuelva a leer el artículo y continúe perfeccionando sus habilidades de programación!
+
+##### Resumen
+
+En este tema, aprendimos qué es el rastreo, analizamos los errores de sintaxis en detalle y pasamos por varios errores comunes que, como principiante, puede encontrar.
+
+# Teoría: Excepciones
+
+A estas alturas, su código se ha vuelto sintácticamente correcto y hermoso, se está ejecutando sin ningún problema. ¡Excelente! Pero espere, cuando continúe escribiendo el programa, ¡aparecerá algo más en los mensajes de Python! Y el programa solo se ejecuta parcialmente. ¿Que esta pasando aqui? Vamos a resolver esto.
+
+Algunos errores en su código no impedirán que el programa se ejecute. Solo se bloqueará al intentar ejecutar una línea "rota": una línea con un error llamado **excepción** . Así, las excepciones son los errores detectados durante la **ejecución** del programa (interpretación), mientras que los errores de sintaxis son los detectados durante la **compilación** del programa en código de bytes.
+
+Examinemos el siguiente fragmento de código:
+
+```python
+print("I will be the first")
+print("And I will be the second")
+a = 0
+b = 5
+print("Here comes an error!..")
+print(b / a)
+print("I won't be printed")
+```
+
+De hecho, podemos ver que algunos de los impresións funcionó, mientras que otros ( `print()`que contiene el error y otro más después) no lo hicieron. Por lo tanto, todo el código **anterior a** la excepción se ejecuta correctamente y todo el código **posterior** no.
+
+```no-highlight
+I will be the first
+and I will be the second
+Here comes an error!..
+Traceback (most recent call last):
+  File  "PATH/TO/YOUR/SCRIPT.py", line 6, in <module>
+    print(b / a)
+ZeroDivisionError: division by zero
+```
+
+Ya sabes que la parte más importante e informativa de un error en Python es la última línea. Contiene una descripción clara y distinta del error que ha encontrado Python. En este caso, podemos ver **ZeroDivisionError** , que es bastante informativo, ¿verdad? No se puede dividir por cero.
+
+De manera similar a los errores de sintaxis, casi todas las excepciones de Python integradas tienen un **valor asociado** que indica la causa detallada del error. Las excepciones no son incondicionalmente fatales: más adelante aprenderá a manejarlas.
+
+##### Excepciones más comunes para estudiantes
+
+Quizás, las excepciones más comunes que las personas ven mientras aún están aprendiendo Python son `NameError`, `TypeError`y `ValueError`.
+
+`NameError` generalmente se genera cuando no ha definido su variable antes de usarla o lo ha hecho incorrectamente.
+
+
+
+Recuerde que las variables distinguen entre **mayúsculas y minúsculas** en Python y deben definirse **antes de su uso** .
+
+
+
+Considere este fragmento de código:
+
+```python
+print(a + b)
+a = 0
+b = 5
+```
+
+Causará la siguiente excepción:
+
+```python
+NameError: name 'a' is not defined
+```
+
+El valor asociado a veces le indica el problema exacto, por lo que será muy fácil solucionarlo.
+
+`TypeError` se genera cuando se aplica una operación o función a un objeto de **tipo inadecuado** . El valor asociado es una cadena que proporciona detalles sobre la falta de coincidencia de tipos en particular. Un caso común es cuando intenta realizar cálculos aritméticos en varios tipos de operandos no admitidos:
+
+```python
+print("15" + 2)
+```
+
+Aquí estamos tratando de resumir una cadena y un número entero, lo que provocará una excepción nuevamente:
+
+```python
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+```
+
+`ValueError` se puede generar si está intentando utilizar una variable del tipo correcto, pero con un **valor** inadecuado . Por ejemplo, es el caso cuando intentas hacer un número entero de una cadena, que no tiene un valor entero:
+
+```python
+print(int("five"))
+
+ValueError: invalid literal for int() with base 10: 'five'
+```
+
+Si tiene algún problema para entender cuál es el error, siempre puede copiar y pegar la última línea de un rastreo y buscarlo en Google. Además, se le recomienda encarecidamente que lo haga, ya que el 99% de los problemas que enfrentan los alumnos ya se han resuelto en foros especializados.
+
+##### Resumen
+
+Hemos aprendido los conceptos básicos de las excepciones, por lo que ahora está familiarizado con este concepto y algunas de las excepciones más comunes en Python. He aquí un resumen:
+
+-   Un programa no se compilará y ejecutará si hay **errores de sintaxis** en él.
+-   Por otro lado, las **excepciones** no impiden que un programa se compile y ejecute, pero tan pronto como se ejecuta la línea con una excepción, el programa se bloquea.
+-   Existen ciertas herramientas para manejar excepciones e incluso para generarlas por su cuenta, y pronto aprenderá más al respecto.
+
+# Teoría: Clase
+
+Como ya sabes, **la programación orientada a objetos (POO)** es un paradigma de programación que se basa en el concepto de objetos. Los objetos interactúan entre sí y así es como funciona el programa. Los objetos tienen estados y comportamientos. Muchos objetos pueden tener características similares y si necesita trabajar con ellos en su programa, puede ser más fácil crear una **clase** para objetos similares. Las clases representan la estructura común de objetos similares: sus datos y su comportamiento.
+
+##### Declarar clases
+
+Las clases se declaran con una palabra clave `**class**`y el nombre de la clase:
+
+```python
+# class syntax
+class MyClass:
+    var = ...  # some variable
+
+    def do_smt(self):
+    # some method
+```
+
+Generalmente, el nombre de la clase comienza con una letra mayúscula y suele ser un sustantivo o una frase nominal. Los nombres de las clases siguen la convención de **CapWords** : lo que significa que si es una frase, todas las palabras de la frase se escriben con mayúscula y sin guiones bajos entre ellas.
+
+```python
+# good class name
+class MyClass:
+    ...
+
+# not so good class name:
+class My_class:
+    ...
+```
+
+Las clases le permiten definir los datos y los comportamientos de objetos similares. El comportamiento se describe mediante **métodos.** Un método es similar a una función en que es un bloque de código que tiene un nombre y realiza una determinada acción. Los métodos, sin embargo, no son independientes ya que se definen dentro de una clase. Los datos dentro de las clases se almacenan en los **atributos** (variables) y hay dos tipos de ellos: **atributos de clase** y **atributos de instancia** . La diferencia entre esos dos se explicará a continuación.
+
+##### Atributo de clase
+
+Un atributo de clase es un atributo compartido por todas las instancias de la clase. Consideremos el **libro de** la clase como ejemplo:
+
+```python
+# Book class
+class Book:
+    material = "paper"
+    cover = "paperback"
+    all_books = []
+```
+
+Esta clase tiene una variable de cadena `**material**`con el valor "papel", una variable de cadena `**cover**`con el valor "rústica" y una lista vacía como atributo `**all_books**`. Todas esas variables son atributos de clase y se puede acceder a ellas usando la **notación de puntos** con el nombre de la clase:
+
+```python
+Book.material  # "paper"
+Book.cover  # "paperback"
+Book.all_books  # []
+```
+
+**Los atributos de clase** se definen dentro de la clase pero fuera de cualquier método. Su valor es el mismo para todas las instancias de esa clase, por lo que podría considerarlos como el tipo de valores "predeterminados" para todos los objetos.
+
+En cuanto a las **i** **variables de nstance,** que almacenan los datos únicos para cada objeto de la clase. Se definen dentro de los métodos de la clase, en particular, dentro del `**__init__**`método. En este tema, nos ocuparemos de los atributos de la clase, pero no se preocupe, tendrá mucho tiempo para aprender más sobre los atributos de las instancias.
+
+##### Instancia de clase
+
+Ahora, creemos una instancia de una clase **Book** . Para eso necesitaríamos ejecutar este código:
+
+```python
+# Book instance
+my_book = Book()
+```
+
+Aquí no solo creamos una instancia de una clase **Book** , sino que también la asignamos a la variable `**my_book**`. La sintaxis de instanciar un objeto de clase se parece a la notación de la función: después del nombre de la clase, escribimos paréntesis.
+
+Nuestro `**my_book**`objeto tiene acceso al contenido de la clase **Libro** : sus atributos y métodos.
+
+```python
+print(my_book.material)  # "paper"
+print(my_book.cover)  # "paperback"
+print(my_book.all_books)  # []
+```
+
+##### Resumen
+
+Bueno, esos eran los conceptos básicos de las clases en Python. Las clases representan la estructura común de objetos similares, sus atributos y métodos. Hay atributos de clase y atributos de instancia. Los atributos de clase son comunes a todas las instancias de la clase.
+
+Con todo, las clases son una herramienta extremadamente útil que puede ayudarlo a optimizar su código y organizar el programa de una manera lógica y legible. ¡Esperamos que los utilice!
+
+```python
+# definition of the class
+class House:
+    def __init__(self, con, elevator=True):
+        self.construction = con
+        self.elevator = elevator
+
+# object of the class House
+new_house = House("building")
+
+```
+
