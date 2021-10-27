@@ -700,3 +700,33 @@ if __name__ == '__main__':
 	main()
 ```
 
+# Clase area de triangulo
+
+```python
+
+class RightTriangle:
+    def __init__(self, hyp, leg_1, leg_2):
+        self.hyp = hyp
+        self.leg_1 = leg_1
+        self.leg_2 = leg_2
+        self.area = 0.5 * leg_1 * leg_2
+
+
+input_c, input_a, input_b = [int(x) for x in input().split()]
+right = RightTriangle(input_c, input_a, input_b)
+
+if right.hyp ** 2 == right.leg_1 ** 2 + right.leg_2 ** 2:
+    print(right.area)
+else:
+    print("Not right")
+```
+
+# Tomar la letra segun la posicion
+
+```python
+customer_name = "John Milton"
+
+letra2 = customer_name[0]
+print(letra2)
+```
+
