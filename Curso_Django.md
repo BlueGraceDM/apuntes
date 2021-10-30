@@ -8383,3 +8383,155 @@ Si las clases son una abstracción, una plantilla para objetos similares, una **
 Para crear objetos con diferentes estados iniciales, las clases tienen un constructor `__init__`que nos permite definir los parámetros necesarios. La referencia a una instancia particular dentro de los métodos se realiza mediante la `self`palabra clave. Dentro del `__init__`método, definimos atributos de instancia que son diferentes para todas las instancias.
 
 La mayoría de las veces en nuestros programas no trataremos directamente las clases, sino sus instancias, por lo que saber cómo crearlas y trabajar con ellas es muy importante.
+
+
+
+# Teoría: métodos
+
+Si los atributos definen los datos que tienen los objetos de una clase en particular, los **métodos** definen su comportamiento. Python tiene varios tipos de métodos que puede crear dentro de una clase pero, en este tema, nos centraremos en los métodos de instancia.
+
+##### Sintaxis del método
+
+Los métodos definen la funcionalidad de los objetos que pertenecen a la clase particular. La sintaxis básica se ve así:
+
+```python
+# basic method syntax
+class MyClass:
+    # the constructor
+    def __init__(self, arg1):
+        self.att = arg1
+
+    # custom method
+    def do_smt(self):
+        # does something
+```
+
+Puede ver que declarar un método se parece a declarar una función: tenemos la palabra clave **`def`**seguida del nombre del método. Los parámetros del método están escritos entre paréntesis.
+
+El primer parámetro del método siempre debe ser **`self`**. Puede recordar que `self`representa la instancia particular de la clase. Cuando se trata de métodos de instancia, el primer parámetro que se pasa al método es la instancia que lo llamó. Creemos una instancia de **MyClass** y veamos cómo funciona:
+
+```python
+my_object = MyClass(some_value)
+# calling the instance method
+my_object.do_smt()
+# my_object does something
+```
+
+En este ejemplo, la instancia **my_object** se pasa *implícitamente,* por lo que no escribimos el parámetro en el código. Sin embargo, podemos pasar la instancia explícitamente:
+
+```python
+MyClass.do_smt(my_object)
+# my_object does the same thing
+```
+
+Estos ejemplos ilustran claramente por qué `self`tiene que ser el primer argumento de los métodos de instancia. Si desea que su método tenga otros parámetros, ¡simplemente escríbalos después de la `self`palabra clave!
+
+##### Métodos vs funciones
+
+Aunque son bastante similares, Python hace una distinción entre métodos y funciones. Para citar la documentación oficial, *"un método es una función que 'pertenece' a un objeto".* Como estamos interesados en POO, buscaremos específicamente métodos asociados con instancias de clases.
+
+Consideremos un ejemplo:
+
+```python
+# class and its methods
+class Ship:
+    def __init__(self, name, capacity):
+        self.name = name
+        self.capacity = capacity
+        self.cargo = 0
+
+    def sail(self):
+        print("{} has sailed!".format(self.name))
+
+
+# function
+def sail_function(name):
+    print("{} has sailed!".format(name))
+```
+
+Lo que nos interesa aquí es el método `sail`de la clase `Ship`y la función `sail_function`. Llamémoslos:
+
+```python
+# creating an instance of the class Ship
+# and calling the method sail
+black_pearl = Ship("Black Pearl", 800)
+black_pearl.sail()
+# prints "Black Pearl has sailed!"
+
+
+# calling the function sail_function
+sail_function(black_pearl.name)
+# also prints "Black Pearl has sailed!"
+```
+
+De la forma en que los hemos definido, tanto nuestro método como nuestra función producen los mismos resultados pero de una manera diferente. Un método está conectado a un objeto de la clase, no es independiente como lo es una función. Seguro que ambos son llamados por sus nombres, pero para llamar a un método necesitamos invocar la clase a la que pertenece este método.
+
+##### Regreso
+
+Hasta ahora, el método no ha devuelto ningún valor ya que solo usamos la `print()`función. Obviamente, al igual que con las funciones, podemos definir qué tipo de datos puede devolver el método con la `return`declaración. Por ejemplo, creemos un método que calcule cuántos kilogramos de carga tiene el barco (inicialmente, el peso de la carga se da en toneladas):
+
+```python
+class Ship:
+    # other methods
+    
+    def convert_cargo(self):
+        return self.cargo * 1000
+```
+
+El método es simple: convierte las toneladas en kilogramos (multiplicándolas por 1000) y luego devuelve el valor calculado. Si tuviéramos que llamarlo, no obtendríamos ningún mensaje a menos que imprimiéramos explícitamente el resultado de la función:
+
+```python
+print(black_pearl.convert_cargo())  # 0
+```
+
+Como no hemos cambiado el valor predeterminado del `cargo`atributo, el método devolvería 0 multiplicado por 1000, que también es 0.
+
+##### Resumen
+
+**Los métodos** dentro de las clases especifican el comportamiento de una clase o sus objetos. Son similares a las funciones con la excepción de que están fuertemente conectadas a la clase y no se pueden llamar independientemente de ella o de sus instancias.
+
+El primer parámetro de los métodos de instancia es la palabra clave **`self`** que representa la instancia particular de la clase. Esa instancia particular de la clase es el primer argumento que se pasa al método. Los métodos pueden devolver valores o simplemente imprimir mensajes (es decir, no devolver nada).
+
+Los métodos le permiten agregar cualquier funcionalidad a sus clases. Así es como puedes manipular tus objetos y crear programas complejos, ¡así que te animamos a explorar métodos en tus proyectos!
+
+```python
+class Mountain:
+    def __init__(self, name, height):
+        self.name = name
+        self.height = height
+
+    def convert_height(self):
+        return self.height / 0.3048
+    
+print(Mountain('kg', 3.048).convert_height()) # 10.
+
+### Same
+class Mountain:
+    def __init__(self, name, height):
+        self.name = name
+        self.height = height
+
+    # create convert_height here
+    def convert_height(self):
+        self.height_in_foot = self.height / 0.3048
+        return self.height_in_foot
+```
+
+```python
+my_object.method()
+Class.method(my_object)
+
+class Car:
+    def __init__(self, model):
+        self.model = model
+
+    def drive(self):
+        print("vroom vroom")
+
+my_car = Car("Volkswagen")
+
+
+my_car.drive() 	 ---> my_object.method()
+Car.drive(my_car) ---> Class.method(my_object)
+```
+

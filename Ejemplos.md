@@ -730,3 +730,34 @@ letra2 = customer_name[0]
 print(letra2)
 ```
 
+# Entender el funcionamiento de la funcion simple
+
+```python
+class Student:
+	
+	def __init__(self, name, last_name, birth_year):
+		self.name = name
+		self.last_name = last_name
+		self.birth_year = birth_year
+		# calculate the student_id here
+		self.student_id = f"{name[0]}{last_name}{birth_year}"
+
+
+student = Student(input(), input(), input())
+print(student.student_id)
+```
+
+# Convertidor de metros a pies 
+
+```python
+class Mountain:
+    def __init__(self, name, height):
+        self.name = name
+        self.height = height
+
+    def convert_height(self):
+        return self.height / 0.3048
+    
+print(Mountain('kg', 3.048).convert_height()) # 10.0
+```
+
