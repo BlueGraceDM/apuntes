@@ -761,3 +761,70 @@ class Mountain:
 print(Mountain('kg', 3.048).convert_height()) # 10.0
 ```
 
+# Random
+
+
+
+```python
+import random
+var = ['Mineria','Salud','Tranporte','Comercio']
+x = []
+for cosas in range(12):
+   car = random.choice(var)
+   x.append(car)
+for i in x:
+   print (i)
+```
+
+#Auto rellenar formulario
+
+```python
+# Descargar Chrome driver
+# Crear CSV y revisar bien los campos
+from selenium import webdriver
+import time
+import pandas as pd
+
+rubros_dict = {'Mineria':'//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[2]/div[3]',
+               'Salud':'//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[2]/div[4]',
+               'Transporte':'//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[2]/div[5]',
+               'Comercio':'//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[2]/div[6]'}
+
+sexo_dict = {'Hombre':'//*[@id="i20"]/div[3]/div',
+             'Mujer':'//*[@id="i17"]/div[3]/div'}
+
+#Abrir Chrome
+driver = webdriver.Chrome('chromedriver.exe')
+# Abrir formulario
+driver.get('https://forms.gle/3YJkAk9ZTSp1WEDv5')
+df = pd.read_csv('ejemplo.csv', encoding = 'latin-1')
+for row, datos in df.iterrows():
+   nombre = datos['Nombres']
+   paterno = datos['Apat']
+   materno = datos['Amat']
+   sexo = datos['Sexo']
+   rubro = datos['Rubro']
+   
+   #Abrir Formulario
+   driver.get('https://forms.gle/3YJkAk9ZTSp1WEDv5')
+   
+   time.sleep(1)
+   
+   #Ingresar nombre
+   driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input').send_keys(nombre)
+   #Ingresar Apat
+   driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input').send_keys(paterno)
+   #Ingresar Amat
+   driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input').send_keys(materno)
+   # Ingresar Sexo
+   driver.find_element_by_xpath(sexo_dict[sexo]).click()
+   # Abrir lista de rubros
+   driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div[1]/div[1]/span').click()
+   # Seleccionar rubro
+   time.sleep(3)
+   driver.find_element_by_xpath(rubros_dict[rubro]).click()
+   
+   # Enviar Diccionario
+   time.sleep(2)
+   driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span').click()
+```
