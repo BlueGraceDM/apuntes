@@ -1,4 +1,4 @@
-# Qué harás en esta etapa 1/5: Bienvenido
+# foaoaQué harás en esta etapa 1/5: Bienvenido
 
 Proyecto: [Centro de servicio Hypercar](https://hyperskill.org/projects/85)
 
@@ -8535,3 +8535,864 @@ my_car.drive() 	 ---> my_object.method()
 Car.drive(my_car) ---> Class.method(my_object)
 ```
 
+#### Ejemplo
+
+
+Create a class `Point` that will represent a point in space. Its constructor needs two parameters x*x* and y*y*, the coordinates of a point on the plane. The class should have a method `dist` that takes another instance of `Point` and returns the Euclidean distance between these two points. For `Point(x1, y1)` and `Point(x2, y2)`, calculate the distance according to the formula:
+
+d = sqrt((x~1~ - x~2~)^2^+ (y~1~ - y~2~)^2^)
+
+Have a look at the following example:
+
+```python
+p1 = Point(1.5, 1)
+p2 = Point(1.5, 2)
+
+print(p1.dist(p2))  # 1.0
+```
+
+Just create the class, you won't need to do anything else.
+
+```python
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def dist(self, p2):
+        return ((p2.x - self.x) ** 2 + (p2.y - self.y) ** 2) ** 0.5
+```
+
+
+
+# Teoría: Bibliotecas
+
+Si ya está familiarizado con al menos un lenguaje de programación, sabe que cualquier lenguaje de programación tiene un diseño legible por humanos. La mayoría de ellos usa símbolos de escritura latina para representar funciones, palabras clave y operadores. Sin embargo, no es el lenguaje que la máquina puede entender, por eso usamos intérpretes, compiladores y ensambladores. Entonces, para facilitar el proceso de creación de código máquina, necesitamos una interfaz de alto nivel que nos permita operar con comandos verbales, que serían transformados en 'ceros y unos' por el propio programa.
+
+![img](https://ucarecdn.com/26d464f9-3d04-4ba1-bb4a-c6764d2acb74/)
+
+La misma idea se puede aplicar cuando desee reutilizar código existente que le proporcione funciones y métodos de alto nivel, en lugar de escribirlo usted mismo una vez más. No estamos allí para hablar del tedioso copiar y pegar, sino de la utilidad de las bibliotecas de programación.
+
+
+
+Alto nivel significa que cada función a la que llama organiza el trabajo de bajo nivel para usted. Por ejemplo, alguna función imaginaria `WRITE_DATA`debajo del capó abre un archivo, escribe datos en él y finalmente cierra el archivo.
+
+
+
+##### Que es una biblioteca
+
+Una **biblioteca de programación** es una colección de código reutilizable y redistribuible que tiene una interfaz bien definida para usar.
+
+Una biblioteca le proporciona funciones y métodos de alto nivel. Podemos esperar que una biblioteca tenga documentación para familiarizarse con el comportamiento de la implementación interna. Debe tratar una biblioteca como una caja negra: tiene la documentación de su interfaz, pero no necesita conocer una implementación. Al igual que los lenguajes de programación lo aíslan de trabajar con código de máquina, las bibliotecas lo aíslan de trabajar con operaciones de bajo nivel.
+
+Entonces, ¿qué piensas? ¿Puede una gran pila de funciones incoherentes ser una biblioteca? Por supuesto, ¡pero es poco probable que alguien lo use! Intentemos destacar las principales características que nos parecen importantes en términos de usabilidad. Una buena biblioteca:
+
+- pertenece a un dominio de conocimiento, por ejemplo, leer y escribir en archivos, nada más
+- proporciona la documentación
+- tiene una interfaz clara, donde el nombre de cada objeto refleja su función
+- no contiene código malicioso
+- tiene pruebas
+- sigue el estilo de código del lenguaje de programación
+
+![img](https://ucarecdn.com/28dce5b8-9575-4196-bdb7-569a9ac880a6/)
+
+Ahora sabe cómo saber si una biblioteca que ha elegido está bien escrita. ¿Cómo podemos usarlo exactamente?
+
+##### Bibliotecas estándar y de terceros
+
+Hay varios tipos de bibliotecas, pero ¿dónde puede encontrarlas?
+
+Las implementaciones del lenguaje de programación son el software habitual que puede instalar en su computadora, y la mayoría de las implementaciones vienen con bibliotecas estándar. La **biblioteca estándar** es una colección estable y estandarizada de módulos para las necesidades esenciales del proceso de desarrollo. Por lo general, las bibliotecas estándar constan de utilidades comunes como trabajar con el sistema de archivos, realizar conexiones de red o analizar archivos JSON, y son parte de la especificación del lenguaje de programación.
+
+La biblioteca estándar difícilmente puede cubrir todas sus necesidades. Por ejemplo, es posible que desee crear una aplicación de escritorio o un rastreador web, pero la biblioteca estándar no le brinda herramientas útiles para eso. En este caso, puede buscar en Internet para encontrar una biblioteca de terceros en sitios como [Github](https://github.com/) . Una **biblioteca de terceros** es una colección de módulos de alto nivel, además de la biblioteca estándar de un lenguaje de programación. Esas bibliotecas suelen ser de código abierto.
+
+Para incluir una biblioteca en su programa, debe usar una palabra clave y su nombre. Si usa herramientas de terceros, primero debe revisar la documentación y averiguar cómo puede instalarla en su computadora; los autores de una biblioteca proporcionan esta información en el archivo [README](https://en.wikipedia.org/wiki/README) .
+
+Entonces, ahora puede sentir que ha aprendido todos los conceptos básicos sobre el uso de bibliotecas. Sin embargo, quizás todavía tenga una pregunta: ¿es más eficiente que simplemente escribir código usted mismo? La respuesta es: en muchos casos, sí.
+
+##### Por que usar bibliotecas
+
+Las bibliotecas no son una solución milagrosa para todos los problemas de programación. No todas las bibliotecas son lo suficientemente maduras para ser utilizadas en la producción de código, y algunas de ellas tienen errores. Si el problema es demasiado estrecho, es difícil encontrar una biblioteca para resolverlo, incluso si existe.
+
+Supongamos que existe una biblioteca para su problema. No podemos cubrir todos los casos, pero podemos darte varias razones para usarlo:
+
+- Reduce el tiempo de desarrollo de un producto final. Podemos enfocarnos en implementar la lógica de la aplicación, no en hacer software auxiliar.
+- El desarrollo de una biblioteca está impulsado por la comunidad. Significa que muchas personas apoyan una biblioteca, y puede unirse a ellos si una biblioteca es de código abierto, si lo desea.
+- Si una biblioteca es popular, muchas empresas y programadores la utilizan. Significa que la biblioteca ha sido probada y utilizada por diferentes personas, y es probable que un nuevo desarrollador de su equipo también conozca esta biblioteca.
+- Las bibliotecas tienen documentación. Puede leer un tutorial y comenzar a usar una biblioteca sin aprender sobre la implementación interna.
+
+El objetivo principal de las bibliotecas es evitar que las personas realicen el mismo trabajo dos veces. Puede seguir esta regla y crear su software sin distraerse con otros problemas.
+
+
+
+Si su código usa una biblioteca, siempre puede reemplazar una función de biblioteca con la suya propia sin romper el programa. Tienes el control de lo que quieres usar.
+
+
+
+##### Conclusión
+
+Resumamos lo que hemos aprendido hasta ahora. En esencia, la biblioteca es una compilación de código con una interfaz comprensible hecha para situaciones específicas. Las bibliotecas pueden ser estándar y de terceros. El uso de bibliotecas de terceros en lugar de escribir su propio código puede ser razonable en muchos casos simplemente porque ahorra tiempo y esfuerzo. Además, las bibliotecas populares suelen estar bien probadas y, si son de código abierto, incluso puedes unirte a la comunidad de sus seguidores.
+
+
+
+# Teoría: Frameworks
+
+##### ¿Qué son los frameworks?
+
+Todos los programas son diferentes al igual que los copos de nieve, sin embargo, son las similitudes en el código lo que queremos llamar su atención, o más bien, cómo estas similitudes se pueden utilizar para beneficio del desarrollador. En programación, es una práctica común reutilizar el código empaquetado en bibliotecas para simplificar el desarrollo y evitar cometer los mismos errores una y otra vez. Estas bibliotecas existen para la mayoría de los lenguajes de programación; proporcionan una buena documentación y un código bien probado que utilizan muchas personas.
+
+Las grandes aplicaciones como tiendas de Internet, bancos en línea o redes sociales a menudo necesitan los mismos componentes y funciones típicas, como la autorización del usuario, la interacción con la base de datos, el envío de notificaciones, etc. Para reutilizarlos, los desarrolladores crearon un tipo especial de software llamado **frameworks** para todos los lenguajes de programación populares.
+
+Un **framework** es una pieza de software universal y reutilizable que facilita el desarrollo de aplicaciones típicas o sus partes. Consiste en plantillas de código estructurado y proporciona una funcionalidad genérica que se puede ampliar fácilmente para las necesidades de una aplicación específica. Para renunciar al control de las tareas de bajo nivel y centrarse en los problemas de alto nivel, debe utilizar la API proporcionada por el marco. Puede reducir significativamente el tiempo total de desarrollo.
+
+Algunos marcos son tan grandes que, de hecho, son una unión de diferentes marcos con un solo nombre.
+
+Los marcos son extremadamente útiles y relativamente fáciles de comprender: por ejemplo, el concepto mismo de marcos tiene algunas [analogías con la vida real](https://www.altcademy.com/explain/framework) que harían que la comprensión fuera indolora para todo tipo de estudiantes.
+
+##### Frameworks vs bibliotecas
+
+A primera vista, puede parecer que los marcos y las bibliotecas son muy similares, pero no es del todo cierto.
+
+Las aplicaciones que utilizan marcos se construyen sobre ellos y amplían su código para obtener una funcionalidad específica. En cierto sentido, un marco sirve como el esqueleto de una aplicación o sus partes y establece "las reglas del juego". Una biblioteca, por otro lado, solo proporciona algunas operaciones específicas sin tener una influencia tan global. Esta es la diferencia clave entre marcos y bibliotecas. Sin embargo, las bibliotecas se pueden proporcionar como parte de los marcos.
+
+Por supuesto, no hay escapatoria a las evidentes similitudes entre marcos y bibliotecas. El programador que usa un framework no modifica su código fuente, actuando solo como su usuario.
+
+##### Inversión de control
+
+El principio más común que viene con los marcos es la **inversión de control (IoC)** .
+
+En un marco, a diferencia de las bibliotecas o las aplicaciones de usuario estándar, el flujo de control general del programa no lo dicta la persona que llama, sino el marco. Significa que el marco llama a su código, y no al revés:
+
+![img](https://ucarecdn.com/4636ed85-f9b9-4a56-96d7-ff07909495af/)
+
+Esto sucede porque un marco proporciona plantillas para resolver posibles tareas y la interacción entre las plantillas ha sido definida por los desarrolladores del marco. El usuario de un marco simplemente toma las plantillas y las extiende con código específico de la aplicación.
+
+##### Ventajas y desventajas
+
+Es hora de sopesarlo todo. Para empezar con una nota positiva, el uso de marcos tiene una serie de ventajas importantes:
+
+- Prototipado y desarrollo rápidos;
+- Estandarización de estructuras de proyectos: es más fácil comprender proyectos similares con la misma estructura;
+- Amplio uso en empresas de todo el mundo;
+- Correcciones de errores y actualizaciones de seguridad por parte de los autores;
+- Un esqueleto bien diseñado: como regla, los marcos utilizan prácticas y patrones actualizados para proporcionar un esqueleto firme para las aplicaciones.
+
+A pesar de las ventajas, existen varios inconvenientes comunes:
+
+- La selección de un marco inadecuado puede dificultar la implementación de una aplicación;
+- Ralentización de la aplicación: los frameworks a menudo hacen muchas cosas pesadas ocultas a los programadores;
+- Es difícil reemplazar un marco que ya no es adecuado por otro, mientras que las bibliotecas se pueden reemplazar fácilmente;
+- Puede encontrar un error en el marco que puede afectar su trabajo.
+
+Puede que esta no sea una lista completa de ventajas y desventajas, pero a medida que vaya adquiriendo más práctica con el uso de marcos, los descubrirá por sí mismo.
+
+##### Cómo elegir marcos
+
+Como regla general, cada lenguaje de programación tiene varios marcos para elegir. Por supuesto, si viene a una empresa donde ya se está utilizando algún marco, es posible que no haya otra opción para usted. Pero si tiene una opción, intente tener en cuenta todos los posibles beneficios y problemas al tomar una decisión.
+
+A continuación, se ofrecen algunos consejos generales para elegir un marco adecuado:
+
+- Preste atención a los marcos conocidos con buena documentación. Esto simplificará enormemente el uso y le permitirá encontrar fácilmente desarrolladores que ya estén familiarizados con este marco. Algunos marcos populares incluso se convierten en un **estándar de facto** para desarrollar tipos específicos de aplicaciones. Estos marcos deben considerarse en primer lugar.
+- Si escribe una aplicación pequeña que probablemente nunca cambiará, puede desarrollarla sin marcos. Además, para una aplicación de este tipo, pueden introducir una complejidad adicional innecesaria. Pero también puede considerar el uso de los llamados **marcos ligeros** o elegir un marco solo para algunas partes de su aplicación.
+
+Ésta es información general; como dijimos, los programas son diferentes, al igual que los posibles marcos que existen. La mejor parte es conocer marcos específicos y trabajar con ellos de cerca.
+
+##### Conclusión
+
+Como puede ver, un marco es simplemente una especie de carcasa para toda la aplicación o algunas de sus partes. Los desarrolladores crean una aplicación que necesitan alrededor de esta carcasa. Se refleja en el principio universal de los marcos: "la Inversión del control". Significa que el marco, no usted, llama a su código y bibliotecas.
+
+Entre los importantes beneficios de utilizar frameworks se encuentran, sobre todo, el rápido desarrollo y la estructura estándar y bien diseñada de una aplicación. Sin embargo, no debe olvidarse de posibles fallas como una mala elección del marco para una tarea específica, una posible ralentización de una aplicación y posibles problemas para reemplazar un marco por otro en el futuro.
+
+Cuando elija un marco para una tarea específica, le sugerimos que primero eche un vistazo a los conocidos con buena documentación y para tareas simples: considere marcos más simples y livianos o ningún marco en absoluto.
+
+
+
+# Teoría: el concepto de patrones
+
+##### Diseño de código
+
+Si está leyendo esto, debe estar realmente interesado en la programación. No importa si es un desarrollador experimentado, recién está comenzando su carrera o aún está trabajando en lo básico; lo que realmente importa es que tengas curiosidad, así que bienvenido.
+
+Para empezar, hablemos de **diseño de código \*.\*** En general, el diseño de su código consiste en expresar sus ideas claramente a sus compañeros de equipo, colegas y clientes. Podemos comparar el código con el texto: si coloca las líneas en el orden correcto y deja clara la estructura, será mucho más fácil explicar y comprender el texto más adelante. Desde el punto de vista de la ingeniería, su código está **bien diseñado** si está de acuerdo con las siguientes afirmaciones:
+
+\1) Cuando realiza un pequeño cambio, *no* produce un efecto dominó en ninguna otra parte del código.
+\2) Su código es *fácil* de reutilizar.
+\3) Es *fácil* mantener su código después del lanzamiento.
+
+##### Patrones de diseño
+
+En el desarrollo de aplicaciones, el diseño del código debe **coincidir con el problema** y ser lo suficientemente **general** como para adaptarse a todos los requisitos que puedan surgir en el futuro. Todos intentan encontrar soluciones más elegantes, adecuadas y flexibles que también se puedan **reutilizar** . Aquí es donde entran en juego los **patrones de diseño** : estas son soluciones repetibles a problemas comunes que enfrentan los desarrolladores. ¡Los patrones de diseño incluso tienen nombres! Por ejemplo, si desea limitarse a una sola instancia de una clase, el patrón *Singleton* será la mejor opción; si ve relaciones familiares entre objetos y desea encapsular el proceso de creación, debe usar *AbstractFactory* , etc.
+
+Como regla general, los ejemplos de arquitectura orientada a objetos bien estructurada utilizan mucho los patrones. Cuando se usa un patrón adecuado, nos dice que el desarrollador realmente ha prestado atención a las interacciones típicas entre los elementos del sistema. Como resultado, la arquitectura de una aplicación se vuelve más fácil de entender.
+
+Al ser tan útiles, los patrones de diseño han llegado a las estanterías de muchos programadores: uno de los ejemplos más famosos es el libro *[Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns_(book)) .* Probablemente haya oído hablar de sus autores, "Gang of Four", que con frecuencia se abrevia como "GoF". Hoy en día se considera uno de los libros clásicos sobre diseño y programación de software. Puede consultarlo para profundizar su comprensión o pasar directamente al aprendizaje práctico aquí.
+
+Tenga en cuenta que en este tema solo consideraremos patrones de diseño *orientados a objetos* .
+
+
+
+![img](https://ucarecdn.com/e744e11f-39b7-4f17-ae9d-82ec51812738/)
+
+##### Patrones de diseño de software y conceptos relacionados
+
+Lo bueno de los patrones es que te ayudan a no perder el tiempo reinventando la rueda para que puedas dedicarlo a desarrollar funciones interesantes. La estructura de los patrones de diseño es estricta: describa el problema, la solución, cuándo aplicar la solución y sus consecuencias. Teóricamente, puede combinar algunos patrones y crear su propio *patrón de monstruo* que contenga, por ejemplo, *Builder, Abstract Factory* y *Decorator* simultáneamente. Sin embargo, como verá en los siguientes temas, es mejor evitar estos monstruos porque los patrones ya están bien agrupados para usted. En otras palabras, no se emocione demasiado, es mejor usarlos uno a la vez.
+
+El uso de patrones no requiere ninguna habilidad específica en lenguaje de programación o imaginación llamativa. Los patrones también son independientes del idioma: aunque se pueden implementar de manera diferente en diferentes idiomas, la idea general de cada patrón es común para todos ellos. Eso significa que es posible que hable el lenguaje de la arquitectura con sus colegas incluso si trabajan con diferentes tecnologías.
+
+##### ¿Por qué debería conocer los patrones de diseño?
+
+Aquí hay una lista de razones bastante convincentes para familiarizarse con los patrones de diseño:
+
+- Los patrones proporcionan **plantillas de solución** **probadas y de uso común** para problemas de diseño; ¡no tienes que inventar nada!
+- Los patrones mejoran la **flexibilidad y la** capacidad de **mantenimiento** de los sistemas orientados a objetos, lo que facilita la reacción a los requisitos cambiantes.
+- Los patrones pueden **acelerar el proceso de desarrollo** .
+- Los patrones son un **vocabulario** **universal** que permite a los desarrolladores describir el diseño de un programa utilizando un conjunto de conceptos identificables bien conocidos.
+- Los patrones se **utilizan a menudo en bibliotecas y marcos estándar** .
+- Puede encontrar patrones en los códigos fuente de muchas aplicaciones y **comprender rápidamente cómo funcionan** , en lugar de leer miles de líneas de código.
+
+##### Advertencias
+
+Para lograr flexibilidad, los patrones de diseño suelen introducir niveles adicionales de indirecta, que en algunos casos pueden complicar los diseños resultantes y perjudicar el rendimiento de la aplicación. En otras palabras, aunque se supone que los patrones le facilitan las cosas, también pueden convertirse en una complicación innecesaria si se aplican de manera imprudente. Los desarrolladores principiantes pueden intentar aplicar patrones en todas partes, incluso en situaciones en las que un código más simple funcionaría bien. [Mire](https://taskinoor.wordpress.com/2011/09/21/the-abuse-of-design-patterns-in-writing-a-hello-world-program/) cómo los patrones de diseño pueden complicar incluso el programa más simple de "Hola, mundo".
+
+Para evitar un mal uso de los patrones, debe aplicarlos con prudencia y ser capaz de adaptarlos correctamente a su problema y lenguaje.
+
+##### Conclusión
+
+Cuando domines los principios de trabajar con patrones de modo que después de aplicarlos con éxito grites "¡Eureka!" sin ninguna duda en sus pensamientos, su percepción de la programación orientada a objetos probablemente cambiará de una vez por todas. En los siguientes temas, aprenderá acerca de los patrones de diseño **creacionales** , **estructurales** y de **comportamiento** . Esté concentrado y atento: estos asuntos están bastante avanzados. ¡Feliz codificación!
+
+
+
+# Teoría: IDE
+
+Escribir un solo programa implica una gran variedad de tareas: usted escribe el código, encuentra y corrige los errores que surgen inevitablemente, luego el código tiene que ser compilado, ejecutado y documentado. Y adivinen qué, todo esto tiene que hacerse una y otra vez (bueno, eso es genial). Con programas pequeños como **Hello World** , puede realizar estas tareas utilizando un editor de texto simple para escribir su código fuente y un conjunto de herramientas para traducir e iniciar los programas. Algunos editores de texto pueden incluso resaltar la sintaxis, lo que simplifica el proceso de escritura, pero esto puede no ser suficiente para trabajar en algo más grande y complejo.
+
+Como desarrollador profesional, necesita una herramienta especializada para navegar a través de sus programas de archivos múltiples, modificarlos, compilarlos, ejecutarlos y depurarlos, mostrar errores de sintaxis, etc. Un **entorno de desarrollo integrado (IDE)** es precisamente eso: ofrece un único programa en el que los desarrolladores pueden hacer frente a todas estas tareas comunes.
+
+##### Breve trasfondo histórico
+
+La mayoría de los IDE modernos son gráficos, aunque los primeros se usaron en la época en que nadie soñaba con gráficos. Se construyeron en una interfaz basada en texto y solo se podían operar usando teclas de función y teclas de acceso rápido para invocar varias funciones. Este fue, por ejemplo, Turbo Pascal, creado por Borland:
+
+![img](https://ucarecdn.com/caef137d-7e91-4b99-ac7a-3604ec73cb28/)
+
+Los primeros IDE fueron diseñados para ser operados a través de una consola o terminal, que eran nuevos en sí mismos. De hecho, antes de eso, los programas generalmente se creaban en papel y se ingresaban en la máquina utilizando medios de papel preparados previamente, como tarjetas perforadas o cintas perforadas.
+
+A continuación se muestran algunos ejemplos históricos específicos. Dartmouth BASIC fue el primer lenguaje diseñado para ejecutarse en una consola o terminal. Este antiguo IDE estaba controlado por comandos, ni siquiera mediante menús y teclas de acceso rápido. Sin embargo, le permitió editar código fuente, administrar archivos, compilar, depurar y ejecutar programas de una manera fundamentalmente similar a los IDE modernos.
+
+Luego llegó el momento de Maestro I. Era un producto de Softlab Munich que fue el primer entorno de desarrollo integrado para software del mundo. ¿Puede creer que ocupó una posición de liderazgo en su nicho durante casi veinte años? Hoy, sin embargo, el Maestro I pertenece a la historia.
+
+Como puede ver, la humanidad no llegó inmediatamente a IDE multifuncionales.
+
+##### ¿Qué es un IDE moderno?
+
+Los IDE se crearon para maximizar la productividad del programador a través de componentes estrechamente acoplados con interfaces de usuario simples. Esto permite al desarrollador realizar menos pasos para cambiar entre diferentes modos, a diferencia de los programas de desarrollo discretos. Sin embargo, los IDE gráficos modernos son un paquete de software complejo. Es decir, se puede lograr la aceleración necesaria del proceso de trabajo solo después del entrenamiento. De todos modos, aquí tampoco hay grandes dificultades: muchos IDE son bastante interactivos y las interfaces de diferentes fabricantes suelen ser muy similares, por lo que no es demasiado difícil cambiar de un IDE a otro.
+
+Hay muchos IDE para diferentes lenguajes de programación. Algunos admiten solo un idioma, mientras que otros admiten varios o se pueden ampliar con complementos. Por ejemplo, los IDE que admiten varios idiomas son [IntelliJ IDEA](https://www.jetbrains.com/help/idea/installation-guide.html) , [Eclipse](https://www.eclipse.org/downloads/packages/installer) , [NetBeans](https://netbeans.apache.org/download/index.html) , [Android Studio](https://developer.android.com/studio) , [Visual Studio Code](https://code.visualstudio.com/) . Los IDE para un lenguaje de programación específico son [Delphi](https://www.embarcadero.com/products/delphi/starter/free-download/thank-you) , [Dev-C ++](https://sourceforge.net/projects/orwelldevcpp/) , [IDLE para Python](https://en.wikipedia.org/wiki/IDLE) , [PyCharm](https://www.jetbrains.com/pycharm/download/#section=windows) .
+
+Como ejemplo, así es como se ve IntelliJ IDEA IDE:
+
+![img](https://ucarecdn.com/d89df081-4394-4d6d-8393-e51ac8ac7c39/)
+
+Todos estos entornos se pueden ejecutar en Windows, Mac OS o GNU / Linux.
+
+##### Componentes IDE
+
+En general, el entorno de desarrollo incluye:
+
+1. Un **editor de texto** , que está diseñado para trabajar con archivos de texto de forma interactiva. Le permite ver el contenido de los archivos de texto y realizar varias acciones como insertar, eliminar y copiar texto, búsqueda contextual, reemplazo, clasificación de cadenas, visualización de códigos de caracteres y conversión de codificaciones, impresión. A menudo contienen funciones adicionales, como el resaltado de sintaxis.
+2. Un **traductor (compilador y / o intérprete)** *,* que traduce un texto escrito en un lenguaje de programación a código de máquina y lo hace inmediatamente antes de iniciar el programa (compilación) o línea por línea (interpretación).
+3. **Cree herramientas de automatización** que preparen el código y lo junten todo.
+4. Un **depurador** *,* que busca errores en el código y los informa de inmediato.
+
+![img](https://ucarecdn.com/2d6c0b56-cc75-4ec0-b4f2-90ab3e72f46a/)
+
+
+
+En general, el uso de un IDE lo convierte en un desarrollador más productivo porque proporciona componentes muy unidos con una interfaz de usuario similar. También automatiza algunas tareas de rutina e incluso le brinda consejos y comentarios. Eso es todo porque el propósito del entorno integrado es combinar varias utilidades en un solo producto. Este enfoque permite a los desarrolladores concentrarse en resolver sus problemas centrales, mientras que un IDE se encarga de las operaciones comunes y estándar.
+
+##### Conclusión
+
+Para resumir,
+
+- un IDE es una herramienta especializada que navega a través de sus programas de archivos múltiples, los modifica, compila, ejecuta, depura y también muestra errores de sintaxis;
+- Los IDE modernos son gráficos e interactivos;
+- algunos IDE admiten solo un idioma, mientras que otros admiten varios idiomas.
+
+
+
+# Teoría: conceptos básicos de PyCharm
+
+Cuando comienzas a programar, elegir el IDE correcto puede ser complicado. Le **recomendamos que** utilice **PyCharm** , uno de los IDE de Python más potentes desarrollados por **JetBrains** . Tiene una interfaz muy fácil de usar y proporciona una variedad de funciones útiles como finalización automática de código, indexación de proyectos, administración de paquetes, etc.
+
+También sugerimos **PyCharm Community Edition** (disponible en nuestro sitio web): es gratis y lo suficientemente potente como para escribir programas bastante grandes. Si desea obtener más información sobre PyCharm, puede visitar la [página web oficial de PyCharm](https://www.jetbrains.com/pycharm) . También puede encontrar la guía para la [instalación de PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html?section=Windows) .
+
+##### El primer proyecto en PyCharm
+
+Ahora vamos a escribir su primer script ' *Hello, World* ' usando PyCharm Community. Suponemos que ya lo ha instalado en su computadora.
+
+\1. Cuando abra PyCharm por primera vez, se le ofrecerán algunas opciones de configuración. Siéntete libre de experimentar, puedes cambiarlos cuando quieras. Elija el tema de la interfaz de usuario que más le guste **:**
+
+![img](https://ucarecdn.com/9f8e9971-5f9c-4a87-8868-5c49399cc761/)
+
+\2. Se le ofrecerán algunos complementos para instalar. Realmente no los necesita por ahora, pero debe saber que PyCharm se puede personalizar fácilmente. Siempre puede instalar nuevos complementos en *Configuración |* *Complementos* .
+
+![img](https://ucarecdn.com/b8a8860a-d9f3-40c0-9b48-c4763ec40740/)
+
+\3. Una vez realizada la personalización, puede **crear un nuevo proyecto** , **abrir** uno existente o **verificar** desde cualquier sistema de control de versiones como Git o Bitbucket. Si recién está comenzando y no tiene ningún proyecto existente, simplemente presione el botón *'Crear nuevo proyecto'* .
+
+![img](https://ucarecdn.com/7cf0dc90-a2c6-441c-80b8-9515114e4415/)
+
+
+
+\4. Elija la ruta para su proyecto futuro, donde se almacenarán todos los archivos del proyecto. Para fines educativos, el nombre del proyecto será " *FirstProject* ". Tiene un menú desplegable: *Project Interpreter: New Virtualenv environment.* Significa que su proyecto se creará con una nueva configuración predeterminada. Significa que estará aislado de otros proyectos. Profundicemos un poco más en ello.
+
+Imagina que tienes 3 proyectos, cada uno escrito en una versión diferente de Python: 2.7; 3,5; 3.7. También pueden tener instalados diferentes **conjuntos de bibliotecas** . Para evitar conflictos y hacer más claro el proceso de desarrollo, creamos todos los proyectos en diferentes carpetas con diferentes intérpretes. Por ahora, podemos continuar con el botón " *Crear* ", pero echemos un vistazo a la configuración del intérprete.
+
+![img](https://ucarecdn.com/1d52e291-bb61-4f00-aece-d8d3005333c6/)
+
+\5. La primera opción es la ruta a un nuevo **entorno virtual** . Este es un entorno virtual, una distribución Python “cuasi” aislada con sus propias bibliotecas disponibles y el administrador de paquetes integrado de Python, que le permite instalar bibliotecas externas. El menú desplegable del intérprete base indica la ruta al *Python real* , que descarga e instala en su computadora.
+
+Supongamos que ha descargado Python 2.7 y lo ha instalado en *C: /python2.7* y Python 3.7 - *C: /python3.7* **.**
+
+Ahora, si desea crear un nuevo proyecto en Python 2.7, elegirá *C: /python2.7/python.exe* como intérprete base para este proyecto. En caso de que desee iniciar un nuevo proyecto en *Python 3.7* , elegirá *C: /python3.7/python.exe* como intérprete base para un proyecto, escrito en *Python 3.7* **.**
+
+Cada uno de estos proyectos tendrá sus propias **dependencias** : las bibliotecas disponibles (o requeridas) para un proyecto específico.
+
+![img](https://ucarecdn.com/52bcdf45-b9e6-4428-8894-ca758b439ec4/)
+
+\6. Al abrir el **directorio raíz** , verá otra carpeta: su nuevo entorno virtual, que contiene todas las configuraciones de Python para este proyecto. La configuración incluye bibliotecas y la versión de Python.
+
+![img](https://ucarecdn.com/c68cebc8-92f4-49ee-9b18-f64dd9960616/)
+
+##### Capacidades de PyCharm
+
+Hemos creado el marco para nuestro proyecto, pero todavía no tenemos un lugar donde podamos escribir nuestro código. Para crear un nuevo archivo Python en su proyecto, puede ir a *Archivo | Nuevo | Python* , o haga clic con el botón derecho en *FirstProject | Nuevo | Archivo de Python* . Ingrese el nombre y presione *OK* .
+
+![img](https://ucarecdn.com/986c2f06-315e-4aa4-8643-af7aaadcaf19/)
+
+Esto creará un nuevo archivo *.py* en la carpeta de su proyecto:
+
+![img](https://ucarecdn.com/d9606b21-eb2a-47e5-9516-c99e62908ca1/)
+
+
+
+Ahora finalmente puede escribir las líneas que deseaba:
+
+```python
+print("Hello, world!")
+```
+
+Para ejecutar el programa en PyCharm, puede hacer clic derecho en el archivo *.py* y presionar **Ejecutar** o usar los accesos directos. Para saber más sobre los accesos directos de PyCharm, puede consultar la [sección Accesos directos](https://www.jetbrains.com/help/pycharm/mastering-keyboard-shortcuts.html) en el sitio web oficial. Puede elegir su sistema operativo en la esquina superior derecha:
+
+![img](https://ucarecdn.com/d6b6daec-11fe-4bdc-8cfb-dffd3339c17c/)
+
+Después de ejecutar un archivo específico por primera vez, PyCharm lo recordará, por lo que puede volver a ejecutar el programa haciendo clic en el botón verde Reproducir en la esquina superior izquierda:
+
+![img](https://ucarecdn.com/a7aca908-38b1-4ca6-969b-325d8dc7c664/)
+
+
+
+Si no tiene el botón Reproducir, vaya a **Ver → Apariencia** y marque la **Barra de herramientas.**
+
+Cuando se ejecuta el programa, el resultado aparecerá en la **ventana Ejecutar herramienta** en la parte inferior de la pantalla:
+
+![img](https://ucarecdn.com/174831ba-3137-4bc9-9ca7-99bd26a9a76f/)
+
+
+
+La primera línea muestra la ruta al intérprete del proyecto y la ruta al programa que ha sido ejecutado por este intérprete. Seguirá el resultado de la ejecución de su programa. Si necesita información más detallada sobre PyCharm, siempre puede consultar el [tutorial oficial](https://www.jetbrains.com/help/pycharm/creating-and-running-your-first-python-project.html) .
+
+##### Configuración de PyCharm
+
+PyCharm es un IDE muy personalizable. Intente ir a *Archivo |* *Configuraciones* . Allí notará que hay muchas secciones. Por ejemplo, es posible que desee cambiar el tema de PyCharm. Usamos *Darcula* . Para encontrar la configuración específica, puede utilizar el cuadro de búsqueda, como se muestra a continuación:
+
+
+
+![img](https://ucarecdn.com/473a1e43-2252-431f-84ee-048658379c11/)
+
+
+
+PyCharm es un IDE muy intuitivo y potente, y también tiene una edición comunitaria gratuita.
+
+##### Algunos otros IDE con los que puede trabajar
+
+PyCharm Community no es el único IDE con el que puede trabajar si desea completar los proyectos en nuestro sitio web.
+
+Primero, veamos la variedad de PyCharms. Además de la versión comunitaria, hay otras dos ediciones: **Educativa** y **Profesional** .
+
+\1) La edición profesional es compatible con muchos otros lenguajes de programación como JavaScript y HTML para desarrollo web, soporte de bases de datos y muchas características que puede necesitar una vez que se convierta en un profesional. ¡Puede obtener una [prueba gratuita](https://www.jetbrains.com/pycharm/download/) en el sitio web oficial para probar esta edición!
+
+\2) [La edición educativa](https://www.jetbrains.com/education/#lang=python&role=learner) se basa en la Community Edition e incluye todas las funciones, pero tiene varias diferencias significativas:
+
+- La versión Edu tiene un diseño ligero con elementos ocultos que no son necesarios en los primeros pasos.
+- No necesita instalar nada más que PyCharm Edu. Todos los demás elementos se instalarán automáticamente.
+
+Otra forma de trabajar con Python es instalar **el complemento IntelliJ IDEA** que copia [todas las capacidades de PyCharm](https://www.jetbrains.com/idea/features/editions_comparison_matrix.html) . Si ya tiene IDEA instalado, es la forma más rápida de comenzar a codificar en Python. Tenga en cuenta que IDEA se desarrolló inicialmente para usuarios de Java, por lo que algunas herramientas pueden ser inconvenientes para una persona que está estudiando Python.
+
+Realmente no importa por dónde empieces después de todo. ¡Puedes probarlos todos y encontrar el que más te convenga!
+
+##### Conclusión
+
+En este tema, descubrimos:
+
+- cómo iniciar un nuevo proyecto en PyCharm Community.
+- un poco sobre el entorno virtual y las versiones de Python.
+- cómo crear archivos en proyectos PyCharm.
+- algunos atajos que facilitan mucho la vida del desarrollador
+- cómo navegar a través de PyCharm, encontrar la configuración necesaria y ejecutar archivos.
+- las alternativas a PyCharm Community
+
+¡Adquirir esta información es uno de los pasos más importantes en el desafiante camino para convertirse en un verdadero desarrollador!
+
+# Teoría: World Wide Web
+
+##### ¿Qué es la Web?
+
+¿Alguna vez te has preguntado qué imágenes aparecerán en la cabeza de las generaciones futuras cuando se trate de la era en la que vivimos ahora? Es probable que el siglo XXI genere asociaciones con la llegada de **Internet** y la **World Wide Web** . Su creación provocó cambios importantes no solo en las estructuras militares y científicas, sino también en la vida de la gente común, brindándonos oportunidades que antes solo podían imaginarse.
+
+Con tanta frecuencia escuchas frases como "La World Wide Web se ha apoderado de nuestro planeta", que la definición de la Web es naturalmente asumida de antemano y se da por sentada. Pero realmente, ¿qué es esta Web y por qué es tan global?
+
+La **World Wide Web** es una colección de recursos de información esparcidos por todo el mundo y vinculados entre sí por referencia. A veces, este término se abrevia a **WWW** , **W3** o simplemente **Web** .
+
+![img](https://ucarecdn.com/72171d72-bd6a-4078-9939-d0bf9a9953a5/)
+
+La Web a veces también se llama irónicamente Wild Wild Web por analogía con el título de la película Wild Wild West: ahora que lo pienso, el parecido es innegable.
+
+Una unidad de datos de hipertexto en el W3 se llama **página web** . Una página web puede contener texto, archivos multimedia, gráficos y enlaces a otras páginas.
+
+![img](https://ucarecdn.com/f3c8632e-1efb-4d39-8158-b49ac9990728/)
+
+Un grupo de páginas web que comparten un tema de contenido común, un diseño y enlaces entre sí se denomina **sitio web** . Programas especiales - **navegadores** - se utilizan para la descarga y navegan por estos sitios web. Navegadores más populares: Firefox, Chrome, Opera, Safari.
+
+A menudo, cuando visita sitios, puede ver "www" en la barra de direcciones del navegador:
+
+![img](https://ucarecdn.com/65b749d1-8287-4a0c-93cf-711ae7869f35/-/crop/345x70/0,0/-/preview/)
+
+Este prefijo indica que la dirección del sitio web pertenece al espacio de Internet de la World Wide Web y no es obligatoria.
+
+##### La historia de la Web
+
+La World Wide Web se creó en la Organización Europea de Energía Nuclear (CERN). El desarrollo de la red informática interna fue realizado por el científico Tim Berners-Lee. En 1989, fue el primero en sugerir la idea de un sistema de gestión de información que utiliza enlaces para consolidar documentos en la red. Él y sus colegas crearon un proyecto prototipo y lo lanzaron para su presentación. Los primeros años de las páginas web se basaron puramente en texto hasta que se introdujo el primer navegador de gráficos NCSA Mosaic en 1993. El evento permitió que la World Wide Web se transformara de investigación científica en un medio de comunicación.
+
+Inicialmente, Internet solo permitía a los usuarios buscar y leer información. Este período de tiempo se denomina condicionalmente **Web 1.0** (1990-2000) para proporcionar una presentación general del entorno de Internet en constante cambio.
+
+Pronto, las personas pudieron interactuar entre sí y compartir su contenido. Este período se denomina extraoficialmente **Web 2.0** (2000-2010).
+
+El desarrollo de la World Wide Web continúa hasta el día de hoy y podremos ver qué cambios traerá la **Web 3.0** (2010-2020). Actualmente, Web 3.0 tiene como objetivo mejorar el análisis de contenido y proporcionar resultados de búsqueda más rápidos y relevantes utilizando inteligencia artificial.
+
+##### Internet vs WWW
+
+La mayoría de la gente usa los términos "Internet" y "WWW" indistintamente, pero de hecho, se trata de dos nociones distintas. La **Internet** es una red informática mundial, es decir, una infraestructura técnica que conecta a millones de ordenadores en todo el mundo. Si W3 se utiliza para distribuir datos que contienen enlaces a otros datos, Internet conecta las computadoras entre sí para proporcionar acceso a la información.
+
+![img](https://ucarecdn.com/185a4c31-0242-4b4c-989b-2d534f33fa64/)
+
+En pocas palabras, WWW es una forma de obtener información a través de Internet, pero Internet también se utiliza para acceder a información que no forma parte de la Web.
+
+Ahora comprende que la World Wide Web e Internet en realidad significan cosas diferentes. Más importante aún, ahora puede demostrar sus conocimientos y explicar esta diferencia a sus amigos.
+
+# Teoría: Protocolo de transferencia de hipertexto
+
+##### Que es HTTP
+
+Siempre que decidas ver las fotos de tus amigos en las redes sociales o dejarles un mensaje, ver un video divertido con gatitos, o encontrar el significado de un término desconocido en el buscador, el dispositivo (cliente) desde el que navegas por Internet. envía una solicitud al servidor y recibe una respuesta de este.
+
+Un **cliente** es un cliente de un servicio y un **servidor** es una computadora que sirve a los usuarios u otras computadoras. Puede ubicarse de forma remota, a decenas de miles de kilómetros de usted. La tecnología en la que la carga de la red se distribuye entre servidores y clientes del servicio se denomina **Arquitectura Cliente-Servidor** .
+
+![img](https://ucarecdn.com/2c6c7f1b-242f-4bc6-86bd-933ac84b3ef2/)
+
+El intercambio de datos entre el cliente y el servidor se realiza mediante **HTTP** . HTTP significa **Protocolo de transferencia de hipertexto** . Un **protocolo** es un conjunto de reglas y convenciones que define una forma uniforme de intercambiar datos entre diferentes programas y manejar errores. Un **protocolo** es un conjunto de reglas específicas mediante las cuales los programas o dispositivos se comunican entre sí. Como un camarero en un restaurante, acepta sus solicitudes, las lleva al servidor para su procesamiento y luego regresa a usted con una respuesta.
+
+##### Historial HTTP breve
+
+HTTP fue desarrollado por un científico y empleado del CERN, *Tim Berners-Lee* , el ideólogo de la World Wide Web.
+
+El trabajo en el protocolo continuó durante dos años y, en marzo de 1991, HTTP se utilizó como tecnología para ayudar a acceder a documentos en Internet y facilitar la navegación por hipertexto. Esta fue la versión 0.9 del Protocolo. Fue diseñado para optimizar la comunicación entre el cliente y el servidor en la red. Después de la aparición del estándar HTTP / 0.9, apareció una separación de funciones entre el cliente y el servidor durante su interacción.
+
+Actualmente, la versión más reciente del Protocolo es **HTTP / 2.0** , lanzada en 2015. Antes de eso, HTTP / 1.1 (lanzado en 1999) se utilizó durante dieciséis años. Este estándar satisfizo a todos durante muchos años debido a sus innovaciones: con la llegada de HTTP / 1.1, la transferencia de solicitudes de cliente a servidor se aceleró enormemente.
+
+No todos los sitios han cambiado a HTTP / 2 todavía, pero los navegadores admiten tanto los estándares nuevos como los antiguos.
+
+##### ¿Qué es HTTPS?
+
+A pesar de la gran funcionalidad y popularidad de HTTP, existe un inconveniente: los datos se transmiten de forma no segura. Esta falla puede ser crítica cuando se trata de pagar compras a través de Internet o enviar datos de pasaporte: ningún usuario quiere que se filtre su información confidencial.
+
+Para hacer el espacio de Internet más seguro, los programadores decidieron desarrollar un complemento a través de HTTP, que ayuda a evitar la interceptación de datos mediante cifrado. La extensión HTTP se llama **HTTPS** y significa **Protocolo de transferencia de hipertexto seguro** .
+
+HTTPS proporciona una conexión segura entre el navegador del usuario y el servidor web. A menudo, la ventana del navegador muestra una barra de direcciones verde o un candado que indica la transferencia de datos cifrados. También puede consultar la barra de direcciones de su navegador web para ver si tiene una conexión segura. Debe comenzar con " *https: //* ".
+
+![img](https://ucarecdn.com/a8ea33a1-a461-4051-9b16-1f636219e082/)
+
+Todos los navegadores modernos admiten HTTPS. Los usuarios de Internet no necesitan configurar esta extensión por separado: se habilita automáticamente si es necesario.
+
+
+
+En el momento actual, los navegadores más populares como Chrome, Firefox, Safari y Edge marcan todas las conexiones a través de HTTP como inseguras.
+
+
+
+##### Conclusión
+
+En resumen, HyperText Transfer Protocol es una colección de regulaciones que hace posible el intercambio de datos entre el cliente y el servidor en la red. La última versión del protocolo es HTTP / 2.0, pero la versión anterior, HTTP / 1.1, todavía está en uso. Una extensión del protocolo HTTPS agregó cifrado a la transferencia de datos y aumentó la seguridad de las transmisiones.
+
+
+
+# Teoría: URL HTTP
+
+Imagine que todos los archivos de Internet están ubicados en una megalópolis, cada uno de ellos tiene la suerte de vivir en su propia casa. Dada la escala de Internet, en el asentamiento resultante habrá una cantidad inimaginable de cuadras y calles. Por ejemplo, un artículo interesante, que quieres compartir con tu amigo, vive en una de las casas. ¿Cómo explica dónde encontrar exactamente el artículo? Así es, debe crear un estándar único mediante el cual pueda nombrar todas las direcciones de la ciudad, y luego darle a su amigo el nombre de la calle y el número de la casa, ¡como en una ciudad real!
+
+Todos los documentos en Internet tienen una dirección personal. Por ejemplo, la URL del sitio web de JetBrains se ve así:
+
+```http
+https://www.jetbrains.com/
+```
+
+Las páginas web, las imágenes, los videos y otros documentos que se pueden almacenar en su computadora también tienen direcciones. Para que tengan el mismo aspecto en Internet, en 1990 los creadores de la World Wide Web desarrollaron un estándar especial que define cómo deberían verse las direcciones. Ese estándar se llama **URL,** que significa **Localizador de recursos uniforme** . Representa la forma estandarizada de registrar direcciones de archivos en Internet.
+
+El estándar tiene una característica específica: no todos los caracteres se pueden usar en las URL. La lista de caracteres permitidos incluye:
+
+- Alfabeto latino (o símbolos del alfabeto inglés);
+- Alfabeto cirílico;
+- Números;
+- Caracteres reservados con significado especial `!#$&'()*+,/:;=?@[]`;
+- Los caracteres no reservados: `-_.~`.
+
+##### Estructura básica de la URL
+
+A continuación, se muestra un ejemplo de una dirección URL:
+
+![img](https://ucarecdn.com/7d04d125-281b-46f9-8651-cdfd78fb9e2c/)
+
+La dirección URL tiene una cierta estructura basada en la siguiente plantilla:
+
+```http
+<protocol>://<login>:<password>@<host>:<port>/<path>?<request parameters>#<anchor>
+```
+
+Ahora veamos esta plantilla con más detalle:
+
+- `<protocol>`es una forma de intercambiar datos con un recurso. Probablemente esté más familiarizado con los protocolos HTTP y HTTPS, pero hay otros;
+- `<login>` y son prefijos que transmiten datos de autenticación para algunos protocolos, si es necesario; `<password>`
+- `<host>`es el nombre de dominio o la dirección IP donde se encuentra el sitio. **Dominio** es el nombre del sitio, IP es su dirección en una red;
+- `<port>`es necesario para la conexión dentro del host especificado. El puerto oficial para las conexiones HTTP es 80, y la alternativa es 8080, pero también es posible utilizar cualquier otro puerto. La configuración predeterminada para HTTPS es 443;
+- `<path>` indica la dirección exacta de un archivo o página en particular dentro de un dominio;
+- `<request parameters>`son parámetros transmitidos al servidor. Dependiendo de los parámetros de la solicitud, el sitio puede cambiar ligeramente su visualización. Por ejemplo, es posible ordenar los elementos de una lista en un orden diferente;
+- `<anchor>` le permite conectarse a una parte específica de una página web o documento.
+
+Esta es la estructura general de cualquier URL. La mayoría de las veces, al acceder a páginas web y documentos ubicados en un servidor web, la mayoría de los parámetros no son obligatorios y se configuran automáticamente.
+
+Cuando solo desea ver una página en particular en Internet con su navegador, la plantilla de URL parece mucho más fácil:
+
+```http
+<protocol>://<host>
+```
+
+Por ejemplo, se puede registrar en un formulario:
+
+```http
+https://www.google.com
+```
+
+Esta simplificación se creó para facilitar la vida de los usuarios habituales de Internet, pero la mayoría de los programadores necesitan conocer la plantilla completa, y ahora tú sí.
+
+##### URL absolutas y relativas
+
+Como sabemos, una URL consta de varias partes y, cuando navega por el mismo sitio, algunos elementos permanecen iguales. Cualquiera que sea el IDE sobre el que desee leer en JetBrains, el protocolo y las partes de host de una URL siempre coinciden con [https://www.jetbrains.com](https://www.jetbrains.com/pycharm/) . Por ejemplo, veamos estos enlaces:
+
+- https://www.jetbrains.com/pycharm/ acerca de PyCharm
+- https://www.jetbrains.com/go/ acerca de GoLand
+- https://www.jetbrains.com/idea/ acerca de IntelliJ IDEA
+
+La nueva información en cada enlace es su `<path>`. Existe otra forma de ubicar recursos en el mismo sitio por solo `<path>?<request parameters>#<anchor>`. La URL completa se conoce como **absoluta** y llamamos **relativa a** su contraparte más corta.
+
+
+
+Debe recordar que solo funcionaría en el mismo sitio, mientras que no puede referirse a otro sitio por una ruta relativa. Cada vez que siga el enlace con una URL relativa, se expandirá a absoluto, donde todas las partes, incluido todo, desde el protocolo hasta el puerto, coincidirán con el recurso que está utilizando esta vez.
+
+
+
+Sabemos que mediante URL absolutas podemos encontrar fácilmente el recurso a través de Internet, pero ¿por qué necesitamos rutas relativas, ya que de todos modos se transformarán en absolutas? Estas son las principales razones para ello:
+
+- Son cortos.
+- Podemos mover fácilmente el sitio a otro host.
+- Son un poco más rápidos de recuperar mediante un navegador.
+
+##### Conclusión
+
+Resumamos lo que ha aprendido sobre las URL en este tema:
+
+- Podemos localizar cualquier recurso en Internet a través de una URL.
+- Cada URL consta de varias partes, pero algunas de ellas son opcionales.
+- Podemos recuperar recursos mediante una URL absoluta y luego navegar por ellos a través de rutas relativas.
+
+
+
+## Teoría: mensajes HTTP
+
+El protocolo HTTP se basa en la arquitectura "cliente-servidor" que se construye sobre la base de la mensajería. Los mensajes HTTP son una forma de intercambiar datos entre clientes y servidores en la Web. Hay dos tipos de mensajes: **solicitudes** y **respuestas** .
+
+Una **solicitud** es una operación que un cliente desea realizar en el servidor y una **respuesta** es una respuesta del servidor a una solicitud entrante. Por lo general, los programadores no necesitan preocuparse por la creación de mensajes HTTP, ya que son producidos por navegadores, aplicaciones y servidores web.
+
+##### El formato de los mensajes
+
+En el protocolo HTTP, todos los mensajes constan de cadenas de texto. Tanto las solicitudes como las respuestas tienen aproximadamente el mismo formato estandarizado:
+
+1. Línea de salida
+
+    que puede variar:
+
+   - para las solicitudes, indica el tipo de solicitud ( **método** ) y la URL a donde enviarla ( **destino** );
+   - para las respuestas, contiene un código de estado para determinar el éxito de la operación.
+
+2. **Encabezados** que describen el mensaje y transmiten varios parámetros.
+
+3. **Cuerpo** en el que se encuentran los datos del mensaje.
+
+La **línea de salida** y el **encabezado** son atributos obligatorios, por lo que las otras partes pueden estar vacías.
+
+El formato completo puede ser bastante complicado para los principiantes, por lo que hemos considerado solo su parte, que es la más importante para comprender los principios generales.
+
+##### La interacción HTTP simplificada
+
+A continuación, se muestra una interacción HTTP simplificada entre un cliente de navegador y un servidor. El cliente y el servidor interactúan a través de solicitudes y respuestas que siguen el formato estudiado:
+
+![img](https://ucarecdn.com/2db1fbaa-3aa7-4117-acd9-5f1c7f01bd10/)
+
+
+
+Tenga en cuenta que existen otros tipos posibles de programas cliente, no solo un navegador. Incluso puede escribir su propio cliente HTTP e interactuar con los servidores. El único requisito es que dicho programa siempre siga el formato del mensaje.
+
+
+
+##### Métodos
+
+HTTP define un conjunto de métodos de solicitud que especifican cuál será la acción deseada para un recurso determinado. A pesar de que sus nombres pueden ser sustantivos, estos métodos de consulta a veces se denominan *verbos HTTP* .
+
+Veamos los métodos de consulta más utilizados:
+
+- `GET` El método solo se usa para recuperar datos del servidor;
+- `POST` el método se utiliza para enviar datos al servidor;
+- `HEAD`solicita datos del servidor de la misma manera que el `GET`método, pero sin un cuerpo de respuesta.
+
+Cada vez que hace clic en un enlace, básicamente le comunica a su navegador que desea `GET`esta página. Cuando desee iniciar sesión en su sitio favorito, introduzca `POST`su nombre de usuario y contraseña para recibir acceso.
+
+Hay [más verbos disponibles para aprender](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) . No es necesario que los memorice todos ahora.
+
+##### Códigos de estado
+
+Para el funcionamiento normal de programas informáticos y páginas web que funcionan a través de HTTP, a excepción del contenido de la página, el servidor devuelve un código de tres dígitos, que especifica la solicitud de respuesta. Con la ayuda de este código, es posible redirigir al cliente a otro sitio o indicar el cambio de página, así como detectar un error en el procesamiento de datos.
+
+Actualmente, los estándares definen cinco clases de códigos de estado:
+
+| **1xx: Informativo**        | Los códigos que comienzan con "1" se denominan códigos de información. Informan sobre cómo se procesan las solicitudes de los clientes. |
+| --------------------------- | ------------------------------------------------------------ |
+| **2xx: éxito**              | Los mensajes de esta clase informan que la acción solicitada por el cliente ha sido aceptada con éxito para su procesamiento. |
+| **3xx: redirección**        | Significa que se deben tomar más medidas para completar la solicitud. |
+| **4xx: Error del cliente**  | Informa errores por parte del cliente.                       |
+| **5xx: Error del servidor** | El código indica que la operación no tuvo éxito debido a una falla del servidor. |
+
+Por ejemplo, si ha cargado correctamente un sitio web, la respuesta que recibió tiene el código 200.
+
+Probablemente también ha estado en una situación en la que su navegador muestra el mensaje **"404 No encontrado"** cuando ingresa la dirección de una página que no existe. Así es como suelen verse estos mensajes de error:
+
+![img](https://ucarecdn.com/946f2b2d-b1fb-4c42-84cb-e36fa29b8117/)
+
+Los navegadores muestran mensajes de error para que los usuarios puedan entender que algo salió mal, en lugar de seguir mirando la página en blanco mientras esperan que se descargue el contenido.
+
+Ahora, cuando haya terminado de leer el tema, puede visitar varios sitios en un navegador y comprender cómo se ven sus acciones desde el punto de vista técnico.
+
+
+
+##### Conclusión
+
+Resaltemos los puntos principales que acabamos de discutir aquí:
+
+- Los mensajes HTTP pueden ser de dos tipos: solicitudes y respuestas.
+- Están compuestos por la línea de salida, los encabezados y el cuerpo. La línea de inicio en las solicitudes incluye el método y el objetivo, mientras que en las respuestas incluye el código de estado.
+- Los métodos utilizados comúnmente en los mensajes de petición son `GET`, `POST`, y `HEAD`.
+- El código de estado indica la respuesta del servidor como un número de tres dígitos. Puede ser una de 5 clases: informativo, correcto, redireccionamiento, error del cliente y error del servidor.
+
+Ahora, cuando haya terminado de leer el tema, puede visitar varios sitios en un navegador e intentar adivinar cómo se ven sus acciones desde un punto de vista técnico.
+
+
+
+## Teoría: desarrollo web
+
+El desarrollo web es el proceso de creación de aplicaciones web o sitios web. Un enfoque para crear una aplicación web es separar la lógica en sus partes del lado del servidor y del lado del cliente. Este proceso generalmente involucra a desarrolladores con diferentes especializaciones. Aprendamos más sobre este aspecto del desarrollo web.
+
+##### Desarrollo de frontend y backend
+
+Es habitual dividir el desarrollo web en dos partes: frontend y backend.
+
+**El desarrollo de frontend,** también llamado programación del **lado del cliente** , es el desarrollo de la interfaz de usuario (en otras palabras, la parte visual de las aplicaciones / sitios web), así como la escritura de la lógica del usuario. En pocas palabras, el desarrollo de frontend es responsable de todo lo que los usuarios ven cuando abren una página web y de todo lo que interactúan.
+
+**El desarrollo backend,** también llamado programación del **lado del servidor** , es el desarrollo del lado del servidor interno de la aplicación web, la implementación de su lógica. El desarrollo de backend incluye las cosas que los usuarios no ven y lo que sucede fuera de su navegador y computadora.
+
+![img](https://ucarecdn.com/12442fd6-8386-478c-82d4-b5cae8762803/)
+
+##### Desarrolladores
+
+Por lo general, diferentes especialistas trabajan en el desarrollo de frontend y backend: desarrolladores de frontend y backend, respectivamente. Para comprender mejor la diferencia entre ellos, eche un vistazo a los ejemplos de las tareas que tienen estos desarrolladores.
+
+- **Los desarrolladores frontend** crean páginas web de acuerdo con el diseño recibido del diseñador. Son responsables del correcto funcionamiento y visualización de los sitios web en diferentes navegadores y en diferentes dispositivos. Gracias a los desarrolladores de frontend, los elementos interactivos aparecen en las páginas web.
+- **Los desarrolladores de backend** escriben la lógica empresarial básica de una aplicación, procesan los datos del usuario, organizan el almacenamiento de información en bases de datos, implementan la seguridad y protección de los datos, optimizan las aplicaciones para lograr la máxima velocidad y escalabilidad.
+
+Además, hay personas que están involucradas en todas las fases del desarrollo de aplicaciones web: desde la creación de la parte del cliente hasta la implementación de la parte del servidor. Tales programadores se denominan **full-stack** **desarrolladores** .
+
+##### Separación de partes del cliente y del servidor
+
+El lado del cliente y el lado del servidor son términos del desarrollo web que nos dicen dónde se ejecuta el código de la aplicación. Pero, ¿por qué separamos las partes cliente y servidor? ¿Por qué necesitamos la representación de la interfaz de usuario y la lógica del servicio separados entre sí? Hay varias razones para esto:
+
+- Podemos reemplazar de forma independiente la lógica de frontend y backend, minimizando el número de errores. Por ejemplo, podemos cambiar la apariencia del sitio sin modificar los procesos comunes;
+- Necesitamos un servidor para almacenar y estructurar los datos;
+- Los datos del lado del cliente pueden quedar desactualizados, pero las respuestas del servidor generalmente están actualizadas;
+- Es más fácil administrar los flujos de datos y orquestar procesos en unos pocos servidores que en millones de clientes;
+- Algunas tareas no necesitan una actualización desde un servidor, es más rápido realizarlas localmente.
+
+##### ¿Cómo se comunican el frontend y el backend?
+
+Para que un servicio web funcione correctamente, las partes del cliente y del servidor deben interactuar. Esto sucede a través de *solicitudes HTTP* . En la variante más básica, la interacción entre el frontend y el backend ocurre de la siguiente manera:
+
+1. El cliente envía una solicitud al servidor para recuperar o modificar datos utilizando el protocolo HTTP.
+2. El backend procesa esta solicitud y devuelve la respuesta a través de HTTP.
+3. Frontend recibe la respuesta y la procesa, y luego muestra el resultado a un usuario.
+
+El formato más popular para intercambiar datos entre cliente y servidor es **JSON** , pero existen otros. Los lenguajes de marcado ayudan a mostrar la respuesta del servidor de una manera fácil de usar. Los lenguajes de marcado más utilizados son **HTML** y **XML** .
+
+##### Conclusión
+
+En este tema, ha aprendido cómo se organiza aproximadamente el proceso de desarrollo web, por qué hay una división en las partes del servidor y del cliente, y cómo estas partes interactúan entre sí. Por lo general, diferentes especialistas trabajan en las partes del servidor y del cliente: desarrolladores de backend y frontend. Pero también hay desarrolladores de pila completa, una especie de desarrolladores universales que desarrollan tanto frontend como backend. Depende de usted qué especialización prefiere.
+
+
+
+# Teoría: conceptos básicos de HTML
+
+##### ¿Qué es HTML?
+
+HTML es un lenguaje utilizado para crear páginas web: gestiona su estructura y contenido. HTML es una abreviatura, significa **HyperText Markup Language** . El hipertexto se refiere a la información de texto que está conectada a otros textos a través de enlaces, tejiendo esta telaraña interconectada de páginas.
+
+Aquí hay una visualización simple de lo que es el hipertexto. Debería parecerle más que familiar a usted, un usuario de Internet experimentado:
+
+![img](https://ucarecdn.com/475320da-05ed-46f7-8e58-daca421ca4fd/)
+
+El lenguaje de marcado ayuda al navegador a reconocer la información de texto y entregarla al lector en una forma conveniente. Existen otros lenguajes de marcado de hipertexto, pero la gran mayoría de las páginas de Internet están escritas en HTML.
+
+##### Historia corta
+
+HTML fue desarrollado por Tim Berners-Lee, miembro del laboratorio científico suizo CERN. El lanzamiento de la primera versión HTML se atribuye a 1989. En 1991 se complementó el lenguaje y se empezó a utilizar para transferir hipertexto en Internet. Inicialmente, HTML se creó para el intercambio de datos entre científicos dentro de la misma institución.
+
+Si tiene curiosidad, aún puede visitar [el primer sitio HTML](http://info.cern.ch/hypertext/WWW/TheProject.html) creado el 6 de agosto de 1991. Durante muchos años no había estado disponible, pero en 2016 se restauró el sitio.
+
+##### HTML hoy
+
+Hoy en día, los sitios escritos en HTML se ven muy diferentes al primero. Probablemente te encuentres con ellos todos los días; mira este, por ejemplo:
+
+![img](https://ucarecdn.com/f669029d-1515-446b-8e3c-a862bf79dfaa/)
+
+*Un ejemplo es una captura de pantalla del sitio web de Greenpeace (https://www.greenpeace.org)*
+
+Puede asegurarse de que HTML sea realmente responsable de la estructura de la página abriendo su código fuente. Es muy fácil de hacer: haga clic con el botón derecho y busque la línea **Ver código fuente de la página** o simplemente use la combinación de teclas **CTRL + U** , y verá algo como esto:
+
+![img](https://ucarecdn.com/223783da-97ce-47f4-9e42-a68e42cbbf77/)
+
+Miles de millones de personas ven los resultados de la interpretación de documentos HTML de su navegador todos los días en sus computadoras y dispositivos móviles. Aunque los principales lectores de HTML son los navegadores, cualquier persona puede comprender fácilmente su estructura, ya que este lenguaje es simple y lógico, pero conocerlo bien a menudo ayuda mucho en el mundo actual.
+
+##### Ventajas de HTML
+
+HTML ha ganado una gran popularidad debido a sus innegables ventajas:
+
+- El idioma es fácil de aprender y usar;
+- Es compatible con todos los navegadores habituales;
+- Puede integrarse con lenguajes de programación.
+
+Tim Berners-Lee, el creador de HTML, dijo una vez: *"* La Web convirtió los datos en el oro del siglo XXI *"* . Ampliando esta metáfora, podemos decir que HTML es una herramienta principal para extraer y almacenar el metal precioso.
+
+
+
+# Teoría: etiquetas y atributos
+
+os documentos HTML constan de palabras que contienen instrucciones sobre cómo mostrar una página web correctamente. Estas instrucciones se denominan **etiquetas** . Indican qué bloque mostrar.
+
+Cuando un navegador recibe un documento HTML, analiza las etiquetas y las usa para formar elementos que podemos ver e interactuar con ellos. En otras palabras, las etiquetas son los ladrillos que construyen una página web. La especificación HTML actual incluye alrededor de 100 etiquetas. Eche un vistazo a [la lista completa](https://www.w3schools.com/tags/) de todas las etiquetas existentes de W3 Schools. ¡Tomará tiempo memorizarlos todos!
+
+La sintaxis de las etiquetas es muy sencilla. El nombre de un elemento se escribe entre los símbolos `<`y `>`. Los nombres de las etiquetas no distinguen entre mayúsculas y minúsculas, pero se considera una buena práctica escribirlos en **minúsculas** .
+
+Todas las etiquetas en lenguaje HTML se dividen en dos tipos principales: **emparejadas** y **no emparejadas** . Consideremos ambos con más detalle.
+
+
+
+Puede utilizar [CodePen](https://codepen.io/pen/) para probar todos los ejemplos usted mismo.
+
+
+
+##### Etiquetas emparejadas
+
+Las etiquetas HTML emparejadas constan de dos instrucciones: una etiqueta de **apertura** (también llamada etiqueta de **inicio** ) que marca el comienzo de un bloque y una etiqueta de **cierre** que tiene el mismo aspecto pero con una barra oblicua adicional `/`.
+
+Como ejemplo, consideraremos la `<p>`etiqueta. Representa un párrafo de texto:
+
+```html
+<p>Some kind of a text</p>
+```
+
+Aquí, `<p>`es una etiqueta de inicio, `Some kind of a text`es el contenido y `</p>`es una etiqueta de cierre.
+
+Las etiquetas son básicamente contenedores donde podemos poner (encerrar) algo. Las etiquetas HTML emparejadas suelen contener otras etiquetas o alguna información, por ejemplo, texto.
+
+##### Etiquetas no emparejadas
+
+Las etiquetas **no** emparejadas **no** tienen **contenido en su** interior. Forman elementos gráficos HTML o símbolos en una página. Por lo tanto, las etiquetas HTML no emparejadas solo tienen una etiqueta de apertura.
+
+A continuación, se muestra un ejemplo de una etiqueta no emparejada:
+
+```html
+<hr>
+```
+
+Un navegador dibujará una línea horizontal una vez que detecte esta etiqueta. Otro ejemplo de una etiqueta no emparejada es la `<br>`que define un solo salto de línea.
+
+##### Etiquetas anidadas
+
+Las etiquetas también se pueden anidar:
+
+```html
+<p>You have learned HTML <b>tags</b> <br>Congratulations!</p>
+```
+
+Aquí, `<b>`se usa para poner en negrita una palabra.
+
+Esta línea HTML se representa como:
+
+![img](https://ucarecdn.com/31783e90-6170-4b12-99b0-4d8cb9b335e7/-/crop/252x83/70,310/-/preview/)
+
+
+
+Una etiqueta anidada debe cerrarse antes del cierre inicial.
+
+
+
+La etiqueta externa se denomina **elemento principal** y la etiqueta interna es un **elemento secundario** .
+
+##### Atributos de etiqueta
+
+Para ampliar las capacidades de las etiquetas individuales y administrarlas más fácilmente, podemos usar **atributos** . Los atributos son aclaraciones para el navegador sobre cómo mostrar una etiqueta.
+
+Cada atributo HTML consta de **nombres** y **valores** . El siguiente ejemplo muestra la sintaxis de los atributos:
+
+```html
+<a href="https://hyperskill.org">The link</a>
+```
+
+Aquí, la `<a>`etiqueta significa un enlace, `href`es el nombre de un atributo y `"https://hyperskill.org"`es el valor. El atributo se asigna a un valor con signo igual `=`. HTML le permite especificar valores de atributo sin comillas si constan de una palabra. Sin embargo, usar comillas es una buena práctica. El valor de un atributo puede incluirse entre comillas simples o dobles ( `""`o `''`).
+
+Otra característica importante de la sintaxis de atributos HTML es que un atributo debe escribirse entre corchetes angulares:
+
+```html
+<img src="image.png">
+```
+
+En este ejemplo, se agrega una imagen a una página web con la `<img>`etiqueta no emparejada . Un enlace al archivo se especifica en el `src`atributo. El valor del atributo es la referencia a la imagen deseada.
+
+Hay muchos atributos ahí fuera. Puede valer la pena que los [revise](https://www.w3schools.com/tags/ref_attributes.asp) .
+
+##### Conclusión
+
+En este tema, hemos cubierto varias etiquetas útiles y algunos atributos. Las etiquetas proporcionan información al navegador sobre la estructura de una página web. Recuerde que el nombre de una etiqueta se incluye entre `<`y `>`en minúsculas. Se subdividen en apertura y cierre, emparejados y desemparejados. Cada subtipo tiene su propio propósito. Los atributos de las etiquetas son los pequeños ayudantes de papá. Refinan las etiquetas y brindan información adicional sobre las etiquetas y ayudan a su navegador. HTML comprende un buen número de etiquetas y atributos; algunos son comunes, otros no. Pero recuerde: ¡la práctica hace la perfección!	

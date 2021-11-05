@@ -828,3 +828,21 @@ for row, datos in df.iterrows():
    time.sleep(2)
    driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span').click()
 ```
+
+# Invocacion de una funcion
+
+```python
+import math
+
+
+class Hexagon:
+    def __init__(self, side_length):
+        self.side_length = side_length
+
+    def get_area(self):
+
+        return round((3 * (math.sqrt(3) * (self.side_length ** 2))) / 2, 3)
+
+print(Hexagon(5.4).get_area())
+```
+
