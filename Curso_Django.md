@@ -9397,7 +9397,8 @@ Hay muchos atributos ahí fuera. Puede valer la pena que los [revise](https://ww
 ##### Conclusión
 
 En este tema, hemos cubierto varias etiquetas útiles y algunos atributos. Las etiquetas proporcionan información al navegador sobre la estructura de una página web. Recuerde que el nombre de una etiqueta se incluye entre `<`y `>`en minúsculas. Se subdividen en apertura y cierre, emparejados y desemparejados. Cada subtipo tiene su propio propósito. Los atributos de las etiquetas son los pequeños ayudantes de papá. Refinan las etiquetas y brindan información adicional sobre las etiquetas y ayudan a su navegador. HTML comprende un buen número de etiquetas y atributos; algunos son comunes, otros no. Pero recuerde: ¡la práctica hace la perfección!	
-=======
+
+
 
 
 # Teoría: Introducción a los sistemas operativos
@@ -10308,7 +10309,3 @@ Juntando todo eso, ahora se puede *acceder a la* plantilla *index.html* en la UR
 A partir de ahora, puede crear un proyecto de Django. Ha aprendido qué archivos deben prepararse, dónde están ubicados y con qué parte del proyecto se ocupan. Esperamos que este sencillo ejemplo le proporcione la comprensión necesaria para construir proyectos más complejos en el futuro.
 
 
-
-
-
->>>>>>> Stashed changes
